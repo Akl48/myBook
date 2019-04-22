@@ -63,6 +63,7 @@ dispatch_async(dispatch_queue_t _Nonnull queue, ^(void)block); //异步
 1. 第一个任务取出来之后必须等待任务执行完，才能执行下一个 
 
 1. 主对列 特殊的串型对列（和主线程先关联的） 
+
    1. dispatch_get_main_queue() 
 
    2. 开启多条串行对列可以有不限量的线程生成
@@ -301,3 +302,68 @@ NSLock *lock = [[NSLock alloc]init];
 
 [lock unlock]; // 解锁 
 ```
+
+# Dispatch Queue 
+
+> Dispatch Queue的本质是添加Block 
+
+## Dispatch Queue的组成 
+
+Dispatch Queue 是通过**结构体**和**链表**实现的FIFO(先进先出)**队列**，FIFO队列主要负责**管理**通过dispatch_async等函数添加的block。可以理解成在程序从上到下追加了一组的Blocks，排除延迟dispatch_after其内部过程是个FIFO的过程。 
+
+### Block的添加 
+
+Block不是直接添加进FIFO对列的。Block先加入Dispatch Continuation（dispatch_continuation_t 类结构体）中，再加入FIFO中。Dispatch Continuation用于记忆Block所属的信息，即执行上下文。 
+
+
+
+## Dispatch Queue执行Block的过程 
+
+在这之前要介绍一下Dispatch Queue实现的软件组件 
+
+|    组件名称     |     提供技术      |
+| :-------------: | :---------------: |
+|   libdispatch   |  Dispatch Queue   |
+| Libc（pthread） | pthread_workqueue |
+|     XNU内核     |     workqueue     |
+
+1. XNU内核 
+   1. XNU内核是Mac和iOS的核心，有三个主要部分组成的一个分层体系结构；内核XNU是Darwin的核心，也是整个OS X的核心。 
+2. Libc 
+   1. libc是Linux下的ANSI C的函数库。 
+3. libdispatch 
+   1. 包含GCD的C语言的库 
+### 通知XNU过程 
+Global Dispatch Queue中执行Block时，libdispatch会从FIFO中抽取出Dispatch Continuation，调用**pthread_workqueue_additem_np**函数，将该Global Dispatch Queue自身以及符合优先级的workqueue信息等传递给参数。 
+
+**pthread_workqueue_additem_up**函数使用workq_kernreturn系统调用。通知workqueue增加应当执行的项目，而XNU内核根据系统状态判断是否要生成线程。如果是OverCommit优先级的Global Dispatch Queue则始终生成线程 
+
+#### Global Dispatch Queue的种类（8） 
+
+1. Global Dispatch Queue（High （Overcommit）Priority） 
+
+2. Global Dispatch Queue（Default （Overcommit）Priority） 
+
+3. Global Dispatch Queue（Low （Overcommit）Priority） 
+
+4. Global Dispatch Queue（Background（Overcommit） Priority） 
+
+优先级中加入了**Overcommit**的会**强制生成线程**。 
+
+相对的XUN中也有四中优先级的workqueue 
+
+* WORKQUEUE_HIGH_PRIORITY 
+
+* WORKQUEUE_DEFAULT_PRIORITY 
+
+* WORKQUEUE_LOW_PRIORITY 
+
+* WORKQUEUE_BG_PRIORITY 
+
+### 执行Block过程 
+
+XNU中的workqueue的线程执行pthread_workqueue函数，调用libdispatch的回调函数，在该回调函数中**执行Block**。 
+
+### 结束 
+
+Block执行结束之后，通知Dispatch Group结束、释放Dispatch Continuation等，开始准备执行加入到Global Dispatch Queue中的下一个Block。 

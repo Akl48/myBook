@@ -1,6 +1,6 @@
 # pthread
 
-### 引入头文件#import<pthread.h> 
+引入头文件#import<pthread.h> 
 
 1. 创建一个pthread对象 
    1. `pthread_t thread = nil; `

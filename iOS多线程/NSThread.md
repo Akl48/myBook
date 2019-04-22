@@ -1,5 +1,7 @@
 # NSThread
 
+[TOC]
+
 #### 创建 
 
 1. `NSThread* thread = [[NSThread alloc]initWithTarget:self selector:@selector(run) object:nil ];` 
