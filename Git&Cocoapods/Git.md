@@ -12,7 +12,7 @@
 
 1. 通过`git init`将这个目录变成**Git**可以管理的仓库
    1. 新建好了就会提示试一个空的仓库`Initialized empty Git repository in`
-2. 新建之后虽然是空的但是有一个**.git** 的隐藏目录来跟踪管理版本库
+2. 新建之后虽然是空的但是有一个.**git** 的隐藏目录来跟踪管理版本库
 
 ### 从Git上下载东西
 
@@ -93,7 +93,8 @@ git上的分支类似于平行宇宙，对现在没有影响，但是在某个�
       1. 等价于`git branch dev`+`git checkout dev` 创建+切换
    2. 查看当前分支`git branch`会在当前分支前面+`*`
    3. 之后就是正常commit再讲dev分支的工作合并到master
-      1. `git merge dev` 通过`git merge`合并指定分支到当前分支
+      1. 切换当前到master线`git branch master`
+      2. `git merge dev` 通过`git merge`合并指定分支到当前分支
    4. 合并之后删除dev分支`git branch -d dev`
 
 #### 解决分支冲突
@@ -104,7 +105,46 @@ git上的分支类似于平行宇宙，对现在没有影响，但是在某个�
 
 #### 分支管理策略
 
+在`git merge`的时候通常会使用`Fast forward`模式，会在`merge`的时候生成一个全新的`commit`
 
+* 可以通过`--no-ff`的方式`merge`
+  * `git merge --no-ff -m "merge no-ff" dev`
+  * 由于是一个全新的`commit`所以需要带一个`message`
+* 在实际开发中`merge`分支是相当稳定的，仅仅是用来发布新版本的，平时不能再上面干活，而平时都在`dev`上干活
+
+#### bug分支
+
+在软件开发中bug突如其来，但是在Git中的分支过于强大，可以通过一个新的临时分支来修复，修复之后合并分支，再删除。
+
+* 但是有时候当前的分支任务没有完成的时候，需要暂时将现场保存起来
+  * `git stash`
+  * 在用`git status`查看工作区，就是干净的
+* 假设在master上修复分支，先切换回master`git branch master`
+* 再新建临时分支—修改bug—整合到当前master—删除分支
+* 再切换回dev `git checkout dev`
+* 在恢复dev分支
+  1. `git stash apply`恢复之后stash的内容需要手动删除`git stash drop`
+  2. `git stash pop`恢复的时候讲stach内容也同时删除了
+
+#### 未来分支
+
+开发一个新feature，最好新建一个分支；
+
+如果要丢弃一个没有被合并过的分支，可以通过`git branch -D <name>`强行删除。(大写的D)
+
+#### 多人合作时候
+
+1. 首先，可以试图用`git push origin <branch-name>`推送自己的修改；
+2. 如果推送失败，则因为远程分支比你的本地更新，需要先用`git pull`试图合并；
+3. 如果合并有冲突，则解决冲突，并在本地提交；
+4. 没有冲突或者解决掉冲突后，再用`git push origin <branch-name>`推送就能成功！
+
+如果`git pull`提示`no tracking information`，则说明本地分支和远程分支的链接关系没有创建，用命令`git branch --set-upstream-to <branch-name> origin/<branch-name>`。
+
+#### rebase
+
+- rebase操作可以把本地未push的分叉提交历史整理成直线；
+- rebase的目的是使得我们在查看历史提交的变化时更容易，因为分叉的提交需要三方对比。
 
 ### 标签
 
