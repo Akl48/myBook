@@ -3,7 +3,7 @@
 * [Introduction](README.md)
 * [OC基本语法](OC/OC.md)
 * [OC进阶知识](OC进阶/OCNextStep.md)
-* [UI基础][UI基础/UI.md]
+* [UI基础](UI基础/UI.md)
 * [UI进阶](UI进阶/UINextStep.md)
 * [iOS多线程](iOS多线程/README.md)
     * [pthread](iOS多线程/pthread.md)
