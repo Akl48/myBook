@@ -2,6 +2,8 @@
 
 # CocoaPods
 
+[原文来自简书](<https://www.jianshu.com/p/aef862d01e86>)
+
 CocoaPods是开发OSX和iOS应用程序的一个**第三方库的依赖管理工具**。通过CocoaPods，可以定义自己的依赖关系(pods)，并且在整个开发环境中对第三方库的版本管理非常方便。由于在工程中引入第三方框架，要配置build phases 和linker flags过程，而CocoaPods则简化了这个过程。
 
 ### 使用
@@ -92,12 +94,42 @@ Sending stats
 ```
 
 1. 读取Podfile文件
+
 2. 版本控制和冲突
+
+   1. 两个不同的 pods 依赖于 CocoaLumberjack 的两个版本，假设一个依赖于2.3.1，另一个依赖于2.3.3，此时冲突解决系统可以使用最新的版本2.3.3，因为这个可以向后与2.3.1兼容。
+   2. 总有一些冲突需要手动解决
+
 3. 加载源文件
+
+   1. 每个.podspec文件都包含一个源代码的索引，这些索引一般包裹一个 git 地址和 git tag。它们以 commit SHAs 的方式存储在~/Library/Caches/CocoaPods中
+   2. **Podfile、.podspec和缓存文件的信息将源文件下载到Pods**
+
 4. 生成Pods.xcodeproj
+
+   1. 每次pod install执行，如果检测到改动时，CocoaPods 会利用 Xcodeproj gem 组件对Pods.xcodeproj进行更新。如果该文件不存在，则用默认配置生成。否则，会将已有的配置项加载至内存中。
+
 5. 安装第三方库
-6. 写入磁盘
-7. 
+
+   1. 当 CocoaPods 往工程中添加一个第三方库时，不仅仅是添加代码这么简单，还会添加很多内容。由于每个第三方库有不同的 target，因此对于每个库，都会有几个文件需要添加，每个 target 都需要：
+
+      * 一个包含编译选项的.xcconfig文件
+
+      * 一个同时包含编译设置和 CocoaPods 默认配置的私有.xcconfig文件
+
+      * 一个编译所必须的prefix.pch文件
+
+      * 另一个编译必须的文件dummy.m
+
+6. 创建Target
+
+   1. 一旦每个 pod 的 target 完成了上面的内容，整个Podstarget 就会被创建。这增加了相同文件的同时，还增加了另外几个文件。如果源码中包含有资源 bundle，将这个 bundle 添加至程序 target 的指令将被添加到Pods-Resources.sh文件中。还有一个名为Pods-environment.h的文件，文件中包含了一些宏，这些宏可以用来检查某个组件是否来自 pod。最后，将生成两个认可文件，一个是plist，另一个是markdown，这两个文件用于给最终用户查阅相关许可信息
+
+7. 写入磁盘
+
+   1. 直到现在，许多工作都是在内存中进行的。为了让这些成果能被重复利用，我们需要将所有的结果保存到一个文件中。所以Pods.xcodeproj文件被写入磁盘，另外两个非常重要的文件：Podfile.lock和Manifest.lock都将被写入磁盘。
+      * Podfile.lock CocoaPods 创建的最重要的文件之一。它记录了需要被安装的 pod 的每个已安装的版本
+      * Manifest.lock 这是每次运行pod install命令时创建的Podfile.lock文件的副本
 
 ### 原理
 
