@@ -105,7 +105,7 @@ git上的分支类似于平行宇宙，对现在没有影响，但是在某个�
 
 #### 分支管理策略
 
-在`git merge`的时候通常会使用`Fast forward`模式，会在`merge`的时候生成一个全新的`commit`
+在`git merge`的时候通常会使用`Fast forward`模式，删除分支之后，会自动删除分支信息。所以有时候需要禁用merge模式，会在`merge`的时候生成一个全新的`commit`，可以看到分支的历史了
 
 * 可以通过`--no-ff`的方式`merge`
   * `git merge --no-ff -m "merge no-ff" dev`
@@ -134,7 +134,9 @@ git上的分支类似于平行宇宙，对现在没有影响，但是在某个�
 
 #### 多人合作时候
 
-1. 首先，可以试图用`git push origin <branch-name>`推送自己的修改；
+远程仓库默认的名字是origin
+
+1. 首先，可以试图用`git push origin <branch-name>`推送自己的分支；
 2. 如果推送失败，则因为远程分支比你的本地更新，需要先用`git pull`试图合并；
 3. 如果合并有冲突，则解决冲突，并在本地提交；
 4. 没有冲突或者解决掉冲突后，再用`git push origin <branch-name>`推送就能成功！
@@ -154,15 +156,19 @@ git上的分支类似于平行宇宙，对现在没有影响，但是在某个�
 
 #### 新建标签
 
-- 命令`git tag <tagname>`用于新建一个标签，默认为`HEAD`，也可以指定一个commit id；
-- 命令`git tag -a <tagname> -m "blablabla..."`可以指定标签信息；
+- 命令`git tag <tagname>`用于新建一个标签，默认为最新的`commit`，也可以指定一个commit id;
+- 命令`git tag -a <tagname> -m "blablabla..."`可以指定标签附带的信息;
 - 命令`git tag`可以查看所有标签。
+
+#### 查看标签
+
+* 通过`git show <tagname>`查看标签信息
 
 #### 操作标签
 
-- 命令`git push origin <tagname>`可以推送一个本地标签；
-- 命令`git push origin --tags`可以推送全部未推送过的本地标签；
-- 命令`git tag -d <tagname>`可以删除一个本地标签；
+- 命令`git push origin <tagname>`可以推送一个本地标签;
+- 命令`git push origin --tags`可以推送全部未推送过的本地标签;
+- 命令`git tag -d <tagname>`可以删除一个本地标签;
 - 命令`git push origin :refs/tags/<tagname>`可以删除一个远程标签。
 
 ## GitBook的使用

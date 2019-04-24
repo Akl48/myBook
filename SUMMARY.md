@@ -16,6 +16,7 @@
     * [JSON](iOS网络/JSON.md)
     * [XML](iOS网络/XML.md)
     * [文件下载](iOS网络/download.md)
+    * [文件上传](iOS网络/upload.md)
     * [AFnetworking](iOS网络/AFnetworking.md)
 * [iOS数据持久化](Coredata.md)
 * [Runloop](Runloop.md)
