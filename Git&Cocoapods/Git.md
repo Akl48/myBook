@@ -4,6 +4,12 @@
 
 **Git跟踪并管理的是修改**
 
+### Git和SVN的差别
+
+1. 速度git的速度远比SVN快
+2. SVN是集中式管理，git是分布式
+3. SVN必须联网工作，git可以本地作业
+
 [廖雪峰老师官网](<https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000>)
 
 [简单易懂版](https://rogerdudler.github.io/git-guide/index.zh.html)
@@ -13,6 +19,14 @@
 1. 通过`git init`将这个目录变成**Git**可以管理的仓库
    1. 新建好了就会提示试一个空的仓库`Initialized empty Git repository in`
 2. 新建之后虽然是空的但是有一个.**git** 的隐藏目录来跟踪管理版本库
+
+### Git的配置
+
+全局配置git用户名和邮箱
+
+`git config --global user.name "ZzzzT_R"`
+
+`git config --global user.email "z1057075812@outlook.com"`
 
 ### 从Git上下载东西
 
