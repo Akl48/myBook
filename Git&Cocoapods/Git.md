@@ -2,6 +2,10 @@
 
 ## Git的使用
 
+[廖雪峰老师官网](<https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000>)
+
+[简单易懂版](https://rogerdudler.github.io/git-guide/index.zh.html)
+
 **Git跟踪并管理的是修改**
 
 ### Git和SVN的差别
@@ -9,10 +13,6 @@
 1. 速度git的速度远比SVN快
 2. SVN是集中式管理，git是分布式
 3. SVN必须联网工作，git可以本地作业
-
-[廖雪峰老师官网](<https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000>)
-
-[简单易懂版](https://rogerdudler.github.io/git-guide/index.zh.html)
 
 ### 新建仓库
 
@@ -27,6 +27,14 @@
 `git config --global user.name "ZzzzT_R"`
 
 `git config --global user.email "z1057075812@outlook.com"`
+
+### Git中的区域
+
+1. 工作区 除了.git的都是工作区
+2. 版本库(.git) 
+   1. HEAD 指向当前分支
+   2. 缓存区 
+   3. 分支(master) 最初的分支
 
 ### 从Git上下载东西
 
@@ -48,11 +56,13 @@ GitHub告诉我们，可以从这个仓库克隆出新的仓库，也可以把�
 
 #### 寻找git的commit id
 
-`git reflog`会记录你的每一次命令，通过这个可以从过去回到未来
+`git reflog`会记录你的每一次命令
+
+回退的记录也可以看到比log强，通过这个可以从过去回到未来
 
 ### 删除Git文件
 
-通过`git rm -r`可以删除文件也可以通过`-r`删除全部文件夹
+通过`git rm `可以删除文件也可以通过`-r`删除全部文件夹
 
 ### 查看Git的修改
 
