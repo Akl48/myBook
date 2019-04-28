@@ -139,7 +139,7 @@ ecb分组模式
 cbc分组模式
 
 * 在CBC中首先将明文分组和前一个密文进行异或运算，再加密
-* 而第一个分组会有一个初始向量用来和他异或加密
+* 而第一个分组会有一个初始向量iv用来和他异或加密
 
 ### 非对称加密
 
@@ -147,6 +147,23 @@ cbc分组模式
 
 1. 使用公钥加密，使用私钥解密
 2. 公钥是公开的，私钥保密
-3. 加密处理安全，但是性能极差
+3. 加密处理安全，但是**性能极差**
+
+### 数字证书
 
 
+1. 简单说明
+    证书和驾照很相似，里面记有姓名、组织、地址等个人信息，以及属于此人的公钥，并有认证机构施加数字签名,只要看到公钥证书，我们就可以知道认证机构认证该公钥的确属于此人
+2. 数字证书的内容
+    1. 公钥
+    2. 认证机构的数字签名(CA|自签名)
+3. 证书的生成步骤
+    1. 生成私钥 openssl genrsa -out private.pem 1024
+    2. 创建证书请求 openssl req -new -key private.pem -out rsacert.csr
+    3. 生成证书并签名，有效期10年 openssl x509 -req -days 3650 -in rsacert.csr -signkey private.pem -out rsacert.crt
+    4. 将 PEM 格式文件转换成 DER 格式 openssl x509 -outform der -in rsacert.crt -out rsacert.der
+    5. 导出P12文件 openssl pkcs12 -export -out p.p12 -inkey private.pem -in rsacert.crt
+
+4. iOS开发中的注意点
+    1. 在iOS开发中，不能直接使用 PEM 格式的证书，因为其内部进行了Base64编码，应该使用的是DER的证书，是二进制格式的
+    2. OpenSSL默认生成的都是PEM格式的证书
