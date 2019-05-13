@@ -132,6 +132,10 @@ s.length();//返回s的长度
 s.substr(int i,int j);//提取字符串返回从i~j的子串 
 ```
 
+## HashMap的使用
+
+\#include <hash_map>
+
 # 算法 
 
 ## 七大排序算法（冒泡，选择，插入，归并排序，快速排序，堆排序，希尔排序） 

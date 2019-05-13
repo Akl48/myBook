@@ -97,7 +97,7 @@ OC规定不能直接修改OC对象结构体的属性
 
 直接配置图片（必须在asset里） 
 
-\###### 小技巧 
+###### 小技巧 
 
 /** 方法注册add*/ 
 
@@ -105,95 +105,88 @@ OC规定不能直接修改OC对象结构体的属性
 
 隐藏状态栏 
 
-\- (BOOL)prefersStatusBarHidden; 
+- (BOOL)prefersStatusBarHidden; 
 
 \#program mark-注释方法 
 
-\#### 模型的使用 
+#### 模型的使用 
 
 专门用来存放数据的对象 
 
-\> 一般继承NSObject，在.h文件中声明一些用来存放数据的属性 
+> 一般继承NSObject，在.h文件中声明一些用来存放数据的属性 
 
 用模型取代字典的好处 
 
-\1. 编写的时候编译器会有提示 
+1. 编写的时候编译器会有提示 
 
-\2. 访问属性会有提示 
+2. 访问属性会有提示 
 
 在使用的时候要将字典转为**模型**，通过赋值给可变数组再直接把可变数组拷贝进不可变数组达到目的 
 
-\#### 类前缀 
+#### 类前缀 
 
 通过自定义类前缀区别系统类 
 
 \> ZZCButton; 
 
-\#### instancetype 
+#### instancetype 
 
 苹果通过instancetype来取代**返回值**中的id,会检测返回值类型。 
 
-\### 自定义控件 
+### 自定义控件 
 
 封装控件内部的细节 
 
-\1. -(void)layoutSubviews;布局子控件，控制子控件尺寸 
+1. -(void)layoutSubviews;布局子控件，控制子控件尺寸 
 
-\2. -(instancetype)init;只做初始化控件 
+2. -(instancetype)init;只做初始化控件 
 
-\#### initWithFrame 
+#### initWithFrame 
 
-\* init会自动调用initWithFrame 
+* init会自动调用initWithFrame 
 
-\* [super initWithFrame:frame]; 
+* [super initWithFrame:frame]; 
 
-\* 通过这个方法可以保证创建哪个都是ok的 
+* 通过这个方法可以保证创建哪个都是ok的 
 
-\### 数据传递 
+### 数据传递 
 
-\1. 直接通过属性传递（暴露了属性） 
+1. 直接通过属性传递（暴露了属性） 
 
-\2. 通过set方法设置 
+2. 通过set方法设置 
 
-\3. 提供一个模型属性传入参数 （常用方法） 
+3. 提供一个模型属性传入参数 （常用方法） 
+   1. @class 模型类 
+   2. 声明属性 
+   3. 重新模型的set方法 
 
-\1. @class 模型类 
+### 自定义按钮 
 
-\2. 声明属性 
-
-\3. 重新模型的set方法 
-
-\### 自定义按钮 
-
-\```objc 
-
-\- (CGRect)imageRectForContentRect:(CGRect)contentRect{ 
+```objc 
+- (CGRect)imageRectForContentRect:(CGRect)contentRect{ 
 
 // 返回图片显示位子 contentRect是按钮的bounds 
 
 } 
 
-\- (CGRect)titleRectForContentRect:(CGRect)contentRect{ 
+- (CGRect)titleRectForContentRect:(CGRect)contentRect{ 
 
 // 返回标题显示位子 
 
 } 
 
 //或者直接使用layoutSubviews 
+```
 
-\``` 
-
-\#### 按钮内边距 
+#### 按钮内边距 
 
 在storybroad中内边距在Edge中设置代码可通过 
 
-\```objc 
+```objc 
+imageEdgeInsets设置  
+```
 
-imageEdgeInsets设置 
-
-\``` 
-
-\## xib文件 
+## xib文件 
 
 相对于storybroad是轻量级的 
 
