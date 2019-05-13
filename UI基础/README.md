@@ -18,7 +18,23 @@
 @property(nonamatic,strong)IBOutlet UILable * lab;
 ```
 
-**通过IBOutlet** 
+**通过IBOutlet**
+
+### 切换主控制storybroad
+
+![image-20190513210856706](/Users/zhoutianrong/Library/Application Support/typora-user-images/image-20190513210856706.png)
+
+[ ] Is Initial View Controller 是否是初始化控制器 再在target->General->Deployment Info->设置初始入口
+
+![image-20190513211022775](/Users/zhoutianrong/Library/Application Support/typora-user-images/image-20190513211022775.png)
+
+### IB
+
+Interface Builder现在打开Xcode即打开IB即前缀IB
+
+### 类扩展的使用
+
+在**声明属性**的时候，如果是声明在.h头文件中，在**其他文件**包含头文件的时候想访问属性来改变的时候是存在数据安全问题的。.m文件是不能被包含的。
 
 ## UIView常见属性 
 

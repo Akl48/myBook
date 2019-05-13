@@ -98,11 +98,12 @@ vector<int>::iterator it;
 
 for (it = vec.begin(); it != vec.end(); it++) 
 	cout << *it << endl; 
-
-//或者 
-for (size_t i = 0; i < vec.size(); i++) { 
-	cout << vec.at(i) << endl; 
-} 
+//或者
+for (auto iter = vec.begin(); iter != vec.end;++iter)
+{
+  if (*iter == 10)
+    nums.erase(iter);
+}
 
 ```
 
@@ -131,10 +132,6 @@ s.length();//返回s的长度
 
 s.substr(int i,int j);//提取字符串返回从i~j的子串 
 ```
-
-## HashMap的使用
-
-\#include <hash_map>
 
 # 算法 
 
