@@ -34,26 +34,39 @@ Interface Builder现在打开Xcode即打开IB即前缀IB
 
 ### 类扩展的使用
 
+```objc
+@interface name()
+@property(nonatomic,strong)NSString *name;
+@end
+```
+
 在**声明属性**的时候，如果是声明在.h头文件中，在**其他文件**包含头文件的时候想访问属性来改变的时候是存在数据安全问题的。.m文件是不能被包含的。
 
-## UIView常见属性 
+### UIView
+
+1. 所有属性都有一些公共的属性-位置|尺寸|背景 将这些控件共同的属性抽取出来形成父类UIView
+
+2. 所有控件最终都继承自UIView
+
+#### UIView常见属性 
 
 ``` objc
-UIView * superview； 
+(UIView *) superview； 
 
 获取父控件 
 
-NSArray * subviews; 
+NSArray * subviews; //获取一个View所有子对象
 
 -(void)removeFromSuperview 
 
-/* 移除控件*/ 
+/* 从父控件移除控件 但不是销毁*/ 
 
 -(void)addSubview 
 
 /* 添加控件*/ 
 
--(UIView*)viewWithTag:(NSInteger)tag; 
+-(UIView*)viewWithTag:(NSInteger)tag;  
+// 本质上是一层一层View的遍历找 找到就返回 1.最好不适用  2.存在性能问题
 
 /* 根据一个tag标志找出对应的控件（一般是子控件）*/ 
 ```
@@ -113,7 +126,7 @@ OC规定不能直接修改OC对象结构体的属性
 
 直接配置图片（必须在asset里） 
 
-###### 小技巧 
+#### 小技巧 
 
 /** 方法注册add*/ 
 
