@@ -151,5 +151,41 @@ s.substr(int i,int j);//提取字符串返回从i~j的子串
 
 ## 翻转一句话，例如I am 3 years old，翻转后，old years 3 am I 
 
+```c++
+class Solution {
+public:
+  	 // 交换 传引用
+     void swap(string &s,int i,int j){
+        char a = s[i];
+        s[i] = s[j];
+        s[j] = a;
+    }
+    string reverseWords(string s) {
+        int len = (int)s.length();
+        for (int i = 0,j = 0; j < len; i++) {
+            if(s[i]==' '){ //如果是空格的话交换前面的所有
+                int now = i+1;
+                i--;
+                while (j<i) {
+                    swap(s,i--,j++);
+                }
+                i = j = now;
+            }
+            if(i == len - 1){ //如果是最后一个单词的话
+                int now = len;
+                
+                while (j<i) {
+                    swap(s, i--, j++);
+                }
+                i = j = now;
+            }
+        }
+        return s;
+    }
+};
+```
+
+
+
 ## 有10亿条数据，现在只有200M内存，怎么找出这10亿条数据中出现次数最多的100条数据 
 

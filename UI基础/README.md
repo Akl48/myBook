@@ -35,7 +35,7 @@ Interface Builder现在打开Xcode即打开IB即前缀IB
 ### 类扩展的使用
 
 ```objc
-@interface name()
+@interface ViewController()
 @property(nonatomic,strong)NSString *name;
 @end
 ```
@@ -44,7 +44,7 @@ Interface Builder现在打开Xcode即打开IB即前缀IB
 
 ### UIView
 
-1. 所有属性都有一些公共的属性-位置|尺寸|背景 将这些控件共同的属性抽取出来形成父类UIView
+1. 所有属性都有一些公共的属性 - 位置|尺寸|背景 将这些控件共同的属性抽取出来形成父类UIView
 
 2. 所有控件最终都继承自UIView
 
@@ -73,46 +73,70 @@ NSArray * subviews; //获取一个View所有子对象
 
 ### 常用UI控件 
 
-OC规定不能直接修改OC对象结构体的属性 
-
 * UIButton 按钮 
-  * 创建 buttonWithType:(UIButtonTypeCustom)自定义 
-  * 高亮 设置属性的时候都必须设置按钮状态set...forState:（normal\highlight） 
-  * 监听事件通过 addTarget: 
-
 * UILabel 文本标签 
-
 * UITextField 文本输入框 
-
 * UIImageView 图片显示 
-  * contentMode 控制图片显示 （UIViewContentMode... scale:拉伸 Aspect:保持图片比例） 
+* UIScrollView 滚动的控件 
+* UICollectionView 九宫格 
+* UIWebView 网页显示控件 
+* UIAlertView 对话警告框 
+* UINavigationBar 导航栏 
+
+#### UILabel
+* text显示文字
+
+* Lines == 0 代码中`numberOfLines` 能显示多少行 0表示就显示多少
+
+* Line Break `lineBreakMode` 超出的最大之后怎么显示
+
+  * ```objc
+    NSLineBreakByWordWrapping = 0,    // Wrap at word boundaries, default
+    NSLineBreakByCharWrapping,        // Wrap at character boundaries
+    NSLineBreakByClipping,        		// Simply clip
+    NSLineBreakByTruncatingHead,    	// Truncate at head of line: "...wxyz"
+    NSLineBreakByTruncatingTail,    	// Truncate at tail of line: "abcd..."
+    NSLineBreakByTruncatingMiddle    	// Truncate middle of line:  "ab...yz"
+    ```
+
+* `textAlignment` 文字显示格式
+
+  * ```objc
+    NSTextAlignmentLeft      = 0,    // Visually left aligned
+    NSTextAlignmentCenter    = 1,    // Visually centered
+    NSTextAlignmentRight     = 2,    // Visually right aligned
+    NSTextAlignmentRight     = 1,    // Visually right aligned
+    NSTextAlignmentCenter    = 2,    // Visually centered
+    NSTextAlignmentJustified = 3,    // Fully-justified. The last line in a paragraph is natural-aligned.
+    NSTextAlignmentNatural   = 4,    // Indicates the default alignment for script
+    ```
+#### UIButton
+* 创建 `buttonWithType:`自定义 
+* 高亮 设置属性的时候都必须设置按钮状态`set...forState:（normal\highlight）` 
+  * 监听事件通过 addTarget: 
+#### UIImageView
+* contentMode 控制图片显示 （UIViewContentMode... scale:带scale的会拉伸 Aspect:保持图片比例）  
+* `imageView.clipsToBounds = YES;`超过边框的会被裁剪
+  
   * 资源的虚拟以及真实文件夹 
-  * UIImageView实现动画（帧动画） 
+    
+    * 添加的黄色文件夹是虚拟的只在项目结构中有|蓝色的文件夹是实在存在的
+  
+* UIImageView实现动画（帧动画） 
   * NSArray * animationImages 
     * startAnimating 开始 
     * stopAnimating 停止 
     * isAnimating 是否正在播放 
     * animationRepeatCount 重复次数（0为无限次） 
     * animationDuration 持续时间 
+1. 通过断点po NSHomeDirectory() 会输出沙盒路径 
 
-* UIScrollView 滚动的控件 
+2. [NSBundle mainBundle]可以获取安装包对象 
 
-* UICollectionView 九宫格 
-
-* UIWebView 网页显示控件 
-
-* UIAlertView 对话警告框 
-
-* UINavigationBar 导航栏 
-
-1. 通过断点po NSHomeDirectory()输出虚拟机文件夹 
-
-2. [NSBundle mainBundle]获取安装包对象 
-
-3. NSString对象通过isEqualToString判断是否相同 
+   1. NSString对象可以通过isEqualToString判断是否相同 
 
 4. 在使用[UIImage imageNamed:]一定会使用缓存技术，消耗内存之后不会恢复 
-   1. imageWithContentsOfFile: //有file为结尾的话一般是全路径 mainBundle （需要传入全路径图片） 
+   1. imageWithContentsOfFile:  //有file为结尾的话一般是全路径 mainBundle （需要传入全路径图片） 
    2. Assets文件夹内在打包的时候会打包成另一个文件 
       1. 在Assets文件夹内的话只能通过图片访问一定会有缓存（适合使用频率高的图片） 
 
@@ -227,11 +251,10 @@ imageEdgeInsets设置
 
 在编译之后为nib文件 
 
-\1. NSSArray* arr = [[NSBundle mainBundle] loadNamed: owner: option:]; 
+1. NSSArray* arr = [[NSBundle mainBundle] loadNamed: owner: option:]; 
 
-\2. UINib* nib = [UINib nibWithName:@"" bundle:nil]; 
-
-\1. NSArray* arr = [nib instantiateWithOwner:nil options:nil]; 
+2. UINib* nib = [UINib nibWithName:@"" bundle:nil]; 
+   1. NSArray* arr = [nib instantiateWithOwner:nil options:nil]; 
 
 如果不设置xib控件尺寸会有默认的尺寸 
 
@@ -243,15 +266,15 @@ imageEdgeInsets设置
 
 如果一个控件从xib或者storybroad创建出来的，加载完毕的时候一定会调用awakeFromNib这个方法 
 
-\> xib类型文件是不会主动加载的需要特殊编译 
+> xib类型文件是不会主动加载的需要特殊编译 
 
 UIView可以隐藏通过hidden隐藏也可以通过透明实现alpha 
 
-\## 渐变动画 
+## 渐变动画 
 
-\### 头尾式 
+### 头尾式 
 
-\```objc 
+```objc 
 
 [UIview beginAnimation:nil context:nil]; 
 
@@ -261,11 +284,11 @@ UIView可以隐藏通过hidden隐藏也可以通过透明实现alpha
 
 [UIView commitAnimations]; 
 
-\``` 
+```
 
-\### block式 
+### block式 
 
-\```objc 
+```objc 
 
 [UIView animateWithDuration:time animation:^{ 
 
@@ -283,23 +306,23 @@ UIView可以隐藏通过hidden隐藏也可以通过透明实现alpha
 
 }]; 
 
-\``` 
+```
 
-\## 工具类 
+## 工具类 
 
-\1. 一般继承于NSObject 
+1. 一般继承于NSObject 
 
-\2. 方法一般都是类方法 
+2. 方法一般都是类方法 
 
-\3. 专门用来处理问题 
+3. 专门用来处理问题 
 
-\## KVO键值编程 
+## KVO键值编程 
 
-\### 赋值 
+### 赋值 
 
 可以直接修改成员变量，就算是私有的 
 
-\```objc 
+```objc 
 
 [setValue:(nullable id) forKey:(nonnull NSString * )]; 
 
@@ -309,11 +332,11 @@ UIView可以隐藏通过hidden隐藏也可以通过透明实现alpha
 
 [setValue:(nullable id) forUndefinedKey:(nonnull NSString * )];//系统找不到key的时候会自定调用 
 
-\``` 
+```
 
-\### 取值 
+### 取值 
 
-\```objc 
+```objc 
 
 [valueForKey:(nonnull NSString *)]; 
 
@@ -323,17 +346,17 @@ UIView可以隐藏通过hidden隐藏也可以通过透明实现alpha
 
 [dictionaryWithValuesForKeys:(nonnull NSArray<NSString *> *)];//会返回一个字典 模型转字典 如果是数组的话，会抽取数组中每个数组的值，并返回一个数组 
 
-\``` 
+```
 
-\## KVO键值监听 
+## KVO键值监听 
 
 可以监听某个对象值的改变 
 
-\```objc 
+```objc 
 
 [self addObserver:self forKeyPath:(nonnull NSString *) options:kNilOptions context:nil];//给对象添加一个监听器 
 
-\- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context{ 
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context{ 
 
 keyPath 那个属性改了 
 
@@ -349,35 +372,35 @@ context 当初传的context是什么就是什么
 
 [self removeObserver:(nonnull NSObject *) forKeyPath:(nonnull NSString *)]; 
 
-\``` 
+```
 
-\## UIScrollView 
+## UIScrollView 
 
-\1. 讲要展示的内容添加到里面 
+1. 讲要展示的内容添加到里面 
 
-\2. 设定内容尺寸contentSize 可滚动的尺寸 contentSize - scrollView尺寸 
+2. 设定内容尺寸contentSize 可滚动的尺寸 contentSize - scrollView尺寸 
 
-\3. 不能通过索引subviews访问ScrollView 
+3. 不能通过索引subviews访问ScrollView 
 
-\### 不能滚动原因 
+### 不能滚动原因 
 
 scrollEnable属性设置为NO 
 
 userInteractionEnabled是UIView的属性，设置之后用户不能交互 
 
-\### 没有设置contentSize怎么实现滚动效果 
+### 没有设置contentSize怎么实现滚动效果 
 
 scrollView.alwaysBounceHorizontal = YES;(默认NO) 
 
-\### 滚动条 
+### 滚动条 
 
 scrollView.showHorizontalScrollIndicator = NO;(默认是YES) 
 
-\### contentOffset 
+### contentOffset 
 
 偏移量 
 
-\### delegate代理 
+### delegate代理 
 
 声明他的代理为一个对象即本控制器即可（任何对象都可以但是一般都是控制器） 
 
@@ -389,7 +412,7 @@ scrollView.delegate = self;
 
 代理属性是weak 
 
-\#### 缩放 
+#### 缩放 
 
 viewForZoomingInScrollView:(UIScrollView *)scrollView 
 
@@ -399,9 +422,9 @@ maximumZoomScale
 
 minimumZoomScale 
 
-\## 屏幕适配 
+## 屏幕适配 
 
-\```objc 
+```objc 
 
 typedef NS_OPTIONS(NSUInteger, UIViewAutoresizing) { 
 
@@ -421,21 +444,21 @@ UIViewAutoresizingFlexibleBottomMargin = 1 << 5
 
 }; 
 
-\``` 
+```
 
-\### UILable实现包裹内容 
+### UILable实现包裹内容 
 
-\1. 实现位子约束 
+1. 实现位子约束 
 
-\2. 设置宽度约束<= 
+2. 设置宽度约束<= 
 
-\3. 不用设置高度约束 
+3. 不用设置高度约束 
 
 用代码实现约束非常复杂 
 
-\### VFL添加约束 
+### VFL添加约束 
 
-\```objc 
+```objc 
 
 NSString* vfl_h = @"H:|-space-[blueView(==redView)]-space-[redView]-space-|";//水平 
 
@@ -449,23 +472,23 @@ NSArray* arr = [NSLayoutConstraint constraintsWithVisualFormat:vfl_h options:kNi
 
 [self addConstraints:arr]; 
 
-\``` 
+```
 
-\## UITableView 
+## UITableView 
 
 继承于UIScrollView因此支持纵向滑动性能好 
 
-\* 需要一组数据源（DataSource）遵守UITableViewDataSource协议 
+* 需要一组数据源（DataSource）遵守UITableViewDataSource协议 
 
-\* 以及需要满足UITableViewDelegate 
+* 以及需要满足UITableViewDelegate 
 
-\* 重要就是字典转模型 
+* 重要就是字典转模型 
 
-\```objc 
+```objc 
 
 //告诉tableView每个一共有多少块 
 
-\- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{ 
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{ 
 
 return (NSInteger); 
 
@@ -473,7 +496,7 @@ return (NSInteger);
 
 //告诉TableView每个section中的Row的个数 
 
-\- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{ 
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{ 
 
 return (NSInteger); 
 
@@ -481,7 +504,7 @@ return (NSInteger);
 
 //告诉TableView每行的cell 
 
-\- (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{ 
+- (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{ 
 
 // indexPath.section; 哪一块 
 
@@ -495,7 +518,7 @@ return [[UITableViewCell alloc]init];
 
 } 
 
-\- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{ 
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{ 
 
 //设置分组头部标题 
 
@@ -503,7 +526,7 @@ return (NSString*);
 
 } 
 
-\- (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section{ 
+- (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section{ 
 
 //设置分组尾部标题 
 
@@ -511,17 +534,18 @@ return (NSString*);
 
 } 
 
-\``` 
+```
 
-\### UITableView常见属性 
+### UITableView常见属性 
 
-\#### 分割线 
+#### 分割线 
+
 
 \* separtorColor 设置颜色 
 
 \* separtorStyle 设置样式 
 
-\#### 高度 
+#### 高度 
 
 \* rowHeight 每行cell的高度 
 
@@ -529,19 +553,19 @@ return (NSString*);
 
 \* sectionFooterHeight 每组尾部高度 
 
-\#### 表头表位 
+#### 表头表位 
 
 \* tableHeaderView 
 
 \* tableFooterView 
 
-\#### 右边索引 
+#### 右边索引 
 
 \* sectionIndexColor 
 
 \* sectionIndexBackgroundColor 
 
-\### UITableViewCell常见属性 
+### UITableViewCell常见属性 
 
 \* accessoryType 指示样子 
 
@@ -549,11 +573,11 @@ return (NSString*);
 
 \* selectionStyle 设置cell选中样式 
 
-\#### contentView 
+#### contentView 
 
 Cell中的image Text等都是contentView的子控件，所以在实现删除的时候移动contentView即可 
 
-\### 索引 
+### 索引 
 
 ```
 -(nullable NSArray<NSString * >* )sectionIndexTitlesForTableView:(UITableView* )TableView;
