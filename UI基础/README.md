@@ -124,11 +124,36 @@ NSArray * subviews; //获取一个View所有子对象
   
 * UIImageView实现动画（帧动画） 
   * NSArray * animationImages 
-    * startAnimating 开始 
-    * stopAnimating 停止 
-    * isAnimating 是否正在播放 
-    * animationRepeatCount 重复次数（0为无限次） 
-    * animationDuration 持续时间 
+  
+    * 设置帧动画的图片设置图片数组
+  
+    * ```objc
+      NSMutableArray *images = [NSMutableArray array];
+      for(int i = 1 ; i <= count;++i){
+        NSString *file = [NSString stringWithFormat:@"%@_%d",name,i];
+        UIImage *image = [UIImage imageNamed:file];
+        [images addObject:image];
+      }
+      self.imageView.animationImages = images;
+      ```
+  
+  * startAnimating 开始 
+  
+  * stopAnimating 停止 
+  
+  * isAnimating 是否正在播放 
+  
+  * animationRepeatCount 重复次数（0为无限次） 
+  
+  * animationDuration 持续时间 
+  
+  * 声音的播放AVFoundation框架 中的AVplayer类对象
+  
+    * ```objc
+      NSURl *url = [[NSBundle mainBundle] URLForResource:[NSString stingWithFormat:@"%@.mp3",name] withExtension:nil];
+      self.player = [AVplayer playWithUrl:url];
+      [self.player play];
+      ```
 1. 通过断点po NSHomeDirectory() 会输出沙盒路径 
 
 2. [NSBundle mainBundle]可以获取安装包对象 
