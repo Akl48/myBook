@@ -27,6 +27,7 @@
     * [Git](Git&Cocoapods/Git.md)
     * [Cocoapods](Git&Cocoapods/Cocoapods.md)
 * [计算机基础](计算机基础/README.md)
+    * [软件项目管理](计算机基础/sofemange.md)
     * [计算机网络](计算机基础/Network.md)
     * [数据结构](计算机基础/dataStructure.md)
     * [操作系统](计算机基础/OS.md)

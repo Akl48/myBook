@@ -162,7 +162,15 @@ NSArray * subviews; //获取一个View所有子对象
 
 4. 在使用[UIImage imageNamed:]一定会使用缓存技术，消耗内存之后不会恢复 
    1. imageWithContentsOfFile:  //有file为结尾的话一般是全路径 mainBundle （需要传入全路径图片） 
+   
+      1. ```objc
+         NSString *imageName = [NSString stringWithFormat:@"%@_%d",name,count];
+         NSString *filePath = [[NSBundle mainBundle] pathForResource:imageName ofType:@"png"];
+         UIImage* image = [UIImage imageWithContentsOfFile:filePath];
+         ```
+   
    2. Assets文件夹内在打包的时候会打包成另一个文件 
+   
       1. 在Assets文件夹内的话只能通过图片访问一定会有缓存（适合使用频率高的图片） 
 
 ### 设置颜色半透明 
@@ -301,7 +309,7 @@ UIView可以隐藏通过hidden隐藏也可以通过透明实现alpha
 
 ```objc 
 
-[UIview beginAnimation:nil context:nil]; 
+[UIView beginAnimation:nil context:nil]; 
 
 [UIView setAnimationDuration:2];//设置动画时间 
 
@@ -607,3 +615,12 @@ Cell中的image Text等都是contentView的子控件，所以在实现删除的�
 ```
 -(nullable NSArray<NSString * >* )sectionIndexTitlesForTableView:(UITableView* )TableView;
 ```
+
+### 自定义不等高cell
+
+#### 数据刷新
+
+1.  全局数据刷新
+   1. `self.tableView.`
+2. 部分数据刷洗
+
