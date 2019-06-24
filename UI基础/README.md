@@ -621,6 +621,54 @@ Cell中的image Text等都是contentView的子控件，所以在实现删除的�
 #### 数据刷新
 
 1.  全局数据刷新
-   1. `self.tableView.`
-2. 部分数据刷洗
+  
+   1. `[self.tableView reload];`
+   
+2. 部分数据刷新
 
+   1. > `NSArray *indexpaths = @[NSIndexPath indexPathForRow:0 inSection:0];`
+      >
+      > `[self.tableView reloadRowsAtIndexPaths:indexpaths withAnimation:UITableViewRowAnimationLeft];`
+      >
+      > 适用于数据数组个数不变
+
+   2.  > `[self.tableView insertRowsAtIndexPaths:indexpaths withRowAnimation:UITableViewRowAnimationTop];`
+
+3. 左滑删除
+
+   1. 设置代理UITableViewDelegate
+
+   2. 代理方法
+     
+      1. ```objc
+        - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(nonnull NSIndexPath *)indexPath{
+            //只要有这个方法就能删除 在这里删除数据 刷新数据
+            [self.wineArray removeObjectAtIndex:indexPath.row];
+            [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationTop];
+        }
+        ```
+        
+      2. 修改文字为中文 `- (NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath{ return @"删除";}`|在Target中的Localizations添加简体中文
+      
+   3. 实现左滑多个按钮
+   
+      1. ```objc
+         - (NSArray<UITableViewRowAction *> *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath{
+             self.tableView.editing = YES;
+             UITableViewRowAction *rowAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleNormal title:@"删除" handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
+                 //点击调用 而且默认的删除不会被调用
+             }];
+             rowAction.backgroundColor = [UIColor redColor];
+             UITableViewRowAction *rowAction2 = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleNormal title:@"关注" handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
+                 //点击调用block
+                 //退出编辑模式(在左滑之后进入编辑模式)
+                 self.tableView.editing = NO;
+             }];
+             return @[rowAction,rowAction2];
+         }
+         ```
+   
+   4. 批量删除
+      1. 进入编辑模式`[self.table setEditing:!self.tableView.isEditing animated:YES];`
+      2. 自定义批量删除
+         1. 自定义cell控件在contentView添加一个ImageView
