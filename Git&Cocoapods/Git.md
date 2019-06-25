@@ -51,7 +51,8 @@ GitHub告诉我们，可以从这个仓库克隆出新的仓库，也可以把�
 ### 上传到Git
 
 1. 添加要更改的文件到暂存区 `git add 文件名`
-1. `git add .`添加所有
+   1. `git add .`添加所有
+   2. 如何跳过暂存区`git commit -a`通过-a可以跳过
 2. 提交改动到HEAD但是还没有到你的远程仓库 `git commit -m "message"`
 3. (第一次)关联到git上`git remote add origin https://github.com/Akl48/mybook.git`
 4. push到远程仓库上`git push -u origin master`
@@ -93,7 +94,7 @@ GitHub告诉我们，可以从这个仓库克隆出新的仓库，也可以把�
 2. 用命令`git reset HEAD <file>`可以把暂存区的修改撤销掉（unstage），重新放回工作区 后面的是版本号
    1. 通过`git reset --hard HEAD^`将git的版本返回上一个版本，^代表了一次回退次数如果变多则为~**100** 可以回到过去
 
-### 更新本地仓库ch
+### 更新本地仓库
 
 `git pull`更新本地仓库到最新
 
