@@ -304,12 +304,38 @@
             
         </li>
     
-        <li class="chapter " data-level="1.7.6" data-path="../iOS网络/AFnetworking.html">
+        <li class="chapter " data-level="1.7.6" data-path="../iOS网络/upload.html">
+            
+                <a href="../iOS网络/upload.html">
+            
+                    
+                    文件上传
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.7" data-path="../iOS网络/AFnetworking.html">
             
                 <a href="../iOS网络/AFnetworking.html">
             
                     
                     AFnetworking
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.8" data-path="../iOS网络/networkSafe.html">
+            
+                <a href="../iOS网络/networkSafe.html">
+            
+                    
+                    数据安全
             
                 </a>
             
@@ -433,7 +459,20 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.13.1" data-path="../计算机基础/Network.html">
+        <li class="chapter " data-level="1.13.1" data-path="../计算机基础/sofemange.html">
+            
+                <a href="../计算机基础/sofemange.html">
+            
+                    
+                    软件项目管理
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.13.2" data-path="../计算机基础/Network.html">
             
                 <a href="../计算机基础/Network.html">
             
@@ -446,7 +485,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.13.2" data-path="../计算机基础/dataStructure.html">
+        <li class="chapter " data-level="1.13.3" data-path="../计算机基础/dataStructure.html">
             
                 <a href="../计算机基础/dataStructure.html">
             
@@ -459,7 +498,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.13.3" data-path="../计算机基础/OS.html">
+        <li class="chapter " data-level="1.13.4" data-path="../计算机基础/OS.html">
             
                 <a href="../计算机基础/OS.html">
             
@@ -472,7 +511,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.13.4" data-path="../计算机基础/algorithm.html">
+        <li class="chapter " data-level="1.13.5" data-path="../计算机基础/algorithm.html">
             
                 <a href="../计算机基础/algorithm.html">
             
@@ -535,7 +574,40 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="oc&#x8FDB;&#x9636;&#x77E5;&#x8BC6;">OC&#x8FDB;&#x9636;&#x77E5;&#x8BC6;</h1>
+                                <p>[TOC]</p>
+<h1 id="objective-c">Objective-C</h1>
+<p>&#x7B80;&#x79F0;OC&#xFF0C;&#x5728;C&#x8BED;&#x8A00;&#x7684;&#x57FA;&#x7840;&#x4E0A;&#x6DFB;&#x52A0;&#x4E86;<strong>&#x9762;&#x5BF9;&#x5BF9;&#x8C61;</strong>&#x7684;&#x7279;&#x6027;&#x3002; </p>
+<h2 id="&#x4E86;&#x89E3;oc">&#x4E86;&#x89E3;OC</h2>
+<p>OC&#x7684;&#x8D77;&#x6E90;&#xFF0C;&#x5728;OC&#x4E2D;&#x9891;&#x7E41;&#x7684;&#x4F7F;&#x7528;[]&#x65B9;&#x62EC;&#x53F7;&#xFF0C;&#x662F;&#x56E0;&#x4E3A;&#x5728;OC&#x4E2D;&#x5B58;&#x5728;&#x7740;&#x7279;&#x6B8A;&#x7684;<strong>&#x6D88;&#x606F;&#x673A;&#x5236;</strong>&#xFF0C;&#x800C;&#x4E0D;&#x662F;<strong>&#x51FD;&#x6570;&#x8C03;&#x7528;</strong>&#x3002; </p>
+<p><strong>&#x6D88;&#x606F;&#x673A;&#x5236;</strong>&#xFF1A;&#x5176;&#x8FD0;&#x884C;&#x65F6;&#xFF0C;&#x4E0D;&#x7BA1;&#x662F;&#x5426;&#x591A;&#x6001;&#xFF0C;&#x603B;&#x662F;&#x5728;&#x8FD0;&#x884C;&#x65F6;&#x624D;&#x4F1A;&#x53BB;&#x67E5;&#x627E;&#x6240;&#x8981;&#x6267;&#x884C;&#x7684;&#x65B9;&#x6CD5;&#xFF0C;&#x5B9E;&#x9645;&#x4E0A;&#x7F16;&#x8BD1;&#x5668;&#x4E0D;&#x4F1A;&#x53BB;&#x5173;&#x5FC3;&#x63A5;&#x53D7;&#x5BF9;&#x8C61;&#x662F;&#x4EC0;&#x4E48;&#x7C7B;&#x578B;&#xFF0C;&#x56E0;&#x4E3A;&#x63A5;&#x53D7;&#x6D88;&#x606F;&#x7684;&#x5BF9;&#x8C61;&#x95EE;&#x9898;&#x4E5F;&#x8981;&#x5728;&#x8FD0;&#x884C;&#x65F6;&#x8003;&#x8651;&#xFF0C;&#x8FD9;&#x4E2A;&#x8FC7;&#x7A0B;&#x662F;<strong>&#x52A8;&#x6001;&#x7ED1;&#x5B9A;</strong>&#x3002; </p>
+<ul>
+<li>OC&#x4E2D;&#x6240;&#x6709;&#x91CD;&#x8981;&#x5DE5;&#x4F5C;&#x90FD;&#x7531;<strong>&#x8FD0;&#x884C;&#x65F6;&#x7EC4;&#x4EF6;</strong>&#x800C;&#x975E;&#x7F16;&#x8BD1;&#x5668;&#x5B8C;&#x6210;&#x3002; </li>
+</ul>
+<h3 id="oc&#x4E2D;&#x7684;&#x6808;&#x548C;&#x5806;">OC&#x4E2D;&#x7684;&#x6808;&#x548C;&#x5806;</h3>
+<p>&#x5728;OC&#x4E2D;&#x4F1A;&#x7ECF;&#x5E38;&#x58F0;&#x660E;&#x4E00;&#x4E2A;NSString* str = @&quot;hello world&quot;;&#x8FD9;&#x6837;&#x7684;&#x8BED;&#x53E5; </p>
+<ol>
+<li><p>&#x58F0;&#x660E;&#x7684;&#x662F;&#x4E00;&#x4E2A;&#x6307;&#x5411;NSString* &#x7684;&#x6307;&#x9488;&#x800C;OC&#x4E2D;&#x7684;&#x6240;&#x6709;&#x5BF9;&#x8C61;&#x90FD;&#x8981;&#x8FD9;&#x6837;&#x58F0;&#x660E; </p>
+</li>
+<li><p>&#x5728;&#x5185;&#x5B58;&#x4E2D;&#x7684;&#x6808;&#x533A;&#x58F0;&#x660E;&#x4E86;&#x4E00;&#x4E2A;NSString* &#x578B;&#x7684;&#x6307;&#x9488; </p>
+</li>
+<li><p>&#x5728;&#x5185;&#x5B58;&#x4E2D;&#x7684;&#x5806;&#x4E2D;&#x5206;&#x914D;&#x7684;NSString&#x5BF9;&#x8C61; </p>
+</li>
+<li><p>&#x5206;&#x914D;&#x5728;&#x6808;&#x4E2D;&#x7684;&#x4FDD;&#x5B58;&#x53D8;&#x91CF;&#x7684;&#x5185;&#x5B58;&#x4F1A;&#x81EA;&#x52A8;&#x6E05;&#x7406; </p>
+</li>
+<li><p>&#x5206;&#x914D;&#x5728;&#x5806;&#x4E2D;&#x7684;&#x5185;&#x5B58;&#x8981;&#x624B;&#x52A8;&#x7BA1;&#x7406;-&#x4F46;&#x662F;OC&#x5C06;&#x8FD9;&#x90E8;&#x5206;&#x62BD;&#x8C61;&#x51FA;&#x6765;&#x5F62;&#x6210;&#x4E86;&#x5F15;&#x7528;&#x8BA1;&#x6570; </p>
+</li>
+</ol>
+<p>&#x6709;&#x65F6;&#x5019;&#x4F1A;&#x9047;&#x5230;&#x5B9A;&#x4E49;&#x4E2D;&#x4E0D;&#x542B;* &#x7684;&#x53D8;&#x91CF;&#x4ED6;&#x4EEC;&#x53EF;&#x80FD;&#x4F1A;&#x4F7F;&#x7528;&#x6808;&#x7A7A;&#x95F4;&#xFF0C;&#x4F8B;&#x5982;CoreGraphics&#x6846;&#x67B6;&#x4E2D;&#x7684;CGRect&#x7B49;&#x3002; </p>
+<h3 id="oc&#x4E2D;&#x7684;&#x5934;&#x6587;&#x4EF6;&#x64CD;&#x4F5C;">OC&#x4E2D;&#x7684;&#x5934;&#x6587;&#x4EF6;&#x64CD;&#x4F5C;</h3>
+<ul>
+<li><p>&#x5728;OC&#x4E2D;&#x7684;&#x6709;&#x65F6;&#x5019;&#x4F7F;&#x7528;&#x4E00;&#x4E2A;Person&#x7C7B;&#x7684;&#x6587;&#x4EF6;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x4E0D;&#x9700;&#x8981;&#x77E5;&#x9053;Person&#x7684;&#x5168;&#x90E8;&#x7EC6;&#x8282;&#xFF0C;&#x53EA;&#x8981;&#x77E5;&#x9053;&#x6709;&#x8FD9;&#x4E2A;&#x7C7B;&#x5C31;&#x884C;&#x4E86;&#x8FD9;&#x4E2A;&#x65F6;&#x5019;&#x53EA;&#x7528;&#x5728;&#x5934;&#x6587;&#x4EF6;&#x4E2D;&#x58F0;&#x660E;@class Person &#x5C31;&#x53EF;&#x4EE5;&#x544A;&#x8BC9;&#x7F16;&#x8BD1;&#x5668;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x8FD9;&#x6837;&#x7684;&#x60C5;&#x51B5;&#x53EB;&#x524D;&#x5411;&#x58F0;&#x660E;&#x3002; </p>
+</li>
+<li><p>&#x800C;&#x5728;&#x5B9E;&#x73B0;&#x6587;&#x4EF6;&#x4E2D;&#xFF0C;&#x5982;&#x679C;&#x8981;&#x77E5;&#x9053;&#x5176;&#x5168;&#x90E8;&#x7EC6;&#x8282;&#xFF0C;&#x5219;&#x8981;&#x5728;&#x5B9E;&#x73B0;&#x6587;&#x4EF6;&#x4E2D;&#x52A0;&#x5165;&#x5934;&#x6587;&#x4EF6;&#x3002; </p>
+</li>
+</ul>
+<blockquote>
+<p>&#x5411;&#x524D;&#x58F0;&#x660E;&#x89E3;&#x51B3;&#x4E86;&#x4E24;&#x4E2A;&#x7C7B;&#x76F8;&#x4E92;&#x5F15;&#x7528;&#x7684;&#x95EE;&#x9898;&#xFF0C;&#x8981;&#x5F15;&#x7528;&#x4F1A;&#x5728;&#x5404;&#x4E2A;&#x5934;&#x6587;&#x4EF6;&#x4E2D;&#x5F15;&#x5165;&#x4E86;&#x5BF9;&#x65B9;&#x7684;&#x6587;&#x4EF6;&#x3002;&#x800C;&#x4F7F;&#x7528;import&#x867D;&#x7136;&#x4E0D;&#x4F1A;&#x50CF;include&#x4E00;&#x6837;&#x5BFC;&#x81F4;&#x6B7B;&#x5FAA;&#x73AF;&#xFF0C;&#x4F46;&#x662F;&#x610F;&#x5473;&#x7740;&#x6709;&#x4E00;&#x4E2A;&#x65E0;&#x6CD5;&#x6B63;&#x786E;&#x7F16;&#x8BD1;&#xFF0C;&#x4E5F;&#x964D;&#x4F4E;&#x4E86;&#x7C7B;&#x4E4B;&#x95F4;&#x7684;&#x8026;&#x5408;&#x3002; </p>
+</blockquote>
 
                                 
                                 </section>
@@ -579,7 +651,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"OC进阶知识","level":"1.3","depth":1,"next":{"title":"UI基础","level":"1.4","depth":1,"path":"UI基础/README.md","ref":"UI基础/README.md","articles":[]},"previous":{"title":"OC基本语法","level":"1.2","depth":1,"path":"OC/README.md","ref":"OC/README.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"OC进阶/README.md","mtime":"2019-04-22T08:37:54.577Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-04-23T04:37:42.419Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"OC进阶知识","level":"1.3","depth":1,"next":{"title":"UI基础","level":"1.4","depth":1,"path":"UI基础/README.md","ref":"UI基础/README.md","articles":[]},"previous":{"title":"OC基本语法","level":"1.2","depth":1,"path":"OC/README.md","ref":"OC/README.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"OC进阶/README.md","mtime":"2019-06-24T23:11:41.932Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-06-24T23:13:05.917Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

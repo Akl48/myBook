@@ -304,12 +304,38 @@
             
         </li>
     
-        <li class="chapter " data-level="1.7.6" data-path="../iOS网络/AFnetworking.html">
+        <li class="chapter " data-level="1.7.6" data-path="../iOS网络/upload.html">
+            
+                <a href="../iOS网络/upload.html">
+            
+                    
+                    文件上传
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.7" data-path="../iOS网络/AFnetworking.html">
             
                 <a href="../iOS网络/AFnetworking.html">
             
                     
                     AFnetworking
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.8" data-path="../iOS网络/networkSafe.html">
+            
+                <a href="../iOS网络/networkSafe.html">
+            
+                    
+                    数据安全
             
                 </a>
             
@@ -433,7 +459,20 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.13.1" data-path="../计算机基础/Network.html">
+        <li class="chapter " data-level="1.13.1" data-path="../计算机基础/sofemange.html">
+            
+                <a href="../计算机基础/sofemange.html">
+            
+                    
+                    软件项目管理
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.13.2" data-path="../计算机基础/Network.html">
             
                 <a href="../计算机基础/Network.html">
             
@@ -446,7 +485,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.13.2" data-path="../计算机基础/dataStructure.html">
+        <li class="chapter " data-level="1.13.3" data-path="../计算机基础/dataStructure.html">
             
                 <a href="../计算机基础/dataStructure.html">
             
@@ -459,7 +498,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.13.3" data-path="../计算机基础/OS.html">
+        <li class="chapter " data-level="1.13.4" data-path="../计算机基础/OS.html">
             
                 <a href="../计算机基础/OS.html">
             
@@ -472,7 +511,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.13.4" data-path="../计算机基础/algorithm.html">
+        <li class="chapter " data-level="1.13.5" data-path="../计算机基础/algorithm.html">
             
                 <a href="../计算机基础/algorithm.html">
             
@@ -535,7 +574,65 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="oc&#x57FA;&#x672C;&#x8BED;&#x6CD5;">OC&#x57FA;&#x672C;&#x8BED;&#x6CD5;</h1>
+                                <p>[TOC]</p>
+<h1 id="oc&#x57FA;&#x672C;&#x8BED;&#x6CD5;">OC&#x57FA;&#x672C;&#x8BED;&#x6CD5;</h1>
+<h3 id="&#x534F;&#x8BAE;">&#x534F;&#x8BAE;</h3>
+<p>&#x534F;&#x8BAE;&#x7684;&#x5B58;&#x5728;&#x76F8;&#x5F53;&#x4E8E;C++&#x4E2D;&#x62BD;&#x8C61;&#x7C7B;&#x7684;&#x5B58;&#x5728;&#x3002;&#x5728;&#x534F;&#x8BAE;&#x4E2D;&#x53EA;&#x58F0;&#x660E;&#x65B9;&#x6CD5;&#xFF0C;&#x800C;&#x5728;&#x9075;&#x5B88;&#x4ED6;&#x7684;&#x534F;&#x8BAE;&#x7684;&#x7C7B;&#x4E2D;&#x5B9E;&#x73B0;&#x5B83;&#x7684;&#x65B9;&#x6CD5;&#x3002;</p>
+<h4 id="&#x58F0;&#x660E;&#x4E00;&#x4E2A;&#x534F;&#x8BAE;">&#x58F0;&#x660E;&#x4E00;&#x4E2A;&#x534F;&#x8BAE;</h4>
+<pre><code class="lang-objc"><span class="hljs-class"><span class="hljs-keyword">@protocol</span> <span class="hljs-title">watch</span> &lt;<span class="hljs-title">NSObject</span>&gt;</span>
+<span class="hljs-comment">//@optional &#x53EF;&#x9009;&#x5B9E;&#x73B0;</span>
+<span class="hljs-comment">//@required &#x5FC5;&#x987B;&#x5B9E;&#x73B0;</span>
+- (<span class="hljs-keyword">void</span>) watchdoor;
+
+<span class="hljs-keyword">@end</span>
+</code></pre>
+<h4 id="&#x9075;&#x5B88;&#x534F;&#x8BAE;">&#x9075;&#x5B88;&#x534F;&#x8BAE;</h4>
+<pre><code class="lang-objc"><span class="hljs-class"><span class="hljs-keyword">@interface</span> <span class="hljs-title">dog</span> : <span class="hljs-title">NSObject</span> &lt;<span class="hljs-title">watch</span>&gt;</span>
+
+<span class="hljs-keyword">@end</span>
+
+<span class="hljs-class"><span class="hljs-keyword">@implementation</span> <span class="hljs-title">dog</span></span>
+
+- (<span class="hljs-keyword">void</span>)watchdoor{
+    <span class="hljs-built_in">NSLog</span>(<span class="hljs-string">@&quot;dog watchdoor&quot;</span>);
+}
+
+<span class="hljs-keyword">@end</span>
+</code></pre>
+<h4 id="&#x4EE3;&#x7406;">&#x4EE3;&#x7406;</h4>
+<p>&#x9A7E;&#x6821;&#x7684;&#x4EE3;&#x7406;&#x662F;&#x5B66;&#x751F; &#x9A7E;&#x6821;&#x662F;&#x88AB;&#x4EE3;&#x7406;&#x65B9; &#x5B66;&#x751F;&#x662F;&#x4EE3;&#x7406;</p>
+<pre><code class="lang-objc"><span class="hljs-class"><span class="hljs-keyword">@protocol</span> <span class="hljs-title">buything</span> &lt;<span class="hljs-title">NSObject</span>&gt;</span>
+-(<span class="hljs-keyword">void</span>)buy;
+<span class="hljs-keyword">@end</span>
+
+<span class="hljs-class"><span class="hljs-keyword">@interface</span> <span class="hljs-title">Boss</span> : <span class="hljs-title">NSObject</span> </span>
+<span class="hljs-keyword">@property</span>(<span class="hljs-keyword">nonatomic</span>,<span class="hljs-keyword">weak</span>)<span class="hljs-keyword">id</span> &lt;buything&gt; delegate;<span class="hljs-comment">//&#x5FC5;&#x987B;&#x4E3A;weak &#x907F;&#x514D;&#x5FAA;&#x73AF;&#x5F15;&#x7528;</span>
+<span class="hljs-keyword">@end</span>
+</code></pre>
+<h3 id="foundation">Foundation</h3>
+<ol>
+<li><code>NSString(NSMutableString)</code><ol>
+<li>&#x5B57;&#x7B26;&#x4E32;&#x5E38;&#x91CF;@&quot;&quot;&#x901A;&#x5E38;&#x7ECF;&#x5E38;&#x4F7F;&#x7528;NSString</li>
+</ol>
+</li>
+<li><code>NSArray(NSMutableArray)</code><ol>
+<li>&#x6570;&#x7EC4;&#x7C7B;&#x578B; &#x53EA;&#x80FD;&#x5B58;&#x653E;&#x5BF9;&#x8C61;</li>
+</ol>
+</li>
+<li><code>NSDictionary(NSMutableDictionary)</code><ol>
+<li>&#x4E0D;&#x80FD;&#x653E;nil</li>
+</ol>
+</li>
+<li>NSURL<ol>
+<li>&#x4E13;&#x95E8;&#x7528;&#x6765;&#x4FDD;&#x5B58;&#x8D44;&#x6E90;&#x8DEF;&#x5F84;<ul>
+<li>http:// &#x5F00;&#x5934;&#x7684;&#x662F;&#x7F51;&#x9875;&#x8DEF;&#x5F84;&#x7684;&#x5199;&#x6CD5;.</li>
+<li>file:// &#x5F00;&#x5934;&#x7684;&#x662F;&#x672C;&#x5730;&#x78C1;&#x76D8;&#x7684;&#x8DEF;&#x5F84;</li>
+<li>ftp:// &#x5F00;&#x5934;&#x7684;&#x662F;ftp&#x6587;&#x4EF6;&#x8D44;&#x6E90;&#x7684;&#x8DEF;&#x5F84;</li>
+</ul>
+</li>
+</ol>
+</li>
+</ol>
 
                                 
                                 </section>
@@ -579,7 +676,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"OC基本语法","level":"1.2","depth":1,"next":{"title":"OC进阶知识","level":"1.3","depth":1,"path":"OC进阶/README.md","ref":"OC进阶/README.md","articles":[]},"previous":{"title":"Introduction","level":"1.1","depth":1,"path":"README.md","ref":"README.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"OC/README.md","mtime":"2019-04-22T08:37:54.575Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-04-23T04:37:42.419Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"OC基本语法","level":"1.2","depth":1,"next":{"title":"OC进阶知识","level":"1.3","depth":1,"path":"OC进阶/README.md","ref":"OC进阶/README.md","articles":[]},"previous":{"title":"Introduction","level":"1.1","depth":1,"path":"README.md","ref":"README.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"OC/README.md","mtime":"2019-06-24T23:11:41.931Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-06-24T23:13:05.917Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

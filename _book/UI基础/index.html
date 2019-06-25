@@ -304,12 +304,38 @@
             
         </li>
     
-        <li class="chapter " data-level="1.7.6" data-path="../iOS网络/AFnetworking.html">
+        <li class="chapter " data-level="1.7.6" data-path="../iOS网络/upload.html">
+            
+                <a href="../iOS网络/upload.html">
+            
+                    
+                    文件上传
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.7" data-path="../iOS网络/AFnetworking.html">
             
                 <a href="../iOS网络/AFnetworking.html">
             
                     
                     AFnetworking
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.8" data-path="../iOS网络/networkSafe.html">
+            
+                <a href="../iOS网络/networkSafe.html">
+            
+                    
+                    数据安全
             
                 </a>
             
@@ -433,7 +459,20 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.13.1" data-path="../计算机基础/Network.html">
+        <li class="chapter " data-level="1.13.1" data-path="../计算机基础/sofemange.html">
+            
+                <a href="../计算机基础/sofemange.html">
+            
+                    
+                    软件项目管理
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.13.2" data-path="../计算机基础/Network.html">
             
                 <a href="../计算机基础/Network.html">
             
@@ -446,7 +485,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.13.2" data-path="../计算机基础/dataStructure.html">
+        <li class="chapter " data-level="1.13.3" data-path="../计算机基础/dataStructure.html">
             
                 <a href="../计算机基础/dataStructure.html">
             
@@ -459,7 +498,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.13.3" data-path="../计算机基础/OS.html">
+        <li class="chapter " data-level="1.13.4" data-path="../计算机基础/OS.html">
             
                 <a href="../计算机基础/OS.html">
             
@@ -472,7 +511,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.13.4" data-path="../计算机基础/algorithm.html">
+        <li class="chapter " data-level="1.13.5" data-path="../计算机基础/algorithm.html">
             
                 <a href="../计算机基础/algorithm.html">
             
@@ -535,7 +574,526 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="ui&#x57FA;&#x7840;">UI&#x57FA;&#x7840;</h1>
+                                <p>[TOC]</p>
+<h2 id="ios&#x4E2D;storybroad&#x7684;&#x57FA;&#x7840;&#x4F7F;&#x7528;">iOS&#x4E2D;storybroad&#x7684;&#x57FA;&#x7840;&#x4F7F;&#x7528;</h2>
+<h3 id="&#x65B9;&#x6CD5;&#x7684;&#x7ED1;&#x5B9A;">&#x65B9;&#x6CD5;&#x7684;&#x7ED1;&#x5B9A;</h3>
+<pre><code>-(IBAction)set{}
+</code></pre><p><strong>&#x901A;&#x8FC7;IBAction</strong> </p>
+<h3 id="&#x5C5E;&#x6027;&#x7684;&#x7ED1;&#x5B9A;">&#x5C5E;&#x6027;&#x7684;&#x7ED1;&#x5B9A;</h3>
+<pre><code>@property(nonamatic,strong)IBOutlet UILable * lab;
+</code></pre><p><strong>&#x901A;&#x8FC7;IBOutlet</strong></p>
+<h3 id="&#x5207;&#x6362;&#x4E3B;&#x63A7;&#x5236;storybroad">&#x5207;&#x6362;&#x4E3B;&#x63A7;&#x5236;storybroad</h3>
+<p><img src="../Users/zhoutianrong/Library/Application Support/typora-user-images/image-20190513210856706.png" alt="image-20190513210856706"></p>
+<p>[ ] Is Initial View Controller &#x662F;&#x5426;&#x662F;&#x521D;&#x59CB;&#x5316;&#x63A7;&#x5236;&#x5668; &#x518D;&#x5728;target-&gt;General-&gt;Deployment Info-&gt;&#x8BBE;&#x7F6E;&#x521D;&#x59CB;&#x5165;&#x53E3;</p>
+<p><img src="../Users/zhoutianrong/Library/Application Support/typora-user-images/image-20190513211022775.png" alt="image-20190513211022775"></p>
+<h3 id="ib">IB</h3>
+<p>Interface Builder&#x73B0;&#x5728;&#x6253;&#x5F00;Xcode&#x5373;&#x6253;&#x5F00;IB&#x5373;&#x524D;&#x7F00;IB</p>
+<h3 id="&#x7C7B;&#x6269;&#x5C55;&#x7684;&#x4F7F;&#x7528;">&#x7C7B;&#x6269;&#x5C55;&#x7684;&#x4F7F;&#x7528;</h3>
+<pre><code class="lang-objc"><span class="hljs-class"><span class="hljs-keyword">@interface</span> <span class="hljs-title">ViewController</span>()</span>
+<span class="hljs-keyword">@property</span>(<span class="hljs-keyword">nonatomic</span>,<span class="hljs-keyword">strong</span>)<span class="hljs-built_in">NSString</span> *name;
+<span class="hljs-keyword">@end</span>
+</code></pre>
+<p>&#x5728;<strong>&#x58F0;&#x660E;&#x5C5E;&#x6027;</strong>&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x5982;&#x679C;&#x662F;&#x58F0;&#x660E;&#x5728;.h&#x5934;&#x6587;&#x4EF6;&#x4E2D;&#xFF0C;&#x5728;<strong>&#x5176;&#x4ED6;&#x6587;&#x4EF6;</strong>&#x5305;&#x542B;&#x5934;&#x6587;&#x4EF6;&#x7684;&#x65F6;&#x5019;&#x60F3;&#x8BBF;&#x95EE;&#x5C5E;&#x6027;&#x6765;&#x6539;&#x53D8;&#x7684;&#x65F6;&#x5019;&#x662F;&#x5B58;&#x5728;&#x6570;&#x636E;&#x5B89;&#x5168;&#x95EE;&#x9898;&#x7684;&#x3002;.m&#x6587;&#x4EF6;&#x662F;&#x4E0D;&#x80FD;&#x88AB;&#x5305;&#x542B;&#x7684;&#x3002;</p>
+<h3 id="uiview">UIView</h3>
+<ol>
+<li><p>&#x6240;&#x6709;&#x5C5E;&#x6027;&#x90FD;&#x6709;&#x4E00;&#x4E9B;&#x516C;&#x5171;&#x7684;&#x5C5E;&#x6027; - &#x4F4D;&#x7F6E;|&#x5C3A;&#x5BF8;|&#x80CC;&#x666F; &#x5C06;&#x8FD9;&#x4E9B;&#x63A7;&#x4EF6;&#x5171;&#x540C;&#x7684;&#x5C5E;&#x6027;&#x62BD;&#x53D6;&#x51FA;&#x6765;&#x5F62;&#x6210;&#x7236;&#x7C7B;UIView</p>
+</li>
+<li><p>&#x6240;&#x6709;&#x63A7;&#x4EF6;&#x6700;&#x7EC8;&#x90FD;&#x7EE7;&#x627F;&#x81EA;UIView</p>
+</li>
+</ol>
+<h4 id="uiview&#x5E38;&#x89C1;&#x5C5E;&#x6027;">UIView&#x5E38;&#x89C1;&#x5C5E;&#x6027;</h4>
+<pre><code class="lang-objc">(<span class="hljs-built_in">UIView</span> *) superview&#xFF1B; 
+
+&#x83B7;&#x53D6;&#x7236;&#x63A7;&#x4EF6; 
+
+<span class="hljs-built_in">NSArray</span> * subviews; <span class="hljs-comment">//&#x83B7;&#x53D6;&#x4E00;&#x4E2A;View&#x6240;&#x6709;&#x5B50;&#x5BF9;&#x8C61;</span>
+
+-(<span class="hljs-keyword">void</span>)removeFromSuperview 
+
+<span class="hljs-comment">/* &#x4ECE;&#x7236;&#x63A7;&#x4EF6;&#x79FB;&#x9664;&#x63A7;&#x4EF6; &#x4F46;&#x4E0D;&#x662F;&#x9500;&#x6BC1;*/</span> 
+
+-(<span class="hljs-keyword">void</span>)addSubview 
+
+<span class="hljs-comment">/* &#x6DFB;&#x52A0;&#x63A7;&#x4EF6;*/</span> 
+
+-(<span class="hljs-built_in">UIView</span>*)viewWithTag:(<span class="hljs-built_in">NSInteger</span>)tag;  
+<span class="hljs-comment">// &#x672C;&#x8D28;&#x4E0A;&#x662F;&#x4E00;&#x5C42;&#x4E00;&#x5C42;View&#x7684;&#x904D;&#x5386;&#x627E; &#x627E;&#x5230;&#x5C31;&#x8FD4;&#x56DE; 1.&#x6700;&#x597D;&#x4E0D;&#x9002;&#x7528;  2.&#x5B58;&#x5728;&#x6027;&#x80FD;&#x95EE;&#x9898;</span>
+
+<span class="hljs-comment">/* &#x6839;&#x636E;&#x4E00;&#x4E2A;tag&#x6807;&#x5FD7;&#x627E;&#x51FA;&#x5BF9;&#x5E94;&#x7684;&#x63A7;&#x4EF6;&#xFF08;&#x4E00;&#x822C;&#x662F;&#x5B50;&#x63A7;&#x4EF6;&#xFF09;*/</span>
+</code></pre>
+<h3 id="&#x5E38;&#x7528;ui&#x63A7;&#x4EF6;">&#x5E38;&#x7528;UI&#x63A7;&#x4EF6;</h3>
+<ul>
+<li>UIButton &#x6309;&#x94AE; </li>
+<li>UILabel &#x6587;&#x672C;&#x6807;&#x7B7E; </li>
+<li>UITextField &#x6587;&#x672C;&#x8F93;&#x5165;&#x6846; </li>
+<li>UIImageView &#x56FE;&#x7247;&#x663E;&#x793A; </li>
+<li>UIScrollView &#x6EDA;&#x52A8;&#x7684;&#x63A7;&#x4EF6; </li>
+<li>UICollectionView &#x4E5D;&#x5BAB;&#x683C; </li>
+<li>UIWebView &#x7F51;&#x9875;&#x663E;&#x793A;&#x63A7;&#x4EF6; </li>
+<li>UIAlertView &#x5BF9;&#x8BDD;&#x8B66;&#x544A;&#x6846; </li>
+<li>UINavigationBar &#x5BFC;&#x822A;&#x680F; </li>
+</ul>
+<h4 id="uilabel">UILabel</h4>
+<ul>
+<li><p>text&#x663E;&#x793A;&#x6587;&#x5B57;</p>
+</li>
+<li><p>Lines == 0 &#x4EE3;&#x7801;&#x4E2D;<code>numberOfLines</code> &#x80FD;&#x663E;&#x793A;&#x591A;&#x5C11;&#x884C; 0&#x8868;&#x793A;&#x5C31;&#x663E;&#x793A;&#x591A;&#x5C11;</p>
+</li>
+<li><p>Line Break <code>lineBreakMode</code> &#x8D85;&#x51FA;&#x7684;&#x6700;&#x5927;&#x4E4B;&#x540E;&#x600E;&#x4E48;&#x663E;&#x793A;</p>
+<ul>
+<li><pre><code class="lang-objc"><span class="hljs-built_in">NSLineBreakByWordWrapping</span> = <span class="hljs-number">0</span>,    <span class="hljs-comment">// Wrap at word boundaries, default</span>
+<span class="hljs-built_in">NSLineBreakByCharWrapping</span>,        <span class="hljs-comment">// Wrap at character boundaries</span>
+<span class="hljs-built_in">NSLineBreakByClipping</span>,                <span class="hljs-comment">// Simply clip</span>
+<span class="hljs-built_in">NSLineBreakByTruncatingHead</span>,        <span class="hljs-comment">// Truncate at head of line: &quot;...wxyz&quot;</span>
+<span class="hljs-built_in">NSLineBreakByTruncatingTail</span>,        <span class="hljs-comment">// Truncate at tail of line: &quot;abcd...&quot;</span>
+<span class="hljs-built_in">NSLineBreakByTruncatingMiddle</span>        <span class="hljs-comment">// Truncate middle of line:  &quot;ab...yz&quot;</span>
+</code></pre>
+</li>
+</ul>
+</li>
+<li><p><code>textAlignment</code> &#x6587;&#x5B57;&#x663E;&#x793A;&#x683C;&#x5F0F;</p>
+<ul>
+<li><pre><code class="lang-objc"><span class="hljs-built_in">NSTextAlignmentLeft</span>      = <span class="hljs-number">0</span>,    <span class="hljs-comment">// Visually left aligned</span>
+<span class="hljs-built_in">NSTextAlignmentCenter</span>    = <span class="hljs-number">1</span>,    <span class="hljs-comment">// Visually centered</span>
+<span class="hljs-built_in">NSTextAlignmentRight</span>     = <span class="hljs-number">2</span>,    <span class="hljs-comment">// Visually right aligned</span>
+<span class="hljs-built_in">NSTextAlignmentRight</span>     = <span class="hljs-number">1</span>,    <span class="hljs-comment">// Visually right aligned</span>
+<span class="hljs-built_in">NSTextAlignmentCenter</span>    = <span class="hljs-number">2</span>,    <span class="hljs-comment">// Visually centered</span>
+<span class="hljs-built_in">NSTextAlignmentJustified</span> = <span class="hljs-number">3</span>,    <span class="hljs-comment">// Fully-justified. The last line in a paragraph is natural-aligned.</span>
+<span class="hljs-built_in">NSTextAlignmentNatural</span>   = <span class="hljs-number">4</span>,    <span class="hljs-comment">// Indicates the default alignment for script</span>
+</code></pre>
+<h4 id="uibutton">UIButton</h4>
+</li>
+</ul>
+</li>
+<li>&#x521B;&#x5EFA; <code>buttonWithType:</code>&#x81EA;&#x5B9A;&#x4E49; </li>
+<li>&#x9AD8;&#x4EAE; &#x8BBE;&#x7F6E;&#x5C5E;&#x6027;&#x7684;&#x65F6;&#x5019;&#x90FD;&#x5FC5;&#x987B;&#x8BBE;&#x7F6E;&#x6309;&#x94AE;&#x72B6;&#x6001;<code>set...forState:&#xFF08;normal\highlight&#xFF09;</code> <ul>
+<li>&#x76D1;&#x542C;&#x4E8B;&#x4EF6;&#x901A;&#x8FC7; addTarget: <h4 id="uiimageview">UIImageView</h4>
+</li>
+</ul>
+</li>
+<li>contentMode &#x63A7;&#x5236;&#x56FE;&#x7247;&#x663E;&#x793A; &#xFF08;UIViewContentMode... scale:&#x5E26;scale&#x7684;&#x4F1A;&#x62C9;&#x4F38; Aspect:&#x4FDD;&#x6301;&#x56FE;&#x7247;&#x6BD4;&#x4F8B;&#xFF09;  </li>
+<li><p><code>imageView.clipsToBounds = YES;</code>&#x8D85;&#x8FC7;&#x8FB9;&#x6846;&#x7684;&#x4F1A;&#x88AB;&#x88C1;&#x526A;</p>
+<ul>
+<li><p>&#x8D44;&#x6E90;&#x7684;&#x865A;&#x62DF;&#x4EE5;&#x53CA;&#x771F;&#x5B9E;&#x6587;&#x4EF6;&#x5939; </p>
+<ul>
+<li>&#x6DFB;&#x52A0;&#x7684;&#x9EC4;&#x8272;&#x6587;&#x4EF6;&#x5939;&#x662F;&#x865A;&#x62DF;&#x7684;&#x53EA;&#x5728;&#x9879;&#x76EE;&#x7ED3;&#x6784;&#x4E2D;&#x6709;|&#x84DD;&#x8272;&#x7684;&#x6587;&#x4EF6;&#x5939;&#x662F;&#x5B9E;&#x5728;&#x5B58;&#x5728;&#x7684;</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>UIImageView&#x5B9E;&#x73B0;&#x52A8;&#x753B;&#xFF08;&#x5E27;&#x52A8;&#x753B;&#xFF09; </p>
+<ul>
+<li><p>NSArray * animationImages </p>
+<ul>
+<li><p>&#x8BBE;&#x7F6E;&#x5E27;&#x52A8;&#x753B;&#x7684;&#x56FE;&#x7247;&#x8BBE;&#x7F6E;&#x56FE;&#x7247;&#x6570;&#x7EC4;</p>
+</li>
+<li><pre><code class="lang-objc"><span class="hljs-built_in">NSMutableArray</span> *images = [<span class="hljs-built_in">NSMutableArray</span> array];
+<span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span> ; i &lt;= count;++i){
+  <span class="hljs-built_in">NSString</span> *file = [<span class="hljs-built_in">NSString</span> stringWithFormat:<span class="hljs-string">@&quot;%@_%d&quot;</span>,name,i];
+  <span class="hljs-built_in">UIImage</span> *image = [<span class="hljs-built_in">UIImage</span> imageNamed:file];
+  [images addObject:image];
+}
+<span class="hljs-keyword">self</span>.imageView.animationImages = images;
+</code></pre>
+</li>
+</ul>
+</li>
+<li><p>startAnimating &#x5F00;&#x59CB; </p>
+</li>
+<li><p>stopAnimating &#x505C;&#x6B62; </p>
+</li>
+<li><p>isAnimating &#x662F;&#x5426;&#x6B63;&#x5728;&#x64AD;&#x653E; </p>
+</li>
+<li><p>animationRepeatCount &#x91CD;&#x590D;&#x6B21;&#x6570;&#xFF08;0&#x4E3A;&#x65E0;&#x9650;&#x6B21;&#xFF09; </p>
+</li>
+<li><p>animationDuration &#x6301;&#x7EED;&#x65F6;&#x95F4; </p>
+</li>
+<li><p>&#x58F0;&#x97F3;&#x7684;&#x64AD;&#x653E;AVFoundation&#x6846;&#x67B6; &#x4E2D;&#x7684;AVplayer&#x7C7B;&#x5BF9;&#x8C61;</p>
+<ul>
+<li><pre><code class="lang-objc"><span class="hljs-built_in">NSURl</span> *url = [[<span class="hljs-built_in">NSBundle</span> mainBundle] URLForResource:[<span class="hljs-built_in">NSString</span> stingWithFormat:<span class="hljs-string">@&quot;%@.mp3&quot;</span>,name] withExtension:<span class="hljs-literal">nil</span>];
+<span class="hljs-keyword">self</span>.player = [<span class="hljs-built_in">AVplayer</span> playWithUrl:url];
+[<span class="hljs-keyword">self</span>.player play];
+</code></pre>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>&#x901A;&#x8FC7;&#x65AD;&#x70B9;po NSHomeDirectory() &#x4F1A;&#x8F93;&#x51FA;&#x6C99;&#x76D2;&#x8DEF;&#x5F84; </p>
+</li>
+<li><p>[NSBundle mainBundle]&#x53EF;&#x4EE5;&#x83B7;&#x53D6;&#x5B89;&#x88C5;&#x5305;&#x5BF9;&#x8C61; </p>
+<ol>
+<li>NSString&#x5BF9;&#x8C61;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;isEqualToString&#x5224;&#x65AD;&#x662F;&#x5426;&#x76F8;&#x540C; </li>
+</ol>
+</li>
+<li><p>&#x5728;&#x4F7F;&#x7528;[UIImage imageNamed:]&#x4E00;&#x5B9A;&#x4F1A;&#x4F7F;&#x7528;&#x7F13;&#x5B58;&#x6280;&#x672F;&#xFF0C;&#x6D88;&#x8017;&#x5185;&#x5B58;&#x4E4B;&#x540E;&#x4E0D;&#x4F1A;&#x6062;&#x590D; </p>
+<ol>
+<li><p>imageWithContentsOfFile:  //&#x6709;file&#x4E3A;&#x7ED3;&#x5C3E;&#x7684;&#x8BDD;&#x4E00;&#x822C;&#x662F;&#x5168;&#x8DEF;&#x5F84; mainBundle &#xFF08;&#x9700;&#x8981;&#x4F20;&#x5165;&#x5168;&#x8DEF;&#x5F84;&#x56FE;&#x7247;&#xFF09; </p>
+<ol>
+<li><pre><code class="lang-objc"><span class="hljs-built_in">NSString</span> *imageName = [<span class="hljs-built_in">NSString</span> stringWithFormat:<span class="hljs-string">@&quot;%@_%d&quot;</span>,name,count];
+<span class="hljs-built_in">NSString</span> *filePath = [[<span class="hljs-built_in">NSBundle</span> mainBundle] pathForResource:imageName ofType:<span class="hljs-string">@&quot;png&quot;</span>];
+<span class="hljs-built_in">UIImage</span>* image = [<span class="hljs-built_in">UIImage</span> imageWithContentsOfFile:filePath];
+</code></pre>
+</li>
+</ol>
+</li>
+<li><p>Assets&#x6587;&#x4EF6;&#x5939;&#x5185;&#x5728;&#x6253;&#x5305;&#x7684;&#x65F6;&#x5019;&#x4F1A;&#x6253;&#x5305;&#x6210;&#x53E6;&#x4E00;&#x4E2A;&#x6587;&#x4EF6; </p>
+<ol>
+<li>&#x5728;Assets&#x6587;&#x4EF6;&#x5939;&#x5185;&#x7684;&#x8BDD;&#x53EA;&#x80FD;&#x901A;&#x8FC7;&#x56FE;&#x7247;&#x8BBF;&#x95EE;&#x4E00;&#x5B9A;&#x4F1A;&#x6709;&#x7F13;&#x5B58;&#xFF08;&#x9002;&#x5408;&#x4F7F;&#x7528;&#x9891;&#x7387;&#x9AD8;&#x7684;&#x56FE;&#x7247;&#xFF09; </li>
+</ol>
+</li>
+</ol>
+</li>
+</ul>
+<h3 id="&#x8BBE;&#x7F6E;&#x989C;&#x8272;&#x534A;&#x900F;&#x660E;">&#x8BBE;&#x7F6E;&#x989C;&#x8272;&#x534A;&#x900F;&#x660E;</h3>
+<p><code>[UIColor colorWithRed: &lt;(CGFloat)&gt; green:&lt;(CGFloat)&gt; blue:&lt;(CGFloat)&gt; alpha:&lt;(CGFloat)&gt;]//&#x8BBE;&#x7F6E;alpha</code> </p>
+<h3 id="&#x62C9;&#x4F38;&#x56FE;&#x7247;">&#x62C9;&#x4F38;&#x56FE;&#x7247;</h3>
+<p><code>[image resizableImageWithCapInsets:UIEdgeInsetsMake(//&#x4FDD;&#x8BC1;&#x4E0D;&#x62C9;&#x4F38;&#x7684;&#x5730;&#x65B9;) resizingMode://&#x62C9;&#x4F38;&#x8FD8;&#x662F;&#x5E73;&#x94FA;];</code> </p>
+<p>&#x76F4;&#x63A5;&#x914D;&#x7F6E;&#x56FE;&#x7247;&#xFF08;&#x5FC5;&#x987B;&#x5728;asset&#x91CC;&#xFF09; </p>
+<h4 id="&#x5C0F;&#x6280;&#x5DE7;">&#x5C0F;&#x6280;&#x5DE7;</h4>
+<p>/<em>* &#x65B9;&#x6CD5;&#x6CE8;&#x518C;add</em>/ </p>
+<p><img src="evernotecid://855EEE5C-EBC3-428D-871C-8987FF9E56B6/appyinxiangcom/22726474/ENResource/p5" alt="8bf2a55cec809eb8bf837d994f32cf08.png"> </p>
+<p>&#x9690;&#x85CF;&#x72B6;&#x6001;&#x680F; </p>
+<ul>
+<li>(BOOL)prefersStatusBarHidden; </li>
+</ul>
+<p>#program mark-&#x6CE8;&#x91CA;&#x65B9;&#x6CD5; </p>
+<h4 id="&#x6A21;&#x578B;&#x7684;&#x4F7F;&#x7528;">&#x6A21;&#x578B;&#x7684;&#x4F7F;&#x7528;</h4>
+<p>&#x4E13;&#x95E8;&#x7528;&#x6765;&#x5B58;&#x653E;&#x6570;&#x636E;&#x7684;&#x5BF9;&#x8C61; </p>
+<blockquote>
+<p>&#x4E00;&#x822C;&#x7EE7;&#x627F;NSObject&#xFF0C;&#x5728;.h&#x6587;&#x4EF6;&#x4E2D;&#x58F0;&#x660E;&#x4E00;&#x4E9B;&#x7528;&#x6765;&#x5B58;&#x653E;&#x6570;&#x636E;&#x7684;&#x5C5E;&#x6027; </p>
+</blockquote>
+<p>&#x7528;&#x6A21;&#x578B;&#x53D6;&#x4EE3;&#x5B57;&#x5178;&#x7684;&#x597D;&#x5904; </p>
+<ol>
+<li><p>&#x7F16;&#x5199;&#x7684;&#x65F6;&#x5019;&#x7F16;&#x8BD1;&#x5668;&#x4F1A;&#x6709;&#x63D0;&#x793A; </p>
+</li>
+<li><p>&#x8BBF;&#x95EE;&#x5C5E;&#x6027;&#x4F1A;&#x6709;&#x63D0;&#x793A; </p>
+</li>
+</ol>
+<p>&#x5728;&#x4F7F;&#x7528;&#x7684;&#x65F6;&#x5019;&#x8981;&#x5C06;&#x5B57;&#x5178;&#x8F6C;&#x4E3A;<strong>&#x6A21;&#x578B;</strong>&#xFF0C;&#x901A;&#x8FC7;&#x8D4B;&#x503C;&#x7ED9;&#x53EF;&#x53D8;&#x6570;&#x7EC4;&#x518D;&#x76F4;&#x63A5;&#x628A;&#x53EF;&#x53D8;&#x6570;&#x7EC4;&#x62F7;&#x8D1D;&#x8FDB;&#x4E0D;&#x53EF;&#x53D8;&#x6570;&#x7EC4;&#x8FBE;&#x5230;&#x76EE;&#x7684; </p>
+<h4 id="&#x7C7B;&#x524D;&#x7F00;">&#x7C7B;&#x524D;&#x7F00;</h4>
+<p>&#x901A;&#x8FC7;&#x81EA;&#x5B9A;&#x4E49;&#x7C7B;&#x524D;&#x7F00;&#x533A;&#x522B;&#x7CFB;&#x7EDF;&#x7C7B; </p>
+<p>&gt; ZZCButton; </p>
+<h4 id="instancetype">instancetype</h4>
+<p>&#x82F9;&#x679C;&#x901A;&#x8FC7;instancetype&#x6765;&#x53D6;&#x4EE3;<strong>&#x8FD4;&#x56DE;&#x503C;</strong>&#x4E2D;&#x7684;id,&#x4F1A;&#x68C0;&#x6D4B;&#x8FD4;&#x56DE;&#x503C;&#x7C7B;&#x578B;&#x3002; </p>
+<h3 id="&#x81EA;&#x5B9A;&#x4E49;&#x63A7;&#x4EF6;">&#x81EA;&#x5B9A;&#x4E49;&#x63A7;&#x4EF6;</h3>
+<p>&#x5C01;&#x88C5;&#x63A7;&#x4EF6;&#x5185;&#x90E8;&#x7684;&#x7EC6;&#x8282; </p>
+<ol>
+<li><p>-(void)layoutSubviews;&#x5E03;&#x5C40;&#x5B50;&#x63A7;&#x4EF6;&#xFF0C;&#x63A7;&#x5236;&#x5B50;&#x63A7;&#x4EF6;&#x5C3A;&#x5BF8; </p>
+</li>
+<li><p>-(instancetype)init;&#x53EA;&#x505A;&#x521D;&#x59CB;&#x5316;&#x63A7;&#x4EF6; </p>
+</li>
+</ol>
+<h4 id="initwithframe">initWithFrame</h4>
+<ul>
+<li><p>init&#x4F1A;&#x81EA;&#x52A8;&#x8C03;&#x7528;initWithFrame </p>
+</li>
+<li><p>[super initWithFrame:frame]; </p>
+</li>
+<li><p>&#x901A;&#x8FC7;&#x8FD9;&#x4E2A;&#x65B9;&#x6CD5;&#x53EF;&#x4EE5;&#x4FDD;&#x8BC1;&#x521B;&#x5EFA;&#x54EA;&#x4E2A;&#x90FD;&#x662F;ok&#x7684; </p>
+</li>
+</ul>
+<h3 id="&#x6570;&#x636E;&#x4F20;&#x9012;">&#x6570;&#x636E;&#x4F20;&#x9012;</h3>
+<ol>
+<li><p>&#x76F4;&#x63A5;&#x901A;&#x8FC7;&#x5C5E;&#x6027;&#x4F20;&#x9012;&#xFF08;&#x66B4;&#x9732;&#x4E86;&#x5C5E;&#x6027;&#xFF09; </p>
+</li>
+<li><p>&#x901A;&#x8FC7;set&#x65B9;&#x6CD5;&#x8BBE;&#x7F6E; </p>
+</li>
+<li><p>&#x63D0;&#x4F9B;&#x4E00;&#x4E2A;&#x6A21;&#x578B;&#x5C5E;&#x6027;&#x4F20;&#x5165;&#x53C2;&#x6570; &#xFF08;&#x5E38;&#x7528;&#x65B9;&#x6CD5;&#xFF09; </p>
+<ol>
+<li>@class &#x6A21;&#x578B;&#x7C7B; </li>
+<li>&#x58F0;&#x660E;&#x5C5E;&#x6027; </li>
+<li>&#x91CD;&#x65B0;&#x6A21;&#x578B;&#x7684;set&#x65B9;&#x6CD5; </li>
+</ol>
+</li>
+</ol>
+<h3 id="&#x81EA;&#x5B9A;&#x4E49;&#x6309;&#x94AE;">&#x81EA;&#x5B9A;&#x4E49;&#x6309;&#x94AE;</h3>
+<pre><code class="lang-objc">- (<span class="hljs-built_in">CGRect</span>)imageRectForContentRect:(<span class="hljs-built_in">CGRect</span>)contentRect{ 
+
+<span class="hljs-comment">// &#x8FD4;&#x56DE;&#x56FE;&#x7247;&#x663E;&#x793A;&#x4F4D;&#x5B50; contentRect&#x662F;&#x6309;&#x94AE;&#x7684;bounds </span>
+
+} 
+
+- (<span class="hljs-built_in">CGRect</span>)titleRectForContentRect:(<span class="hljs-built_in">CGRect</span>)contentRect{ 
+
+<span class="hljs-comment">// &#x8FD4;&#x56DE;&#x6807;&#x9898;&#x663E;&#x793A;&#x4F4D;&#x5B50; </span>
+
+} 
+
+<span class="hljs-comment">//&#x6216;&#x8005;&#x76F4;&#x63A5;&#x4F7F;&#x7528;layoutSubviews</span>
+</code></pre>
+<h4 id="&#x6309;&#x94AE;&#x5185;&#x8FB9;&#x8DDD;">&#x6309;&#x94AE;&#x5185;&#x8FB9;&#x8DDD;</h4>
+<p>&#x5728;storybroad&#x4E2D;&#x5185;&#x8FB9;&#x8DDD;&#x5728;Edge&#x4E2D;&#x8BBE;&#x7F6E;&#x4EE3;&#x7801;&#x53EF;&#x901A;&#x8FC7; </p>
+<pre><code class="lang-objc">imageEdgeInsets&#x8BBE;&#x7F6E;
+</code></pre>
+<h2 id="xib&#x6587;&#x4EF6;">xib&#x6587;&#x4EF6;</h2>
+<p>&#x76F8;&#x5BF9;&#x4E8E;storybroad&#x662F;&#x8F7B;&#x91CF;&#x7EA7;&#x7684; </p>
+<p>&#x7528;&#x4E8E;&#x63CF;&#x8FF0;&#x5C40;&#x90E8;&#x7684;&#x4E00;&#x5C0F;&#x90E8;&#x5206;&#x7684;&#x754C;&#x9762; </p>
+<p>&#x53EF;&#x4EE5;&#x7528;&#x6765;&#x81EA;&#x5B9A;&#x4E49;&#x63A7;&#x4EF6; </p>
+<p>### &#x52A0;&#x8F7D;xib&#x6587;&#x4EF6; </p>
+<p>&#x5728;&#x7F16;&#x8BD1;&#x4E4B;&#x540E;&#x4E3A;nib&#x6587;&#x4EF6; </p>
+<ol>
+<li><p>NSSArray* arr = [[NSBundle mainBundle] loadNamed: owner: option:]; </p>
+</li>
+<li><p>UINib* nib = [UINib nibWithName:@&quot;&quot; bundle:nil]; </p>
+<ol>
+<li>NSArray* arr = [nib instantiateWithOwner:nil options:nil]; </li>
+</ol>
+</li>
+</ol>
+<p>&#x5982;&#x679C;&#x4E0D;&#x8BBE;&#x7F6E;xib&#x63A7;&#x4EF6;&#x5C3A;&#x5BF8;&#x4F1A;&#x6709;&#x9ED8;&#x8BA4;&#x7684;&#x5C3A;&#x5BF8; </p>
+<p>&#x6700;&#x597D;&#x7684;&#x63A7;&#x5236;&#x63A7;&#x4EF6;&#x7684;&#x65B9;&#x6CD5;&#x5C31;&#x662F;&#x62D6;&#x6839;&#x7EBF; </p>
+<p><img src="evernotecid://855EEE5C-EBC3-428D-871C-8987FF9E56B6/appyinxiangcom/22726474/ENResource/p6" alt="55c7220a11d646e0c15608551bfa1ddf.png"> </p>
+<p>&#x5982;&#x679C;&#x4E00;&#x4E2A;&#x63A7;&#x4EF6;&#x662F;&#x4ECE;xib&#x6216;&#x8005;storyboard&#x521B;&#x5EFA;&#x7684;&#xFF0C;&#x521D;&#x59CB;&#x5316;&#x4E00;&#x5B9A;&#x4F1A;&#x8C03;&#x7528;initWithCoder:&#x8FD9;&#x4E2A;&#x65B9;&#x6CD5; </p>
+<p>&#x5982;&#x679C;&#x4E00;&#x4E2A;&#x63A7;&#x4EF6;&#x4ECE;xib&#x6216;&#x8005;storybroad&#x521B;&#x5EFA;&#x51FA;&#x6765;&#x7684;&#xFF0C;&#x52A0;&#x8F7D;&#x5B8C;&#x6BD5;&#x7684;&#x65F6;&#x5019;&#x4E00;&#x5B9A;&#x4F1A;&#x8C03;&#x7528;awakeFromNib&#x8FD9;&#x4E2A;&#x65B9;&#x6CD5; </p>
+<blockquote>
+<p>xib&#x7C7B;&#x578B;&#x6587;&#x4EF6;&#x662F;&#x4E0D;&#x4F1A;&#x4E3B;&#x52A8;&#x52A0;&#x8F7D;&#x7684;&#x9700;&#x8981;&#x7279;&#x6B8A;&#x7F16;&#x8BD1; </p>
+</blockquote>
+<p>UIView&#x53EF;&#x4EE5;&#x9690;&#x85CF;&#x901A;&#x8FC7;hidden&#x9690;&#x85CF;&#x4E5F;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x900F;&#x660E;&#x5B9E;&#x73B0;alpha </p>
+<h2 id="&#x6E10;&#x53D8;&#x52A8;&#x753B;">&#x6E10;&#x53D8;&#x52A8;&#x753B;</h2>
+<h3 id="&#x5934;&#x5C3E;&#x5F0F;">&#x5934;&#x5C3E;&#x5F0F;</h3>
+<pre><code class="lang-objc">
+[<span class="hljs-built_in">UIView</span> beginAnimation:<span class="hljs-literal">nil</span> context:<span class="hljs-literal">nil</span>]; 
+
+[<span class="hljs-built_in">UIView</span> setAnimationDuration:<span class="hljs-number">2</span>];<span class="hljs-comment">//&#x8BBE;&#x7F6E;&#x52A8;&#x753B;&#x65F6;&#x95F4; </span>
+
+<span class="hljs-comment">//&#x5B9E;&#x73B0;&#x52A8;&#x753B; </span>
+
+[<span class="hljs-built_in">UIView</span> commitAnimations];
+</code></pre>
+<h3 id="block&#x5F0F;">block&#x5F0F;</h3>
+<pre><code class="lang-objc">
+[<span class="hljs-built_in">UIView</span> animateWithDuration:time animation:^{ 
+
+<span class="hljs-comment">//&#x5B9E;&#x73B0;&#x52A8;&#x753B; </span>
+
+}]; 
+
+[<span class="hljs-built_in">UIView</span> animateWithDuration:(<span class="hljs-built_in">NSTimeInterval</span>) animations:^{ 
+
+<span class="hljs-comment">//&#x5B9E;&#x73B0;&#x52A8;&#x753B; </span>
+
+} completion:^(<span class="hljs-built_in">BOOL</span> finished) { 
+
+<span class="hljs-comment">//&#x5B8C;&#x6210;&#x540E;&#x5B9E;&#x73B0;&#x6548;&#x679C; </span>
+
+}];
+</code></pre>
+<h2 id="&#x5DE5;&#x5177;&#x7C7B;">&#x5DE5;&#x5177;&#x7C7B;</h2>
+<ol>
+<li><p>&#x4E00;&#x822C;&#x7EE7;&#x627F;&#x4E8E;NSObject </p>
+</li>
+<li><p>&#x65B9;&#x6CD5;&#x4E00;&#x822C;&#x90FD;&#x662F;&#x7C7B;&#x65B9;&#x6CD5; </p>
+</li>
+<li><p>&#x4E13;&#x95E8;&#x7528;&#x6765;&#x5904;&#x7406;&#x95EE;&#x9898; </p>
+</li>
+</ol>
+<h2 id="kvo&#x952E;&#x503C;&#x7F16;&#x7A0B;">KVO&#x952E;&#x503C;&#x7F16;&#x7A0B;</h2>
+<h3 id="&#x8D4B;&#x503C;">&#x8D4B;&#x503C;</h3>
+<p>&#x53EF;&#x4EE5;&#x76F4;&#x63A5;&#x4FEE;&#x6539;&#x6210;&#x5458;&#x53D8;&#x91CF;&#xFF0C;&#x5C31;&#x7B97;&#x662F;&#x79C1;&#x6709;&#x7684; </p>
+<pre><code class="lang-objc">
+[setValue:(nullable <span class="hljs-keyword">id</span>) forKey:(nonnull <span class="hljs-built_in">NSString</span> * )]; 
+
+[setValue:(nullable <span class="hljs-keyword">id</span>) forKeyPath:(nonnull <span class="hljs-built_in">NSString</span> * )]; 
+
+[setValuesForKeysWithDictionary:(nonnull <span class="hljs-built_in">NSDictionary</span>&lt;<span class="hljs-built_in">NSString</span> * ,<span class="hljs-keyword">id</span>&gt; * )];<span class="hljs-comment">//&#x4F1A;&#x904D;&#x5386;&#x5B57;&#x5178;&#xFF0C;&#x81EA;&#x52A8;&#x8D4B;&#x503C;&#x5B57;&#x5178;&#x6A21;&#x578B;&#x3002;&#x5C40;&#x9650;&#x662F;&#x627E;&#x4E0D;&#x5230;&#x5B57;&#x5178;&#x7684;&#x5C5E;&#x6027;&#x4F1A;&#x62A5;&#x9519;&#xFF0C;&#x5B9E;&#x9645;&#x53EF;&#x80FD;&#x4E0D;&#x7528; &#x5B57;&#x5178;&#x8F6C;&#x6A21;&#x578B; </span>
+
+[setValue:(nullable <span class="hljs-keyword">id</span>) forUndefinedKey:(nonnull <span class="hljs-built_in">NSString</span> * )];<span class="hljs-comment">//&#x7CFB;&#x7EDF;&#x627E;&#x4E0D;&#x5230;key&#x7684;&#x65F6;&#x5019;&#x4F1A;&#x81EA;&#x5B9A;&#x8C03;&#x7528;</span>
+</code></pre>
+<h3 id="&#x53D6;&#x503C;">&#x53D6;&#x503C;</h3>
+<pre><code class="lang-objc">
+[valueForKey:(nonnull <span class="hljs-built_in">NSString</span> *)]; 
+
+[valueForKeyPath:(nonnull <span class="hljs-built_in">NSString</span> *)];<span class="hljs-comment">//&#x6700;&#x597D;&#x7528;KeyPath </span>
+
+[valueForUndefinedKey:(nonnull <span class="hljs-built_in">NSString</span> *)]; 
+
+[dictionaryWithValuesForKeys:(nonnull <span class="hljs-built_in">NSArray</span>&lt;<span class="hljs-built_in">NSString</span> *&gt; *)];<span class="hljs-comment">//&#x4F1A;&#x8FD4;&#x56DE;&#x4E00;&#x4E2A;&#x5B57;&#x5178; &#x6A21;&#x578B;&#x8F6C;&#x5B57;&#x5178; &#x5982;&#x679C;&#x662F;&#x6570;&#x7EC4;&#x7684;&#x8BDD;&#xFF0C;&#x4F1A;&#x62BD;&#x53D6;&#x6570;&#x7EC4;&#x4E2D;&#x6BCF;&#x4E2A;&#x6570;&#x7EC4;&#x7684;&#x503C;&#xFF0C;&#x5E76;&#x8FD4;&#x56DE;&#x4E00;&#x4E2A;&#x6570;&#x7EC4;</span>
+</code></pre>
+<h2 id="kvo&#x952E;&#x503C;&#x76D1;&#x542C;">KVO&#x952E;&#x503C;&#x76D1;&#x542C;</h2>
+<p>&#x53EF;&#x4EE5;&#x76D1;&#x542C;&#x67D0;&#x4E2A;&#x5BF9;&#x8C61;&#x503C;&#x7684;&#x6539;&#x53D8; </p>
+<pre><code class="lang-objc">
+[<span class="hljs-keyword">self</span> addObserver:<span class="hljs-keyword">self</span> forKeyPath:(nonnull <span class="hljs-built_in">NSString</span> *) options:kNilOptions context:<span class="hljs-literal">nil</span>];<span class="hljs-comment">//&#x7ED9;&#x5BF9;&#x8C61;&#x6DFB;&#x52A0;&#x4E00;&#x4E2A;&#x76D1;&#x542C;&#x5668; </span>
+
+- (<span class="hljs-keyword">void</span>)observeValueForKeyPath:(<span class="hljs-built_in">NSString</span> *)keyPath ofObject:(<span class="hljs-keyword">id</span>)object change:(<span class="hljs-built_in">NSDictionary</span>&lt;<span class="hljs-built_in">NSKeyValueChangeKey</span>,<span class="hljs-keyword">id</span>&gt; *)change context:(<span class="hljs-keyword">void</span> *)context{ 
+
+keyPath &#x90A3;&#x4E2A;&#x5C5E;&#x6027;&#x6539;&#x4E86; 
+
+object &#x90A3;&#x4E2A;&#x5BF9;&#x8C61; 
+
+change &#x6539;&#x6210;&#x4EC0;&#x4E48;&#x6837;&#x4E86; 
+
+context &#x5F53;&#x521D;&#x4F20;&#x7684;context&#x662F;&#x4EC0;&#x4E48;&#x5C31;&#x662F;&#x4EC0;&#x4E48; 
+
+}<span class="hljs-comment">//&#x76D1;&#x542C;&#x65B9;&#x6CD5;&#x5F53;&#x901A;KVO&#x76D1;&#x542C;&#x5230;&#x4E4B;&#x540E;&#x4F1A;&#x81EA;&#x52A8;&#x8C03;&#x7528; </span>
+
+<span class="hljs-comment">//&#x5728;&#x76D1;&#x542C;&#x5BF9;&#x8C61;&#x9500;&#x6BC1;&#x4E4B;&#x524D;&#x8981;&#x79FB;&#x9664;KVO </span>
+
+[<span class="hljs-keyword">self</span> removeObserver:(nonnull <span class="hljs-built_in">NSObject</span> *) forKeyPath:(nonnull <span class="hljs-built_in">NSString</span> *)];
+</code></pre>
+<h2 id="uiscrollview">UIScrollView</h2>
+<ol>
+<li><p>&#x8BB2;&#x8981;&#x5C55;&#x793A;&#x7684;&#x5185;&#x5BB9;&#x6DFB;&#x52A0;&#x5230;&#x91CC;&#x9762; </p>
+</li>
+<li><p>&#x8BBE;&#x5B9A;&#x5185;&#x5BB9;&#x5C3A;&#x5BF8;contentSize &#x53EF;&#x6EDA;&#x52A8;&#x7684;&#x5C3A;&#x5BF8; contentSize - scrollView&#x5C3A;&#x5BF8; </p>
+</li>
+<li><p>&#x4E0D;&#x80FD;&#x901A;&#x8FC7;&#x7D22;&#x5F15;subviews&#x8BBF;&#x95EE;ScrollView </p>
+</li>
+</ol>
+<h3 id="&#x4E0D;&#x80FD;&#x6EDA;&#x52A8;&#x539F;&#x56E0;">&#x4E0D;&#x80FD;&#x6EDA;&#x52A8;&#x539F;&#x56E0;</h3>
+<p>scrollEnable&#x5C5E;&#x6027;&#x8BBE;&#x7F6E;&#x4E3A;NO </p>
+<p>userInteractionEnabled&#x662F;UIView&#x7684;&#x5C5E;&#x6027;&#xFF0C;&#x8BBE;&#x7F6E;&#x4E4B;&#x540E;&#x7528;&#x6237;&#x4E0D;&#x80FD;&#x4EA4;&#x4E92; </p>
+<h3 id="&#x6CA1;&#x6709;&#x8BBE;&#x7F6E;contentsize&#x600E;&#x4E48;&#x5B9E;&#x73B0;&#x6EDA;&#x52A8;&#x6548;&#x679C;">&#x6CA1;&#x6709;&#x8BBE;&#x7F6E;contentSize&#x600E;&#x4E48;&#x5B9E;&#x73B0;&#x6EDA;&#x52A8;&#x6548;&#x679C;</h3>
+<p>scrollView.alwaysBounceHorizontal = YES;(&#x9ED8;&#x8BA4;NO) </p>
+<h3 id="&#x6EDA;&#x52A8;&#x6761;">&#x6EDA;&#x52A8;&#x6761;</h3>
+<p>scrollView.showHorizontalScrollIndicator = NO;(&#x9ED8;&#x8BA4;&#x662F;YES) </p>
+<h3 id="contentoffset">contentOffset</h3>
+<p>&#x504F;&#x79FB;&#x91CF; </p>
+<h3 id="delegate&#x4EE3;&#x7406;">delegate&#x4EE3;&#x7406;</h3>
+<p>&#x58F0;&#x660E;&#x4ED6;&#x7684;&#x4EE3;&#x7406;&#x4E3A;&#x4E00;&#x4E2A;&#x5BF9;&#x8C61;&#x5373;&#x672C;&#x63A7;&#x5236;&#x5668;&#x5373;&#x53EF;&#xFF08;&#x4EFB;&#x4F55;&#x5BF9;&#x8C61;&#x90FD;&#x53EF;&#x4EE5;&#x4F46;&#x662F;&#x4E00;&#x822C;&#x90FD;&#x662F;&#x63A7;&#x5236;&#x5668;&#xFF09; </p>
+<p>scrollView.delegate = self; </p>
+<p>&#x8FD8;&#x9700;&#x8981;&#x6EE1;&#x8DB3;&#x534F;&#x8BAE;&#xFF0C;&#x9075;&#x5B88;&#x534F;&#x8BAE;&#x9700;&#x8981;&#x5728;interface&#x4E2D;&#x58F0;&#x660E;&#xFF0C;&#x7C7B;&#x6269;&#x5C55;&#x4E2D;&#x9075;&#x5B88;&#x4E5F;&#x53EF;&#x4EE5; </p>
+<p>&#x4EE3;&#x7406;&#x65B9;&#x6CD5;&#x4E0D;&#x9700;&#x8981;&#x4E3B;&#x52A8;&#x4F7F;&#x7528;&#xFF0C;&#x4F1A;&#x81EA;&#x52A8;&#x8C03;&#x7528; </p>
+<p>&#x4EE3;&#x7406;&#x5C5E;&#x6027;&#x662F;weak </p>
+<h4 id="&#x7F29;&#x653E;">&#x7F29;&#x653E;</h4>
+<p>viewForZoomingInScrollView:(UIScrollView *)scrollView </p>
+<p>&#x5728;&#x8BBE;&#x7F6E;&#x6700;&#x5927;&#x6700;&#x5C0F;&#x7F29;&#x653E;&#x6BD4;&#x4F8B; </p>
+<p>maximumZoomScale </p>
+<p>minimumZoomScale </p>
+<h2 id="&#x5C4F;&#x5E55;&#x9002;&#x914D;">&#x5C4F;&#x5E55;&#x9002;&#x914D;</h2>
+<pre><code class="lang-objc">
+<span class="hljs-keyword">typedef</span> <span class="hljs-built_in">NS_OPTIONS</span>(<span class="hljs-built_in">NSUInteger</span>, <span class="hljs-built_in">UIViewAutoresizing</span>) { 
+
+<span class="hljs-built_in">UIViewAutoresizingNone</span> = <span class="hljs-number">0</span>, 
+
+<span class="hljs-built_in">UIViewAutoresizingFlexibleLeftMargin</span> = <span class="hljs-number">1</span> &lt;&lt; <span class="hljs-number">0</span>, 
+
+<span class="hljs-built_in">UIViewAutoresizingFlexibleWidth</span> = <span class="hljs-number">1</span> &lt;&lt; <span class="hljs-number">1</span>, 
+
+<span class="hljs-built_in">UIViewAutoresizingFlexibleRightMargin</span> = <span class="hljs-number">1</span> &lt;&lt; <span class="hljs-number">2</span>, 
+
+<span class="hljs-built_in">UIViewAutoresizingFlexibleTopMargin</span> = <span class="hljs-number">1</span> &lt;&lt; <span class="hljs-number">3</span>, 
+
+<span class="hljs-built_in">UIViewAutoresizingFlexibleHeight</span> = <span class="hljs-number">1</span> &lt;&lt; <span class="hljs-number">4</span>, 
+
+<span class="hljs-built_in">UIViewAutoresizingFlexibleBottomMargin</span> = <span class="hljs-number">1</span> &lt;&lt; <span class="hljs-number">5</span> 
+
+};
+</code></pre>
+<h3 id="uilable&#x5B9E;&#x73B0;&#x5305;&#x88F9;&#x5185;&#x5BB9;">UILable&#x5B9E;&#x73B0;&#x5305;&#x88F9;&#x5185;&#x5BB9;</h3>
+<ol>
+<li><p>&#x5B9E;&#x73B0;&#x4F4D;&#x5B50;&#x7EA6;&#x675F; </p>
+</li>
+<li><p>&#x8BBE;&#x7F6E;&#x5BBD;&#x5EA6;&#x7EA6;&#x675F;&lt;= </p>
+</li>
+<li><p>&#x4E0D;&#x7528;&#x8BBE;&#x7F6E;&#x9AD8;&#x5EA6;&#x7EA6;&#x675F; </p>
+</li>
+</ol>
+<p>&#x7528;&#x4EE3;&#x7801;&#x5B9E;&#x73B0;&#x7EA6;&#x675F;&#x975E;&#x5E38;&#x590D;&#x6742; </p>
+<h3 id="vfl&#x6DFB;&#x52A0;&#x7EA6;&#x675F;">VFL&#x6DFB;&#x52A0;&#x7EA6;&#x675F;</h3>
+<pre><code class="lang-objc">
+<span class="hljs-built_in">NSString</span>* vfl_h = <span class="hljs-string">@&quot;H:|-space-[blueView(==redView)]-space-[redView]-space-|&quot;</span>;<span class="hljs-comment">//&#x6C34;&#x5E73; </span>
+
+<span class="hljs-built_in">NSString</span>* vfl_V = <span class="hljs-string">@&quot;V:[blueView]-space-|&quot;</span>;<span class="hljs-comment">//&#x5782;&#x76F4; </span>
+
+<span class="hljs-built_in">NSDictionary</span>* dict = @{<span class="hljs-string">@&quot;redView&quot;</span>:redView,<span class="hljs-string">@&quot;blueView&quot;</span>:blueView}; 
+
+<span class="hljs-built_in">NSDictionary</span>* space = @{<span class="hljs-string">@&quot;space&quot;</span>:@<span class="hljs-number">20</span>}; 
+
+<span class="hljs-built_in">NSArray</span>* arr = [<span class="hljs-built_in">NSLayoutConstraint</span> constraintsWithVisualFormat:vfl_h options:kNilOptions metrics:space views:dict]; 
+
+[<span class="hljs-keyword">self</span> addConstraints:arr];
+</code></pre>
+<h2 id="uitableview">UITableView</h2>
+<p>&#x7EE7;&#x627F;&#x4E8E;UIScrollView&#x56E0;&#x6B64;&#x652F;&#x6301;&#x7EB5;&#x5411;&#x6ED1;&#x52A8;&#x6027;&#x80FD;&#x597D; </p>
+<ul>
+<li><p>&#x9700;&#x8981;&#x4E00;&#x7EC4;&#x6570;&#x636E;&#x6E90;&#xFF08;DataSource&#xFF09;&#x9075;&#x5B88;UITableViewDataSource&#x534F;&#x8BAE; </p>
+</li>
+<li><p>&#x4EE5;&#x53CA;&#x9700;&#x8981;&#x6EE1;&#x8DB3;UITableViewDelegate </p>
+</li>
+<li><p>&#x91CD;&#x8981;&#x5C31;&#x662F;&#x5B57;&#x5178;&#x8F6C;&#x6A21;&#x578B; </p>
+</li>
+</ul>
+<pre><code class="lang-objc">
+<span class="hljs-comment">//&#x544A;&#x8BC9;tableView&#x6BCF;&#x4E2A;&#x4E00;&#x5171;&#x6709;&#x591A;&#x5C11;&#x5757; </span>
+
+- (<span class="hljs-built_in">NSInteger</span>)numberOfSectionsInTableView:(<span class="hljs-built_in">UITableView</span> *)tableView{ 
+
+<span class="hljs-keyword">return</span> (<span class="hljs-built_in">NSInteger</span>); 
+
+} 
+
+<span class="hljs-comment">//&#x544A;&#x8BC9;TableView&#x6BCF;&#x4E2A;section&#x4E2D;&#x7684;Row&#x7684;&#x4E2A;&#x6570; </span>
+
+- (<span class="hljs-built_in">NSInteger</span>)tableView:(<span class="hljs-built_in">UITableView</span> *)tableView numberOfRowsInSection:(<span class="hljs-built_in">NSInteger</span>)section{ 
+
+<span class="hljs-keyword">return</span> (<span class="hljs-built_in">NSInteger</span>); 
+
+} 
+
+<span class="hljs-comment">//&#x544A;&#x8BC9;TableView&#x6BCF;&#x884C;&#x7684;cell </span>
+
+- (<span class="hljs-built_in">UITableViewCell</span>*)tableView:(<span class="hljs-built_in">UITableView</span> *)tableView cellForRowAtIndexPath:(<span class="hljs-built_in">NSIndexPath</span> *)indexPath{ 
+
+<span class="hljs-comment">// indexPath.section; &#x54EA;&#x4E00;&#x5757; </span>
+
+<span class="hljs-comment">// indexPath.row &#x54EA;&#x4E00;&#x884C; </span>
+
+<span class="hljs-built_in">UITableViewCell</span>* cell = [[<span class="hljs-built_in">UITableViewCell</span> alloc]init]; 
+
+cell.accessoryType = <span class="hljs-built_in">UITableViewCellAccessoryDisclosureIndicator</span>;<span class="hljs-comment">//&#x8BBE;&#x7F6E;cell&#x53F3;&#x8FB9;&#x6307;&#x793A;&#x6837;&#x5B50; </span>
+
+<span class="hljs-keyword">return</span> [[<span class="hljs-built_in">UITableViewCell</span> alloc]init]; 
+
+} 
+
+- (<span class="hljs-built_in">NSString</span> *)tableView:(<span class="hljs-built_in">UITableView</span> *)tableView titleForHeaderInSection:(<span class="hljs-built_in">NSInteger</span>)section{ 
+
+<span class="hljs-comment">//&#x8BBE;&#x7F6E;&#x5206;&#x7EC4;&#x5934;&#x90E8;&#x6807;&#x9898; </span>
+
+<span class="hljs-keyword">return</span> (<span class="hljs-built_in">NSString</span>*); 
+
+} 
+
+- (<span class="hljs-built_in">NSString</span> *)tableView:(<span class="hljs-built_in">UITableView</span> *)tableView titleForFooterInSection:(<span class="hljs-built_in">NSInteger</span>)section{ 
+
+<span class="hljs-comment">//&#x8BBE;&#x7F6E;&#x5206;&#x7EC4;&#x5C3E;&#x90E8;&#x6807;&#x9898; </span>
+
+<span class="hljs-keyword">return</span> (<span class="hljs-built_in">NSString</span>*); 
+
+}
+</code></pre>
+<h3 id="uitableview&#x5E38;&#x89C1;&#x5C5E;&#x6027;">UITableView&#x5E38;&#x89C1;&#x5C5E;&#x6027;</h3>
+<h4 id="&#x5206;&#x5272;&#x7EBF;">&#x5206;&#x5272;&#x7EBF;</h4>
+<p>* separtorColor &#x8BBE;&#x7F6E;&#x989C;&#x8272; </p>
+<p>* separtorStyle &#x8BBE;&#x7F6E;&#x6837;&#x5F0F; </p>
+<h4 id="&#x9AD8;&#x5EA6;">&#x9AD8;&#x5EA6;</h4>
+<p>* rowHeight &#x6BCF;&#x884C;cell&#x7684;&#x9AD8;&#x5EA6; </p>
+<p>* sectionHeaderHeight &#x6BCF;&#x7EC4;&#x5934;&#x90E8;&#x9AD8;&#x5EA6; </p>
+<p>* sectionFooterHeight &#x6BCF;&#x7EC4;&#x5C3E;&#x90E8;&#x9AD8;&#x5EA6; </p>
+<h4 id="&#x8868;&#x5934;&#x8868;&#x4F4D;">&#x8868;&#x5934;&#x8868;&#x4F4D;</h4>
+<p>* tableHeaderView </p>
+<p>* tableFooterView </p>
+<h4 id="&#x53F3;&#x8FB9;&#x7D22;&#x5F15;">&#x53F3;&#x8FB9;&#x7D22;&#x5F15;</h4>
+<p>* sectionIndexColor </p>
+<p>* sectionIndexBackgroundColor </p>
+<h3 id="uitableviewcell&#x5E38;&#x89C1;&#x5C5E;&#x6027;">UITableViewCell&#x5E38;&#x89C1;&#x5C5E;&#x6027;</h3>
+<p>* accessoryType &#x6307;&#x793A;&#x6837;&#x5B50; </p>
+<p>* accessoryView &#x8BBE;&#x7F6E;&#x53F3;&#x8FB9;&#x7684;&#x77E5;&#x8BC6;&#x63A7;&#x4EF6; </p>
+<p>* selectionStyle &#x8BBE;&#x7F6E;cell&#x9009;&#x4E2D;&#x6837;&#x5F0F; </p>
+<h4 id="contentview">contentView</h4>
+<p>Cell&#x4E2D;&#x7684;image Text&#x7B49;&#x90FD;&#x662F;contentView&#x7684;&#x5B50;&#x63A7;&#x4EF6;&#xFF0C;&#x6240;&#x4EE5;&#x5728;&#x5B9E;&#x73B0;&#x5220;&#x9664;&#x7684;&#x65F6;&#x5019;&#x79FB;&#x52A8;contentView&#x5373;&#x53EF; </p>
+<h3 id="&#x7D22;&#x5F15;">&#x7D22;&#x5F15;</h3>
+<pre><code>-(nullable NSArray&lt;NSString * &gt;* )sectionIndexTitlesForTableView:(UITableView* )TableView;
+</code></pre><h3 id="&#x81EA;&#x5B9A;&#x4E49;&#x4E0D;&#x7B49;&#x9AD8;cell">&#x81EA;&#x5B9A;&#x4E49;&#x4E0D;&#x7B49;&#x9AD8;cell</h3>
+<h4 id="&#x6570;&#x636E;&#x5237;&#x65B0;">&#x6570;&#x636E;&#x5237;&#x65B0;</h4>
+<ol>
+<li>&#x5168;&#x5C40;&#x6570;&#x636E;&#x5237;&#x65B0;<ol>
+<li><code>self.tableView.</code></li>
+</ol>
+</li>
+<li>&#x90E8;&#x5206;&#x6570;&#x636E;&#x5237;&#x6D17;</li>
+</ol>
 
                                 
                                 </section>
@@ -579,7 +1137,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"UI基础","level":"1.4","depth":1,"next":{"title":"UI进阶","level":"1.5","depth":1,"path":"UI进阶/README.md","ref":"UI进阶/README.md","articles":[]},"previous":{"title":"OC进阶知识","level":"1.3","depth":1,"path":"OC进阶/README.md","ref":"OC进阶/README.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"UI基础/README.md","mtime":"2019-04-22T08:37:54.577Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-04-23T04:37:42.419Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"UI基础","level":"1.4","depth":1,"next":{"title":"UI进阶","level":"1.5","depth":1,"path":"UI进阶/README.md","ref":"UI进阶/README.md","articles":[]},"previous":{"title":"OC进阶知识","level":"1.3","depth":1,"path":"OC进阶/README.md","ref":"OC进阶/README.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"UI基础/README.md","mtime":"2019-06-24T23:11:41.933Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-06-24T23:13:05.917Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

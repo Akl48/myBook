@@ -304,12 +304,38 @@
             
         </li>
     
-        <li class="chapter " data-level="1.7.6" data-path="iOS网络/AFnetworking.html">
+        <li class="chapter " data-level="1.7.6" data-path="iOS网络/upload.html">
+            
+                <a href="iOS网络/upload.html">
+            
+                    
+                    文件上传
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.7" data-path="iOS网络/AFnetworking.html">
             
                 <a href="iOS网络/AFnetworking.html">
             
                     
                     AFnetworking
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.8" data-path="iOS网络/networkSafe.html">
+            
+                <a href="iOS网络/networkSafe.html">
+            
+                    
+                    数据安全
             
                 </a>
             
@@ -433,7 +459,20 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.13.1" data-path="计算机基础/Network.html">
+        <li class="chapter " data-level="1.13.1" data-path="计算机基础/sofemange.html">
+            
+                <a href="计算机基础/sofemange.html">
+            
+                    
+                    软件项目管理
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.13.2" data-path="计算机基础/Network.html">
             
                 <a href="计算机基础/Network.html">
             
@@ -446,7 +485,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.13.2" data-path="计算机基础/dataStructure.html">
+        <li class="chapter " data-level="1.13.3" data-path="计算机基础/dataStructure.html">
             
                 <a href="计算机基础/dataStructure.html">
             
@@ -459,7 +498,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.13.3" data-path="计算机基础/OS.html">
+        <li class="chapter " data-level="1.13.4" data-path="计算机基础/OS.html">
             
                 <a href="计算机基础/OS.html">
             
@@ -472,7 +511,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.13.4" data-path="计算机基础/algorithm.html">
+        <li class="chapter " data-level="1.13.5" data-path="计算机基础/algorithm.html">
             
                 <a href="计算机基础/algorithm.html">
             
@@ -535,7 +574,88 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="runtime">Runtime</h1>
+                                <p>[TOC]</p>
+<h1 id="runtime&#x6D88;&#x606F;&#x4F20;&#x9012;">Runtime&#x6D88;&#x606F;&#x4F20;&#x9012;</h1>
+<p>[objc msgSend]; </p>
+<ol>
+<li><p>&#x9996;&#x5148;&#x901A;&#x8FC7;objc&#x7684;isa&#x6307;&#x9488;&#x627E;&#x5230;&#x4ED6;&#x7684;class </p>
+</li>
+<li><p>&#x5728;class&#x7684;method list&#x53BB;&#x627E;&#x662F;&#x5426;&#x6709;msgSend </p>
+</li>
+<li><p>&#x6CA1;&#x6709;&#x5C31;&#x53BB;&#x4ED6;&#x7684;super class&#x627E; </p>
+</li>
+<li><p>&#x627E;&#x5230;&#x4E4B;&#x540E;&#x6267;&#x884C;&#x5B83;&#x7684;IMP </p>
+</li>
+<li><p>&#x627E;&#x5230;&#x4E4B;&#x540E;&#x5C06;key&#xFF1A;method_name value&#xFF1A;method_imp&#x4F5C;&#x4E3A;&#x5B57;&#x5178;&#x5B58;&#x50A8;&#x5728;objc_cache&#x4E2D; </p>
+</li>
+</ol>
+<p>&#x6CE8;&#xFF1A;IMP &#x51FD;&#x6570;&#x6307;&#x9488; &#x8BB0;&#x5F55;&#x4E86;&#x65B9;&#x6CD5;&#x7684;&#x5730;&#x5740; </p>
+<h2 id="&#x5BF9;&#x8C61;">&#x5BF9;&#x8C61;</h2>
+<pre><code class="lang-objc"><span class="hljs-keyword">struct</span> objc_object { 
+
+Class _Nonnull isa OBJC_ISA_<span class="hljs-built_in">AVAILABILITY</span>; 
+
+};
+</code></pre>
+<h2 id="&#x7C7B;">&#x7C7B;</h2>
+<pre><code class="lang-objc"><span class="hljs-keyword">struct</span> objc_class { 
+
+Class _Nonnull isa OBJC_ISA_<span class="hljs-built_in">AVAILABILITY</span>; 
+
+<span class="hljs-meta">#if !__OBJC2__ </span>
+
+Class _Nullable super_class OBJC2_UN<span class="hljs-built_in">AVAILABLE</span>; 
+
+<span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span> * _Nonnull name OBJC2_UN<span class="hljs-built_in">AVAILABLE</span>; 
+
+<span class="hljs-keyword">long</span> version OBJC2_UN<span class="hljs-built_in">AVAILABLE</span>; 
+
+<span class="hljs-keyword">long</span> info OBJC2_UN<span class="hljs-built_in">AVAILABLE</span>; 
+
+<span class="hljs-keyword">long</span> instance_size OBJC2_UN<span class="hljs-built_in">AVAILABLE</span>; 
+
+<span class="hljs-keyword">struct</span> objc_ivar_list * _Nullable ivars OBJC2_UN<span class="hljs-built_in">AVAILABLE</span>; 
+
+<span class="hljs-keyword">struct</span> objc_method_list * _Nullable * _Nullable methodLists OBJC2_UN<span class="hljs-built_in">AVAILABLE</span>; 
+
+<span class="hljs-keyword">struct</span> objc_cache * _Nonnull cache OBJC2_UN<span class="hljs-built_in">AVAILABLE</span>; 
+
+<span class="hljs-keyword">struct</span> objc_protocol_list * _Nullable protocols OBJC2_UN<span class="hljs-built_in">AVAILABLE</span>; 
+
+<span class="hljs-meta">#endif </span>
+
+} OBJC2_UN<span class="hljs-built_in">AVAILABLE</span>;
+</code></pre>
+<h2 id="&#x65B9;&#x6CD5;">&#x65B9;&#x6CD5;</h2>
+<pre><code class="lang-objc"><span class="hljs-keyword">struct</span> objc_method { 
+
+SEL _Nonnull method_name OBJC2_UN<span class="hljs-built_in">AVAILABLE</span>; 
+
+<span class="hljs-keyword">char</span> * _Nullable method_types OBJC2_UN<span class="hljs-built_in">AVAILABLE</span>; 
+
+IMP _Nonnull method_imp OBJC2_UN<span class="hljs-built_in">AVAILABLE</span>; 
+
+}
+</code></pre>
+<h2 id="&#x65B9;&#x6CD5;&#x5217;&#x8868;">&#x65B9;&#x6CD5;&#x5217;&#x8868;</h2>
+<pre><code class="lang-objc"><span class="hljs-keyword">struct</span> objc_method_list { 
+
+<span class="hljs-keyword">struct</span> objc_method_list * _Nullable obsolete OBJC2_UN<span class="hljs-built_in">AVAILABLE</span>; 
+
+<span class="hljs-keyword">int</span> method_count OBJC2_UN<span class="hljs-built_in">AVAILABLE</span>; 
+
+<span class="hljs-meta">#ifdef __LP64__ </span>
+
+<span class="hljs-keyword">int</span> space OBJC2_UN<span class="hljs-built_in">AVAILABLE</span>; 
+
+<span class="hljs-meta">#endif </span>
+
+<span class="hljs-comment">/* variable length structure */</span> 
+
+<span class="hljs-keyword">struct</span> objc_method method_list[<span class="hljs-number">1</span>] OBJC2_UN<span class="hljs-built_in">AVAILABLE</span>; 
+
+} OBJC2_UN<span class="hljs-built_in">AVAILABLE</span>;
+</code></pre>
 
                                 
                                 </section>
@@ -579,7 +699,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Runtime","level":"1.10","depth":1,"next":{"title":"Block","level":"1.11","depth":1,"path":"Block.md","ref":"Block.md","articles":[]},"previous":{"title":"Runloop","level":"1.9","depth":1,"path":"Runloop.md","ref":"Runloop.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"Runtime.md","mtime":"2019-04-22T07:08:02.949Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-04-23T04:37:42.419Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Runtime","level":"1.10","depth":1,"next":{"title":"Block","level":"1.11","depth":1,"path":"Block.md","ref":"Block.md","articles":[]},"previous":{"title":"Runloop","level":"1.9","depth":1,"path":"Runloop.md","ref":"Runloop.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"Runtime.md","mtime":"2019-06-24T23:11:41.932Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-06-24T23:13:05.917Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>

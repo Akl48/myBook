@@ -6,6 +6,8 @@
 
 [简单易懂版](https://rogerdudler.github.io/git-guide/index.zh.html)
 
+[pro git](https://gitee.com/progit/)
+
 **Git跟踪并管理的是修改**
 
 ### Git和SVN的差别
