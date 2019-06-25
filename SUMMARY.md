@@ -32,4 +32,6 @@
     * [数据结构](计算机基础/dataStructure.md)
     * [操作系统](计算机基础/OS.md)
     * [算法](计算机基础/algorithm.md)
+* [mac基础配置](mac基础配置/README.md)
+    * [mac终端设置](mac基础配置/terminal.md)
 
