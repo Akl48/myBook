@@ -2,21 +2,21 @@
 
 ## Git的使用
 
-[廖雪峰老师官网](<https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000>)
+[简单易懂版](https://rogerdudler.github.io/git-guide/index.zh.html)（简单版）
 
-[简单易懂版](https://rogerdudler.github.io/git-guide/index.zh.html)
+[廖雪峰老师官网](<https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000>)（中级版）
 
-[pro git](https://gitee.com/progit/)
+[pro git](https://gitee.com/progit/) (高级版)
 
 **Git跟踪并管理的是修改**
 
 ### Git和SVN的差别
 
-1. 速度git的速度远比SVN快
+1. **速度** git的速度远比SVN快
 2. SVN是集中式管理，git是分布式
 3. SVN必须联网工作，git可以本地作业
 
-### 新建仓库
+### 本地新建仓库
 
 1. 通过`git init`将这个目录变成**Git**可以管理的仓库
    1. 新建好了就会提示试一个空的仓库`Initialized empty Git repository in`
@@ -24,7 +24,7 @@
 
 ### Git的配置
 
-全局配置git用户名和邮箱
+全局配置git的用户名和邮箱
 
 `git config --global user.name "ZzzzT_R"`
 
@@ -40,7 +40,7 @@
 
 ### 从Git上下载东西
 
-通过`git clone + git的链接`将远程仓库clone下来
+通过`git clone git的http链接` 将远程仓库克隆下来
 
 ### 将本地的仓库同步到git上
 
@@ -52,7 +52,7 @@ GitHub告诉我们，可以从这个仓库克隆出新的仓库，也可以把�
 
 1. 添加要更改的文件到暂存区 `git add 文件名`
    1. `git add .`添加所有
-   2. 如何跳过暂存区`git commit -a`通过-a可以跳过
+   2. 如何跳过暂存区 通过-a可以跳过 `git commit -a`
 2. 提交改动到HEAD但是还没有到你的远程仓库 `git commit -m "message"`
 3. (第一次)关联到git上`git remote add origin https://github.com/Akl48/mybook.git`
 4. push到远程仓库上`git push -u origin master`
@@ -130,6 +130,9 @@ git上的分支类似于平行宇宙，对现在没有影响，但是在某个�
 
 解决冲突就是把Git合并失败的文件手动编辑为我们希望的内容，再提交。
 
+1. merge
+2. rebase
+
 #### 分支管理策略
 
 在`git merge`的时候通常会使用`Fast forward`模式，删除分支之后，会自动删除分支信息。所以有时候需要禁用merge模式，会在`merge`的时候生成一个全新的`commit`，可以看到分支的历史了
@@ -174,8 +177,7 @@ git上的分支类似于平行宇宙，对现在没有影响，但是在某个�
 
 `rebase`相较于`merge`而言有一个更加**整洁**的提交记录。
 
-- rebase操作可以把**本地未push**的分叉提交历史**整理成直线**；
-- rebase的目的是使得我们在查看历史提交的变化时更容易，因为分叉的提交需要三方对比。
+
 
 ### 标签
 
