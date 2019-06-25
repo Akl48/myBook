@@ -2,17 +2,17 @@
 
 ## Git的使用
 
-[廖雪峰老师官网](<https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000>)
+[简单易懂版](https://rogerdudler.github.io/git-guide/index.zh.html)（简单版）
 
-[简单易懂版](https://rogerdudler.github.io/git-guide/index.zh.html)
+[廖雪峰老师官网](<https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000>)（中级版）
 
-[pro git](https://gitee.com/progit/)
+[pro git](https://gitee.com/progit/)（高级版）
 
 **Git跟踪并管理的是修改**
 
 ### Git和SVN的差别
 
-1. 速度git的速度远比SVN快
+1. **速度** git的速度远比SVN快
 2. SVN是集中式管理，git是分布式
 3. SVN必须联网工作，git可以本地作业
 
@@ -20,7 +20,7 @@
 
 1. 通过`git init`将这个目录变成**Git**可以管理的仓库
    1. 新建好了就会提示试一个空的仓库`Initialized empty Git repository in`
-2. 新建之后虽然是空的但是有一个.**git** 的隐藏目录来跟踪管理版本库
+2. 新建之后有一个.**git** 的隐藏目录来跟踪管理版本库
 
 ### Git的配置
 
@@ -33,14 +33,16 @@
 ### Git中的区域
 
 1. 工作区 除了.git的都是工作区
-2. 版本库(.git) 
+2. 暂存区 通过add将更改的文件添加到缓存区
+   1. 也可以通过status来查看差别
+3. 版本库(.git) 
    1. HEAD 指向当前分支
    2. 缓存区 
    3. 分支(master) 最初的分支
 
 ### 从Git上下载东西
 
-通过`git clone + git的链接`将远程仓库clone下来
+通过`git clone git的链接`将远程仓库download下来
 
 ### 将本地的仓库同步到git上
 
@@ -52,16 +54,16 @@ GitHub告诉我们，可以从这个仓库克隆出新的仓库，也可以把�
 
 1. 添加要更改的文件到暂存区 `git add 文件名`
    1. `git add .`添加所有
-   2. 如何跳过暂存区`git commit -a`通过-a可以跳过
+   2. 如何跳过暂存区？通过-a可以跳过`git commit -a`
 2. 提交改动到HEAD但是还没有到你的远程仓库 `git commit -m "message"`
 3. (第一次)关联到git上`git remote add origin https://github.com/Akl48/mybook.git`
 4. push到远程仓库上`git push -u origin master`
 
 #### 寻找git的commit id
 
-`git reflog`会记录你的每一次命令
+`git reflog`**会记录你的每一次命令**
 
-回退的记录也可以看到比log强，通过这个可以从过去回到未来
+**回退的记录也可以看到**比log强，通过这个可以从过去回到未来
 
 ### 删除Git文件
 
