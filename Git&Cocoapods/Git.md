@@ -43,6 +43,8 @@
 ### 从Git上下载东西
 
 通过`git clone git的http链接` 将远程仓库克隆下来
+- `git clone`下来的会自动将远程仓库归于origin名下。
+- `git fatch [remote name]`此命令会到远程仓库中拉取所有你本地仓库中还没有的数据，之后你可以在本地访问该远程仓库中所有的分支，将其中某个合并到本地。
 
 
 ### 将本地的仓库同步到git上
@@ -63,7 +65,6 @@ GitHub告诉我们，可以从这个仓库克隆出新的仓库，也可以把�
 #### 寻找git的commit id
 
 `git reflog`**会记录你的每一次命令**
-
 **回退的记录也可以看到**比log强，通过这个可以从过去回到未来
 
 ### 删除Git文件
@@ -73,9 +74,7 @@ GitHub告诉我们，可以从这个仓库克隆出新的仓库，也可以把�
 ### 查看Git的修改
 
 > commit d1635c35b894ed4f48dc04c29ae0bcf7f93d0f46
->
 > Author: 周天荣 <zhoutianrong@JOJO.local>
->
 > Date:   Mon Apr 22 15:34:22 2019 +0800
 
 可以通过`git log`查看最近的改动记录 可以加上参数选择`--pretty=oneline`也可以加上`--author=bob`查看作者
@@ -90,7 +89,7 @@ GitHub告诉我们，可以从这个仓库克隆出新的仓库，也可以把�
 * 通过`git diff`可以查看更改的内容 ta**会使用文件补丁的格式显示具体添加和删除的行**
 
 ### 撤销文件修改
-
+1. 修改最后一次提交`git commit --amend`
 1. `git checkout -- readme.txt`意思就是，把`readme.txt`文件在工作区的修改全部撤销。可以将这个文件回到最近一次**git commit**或者**git add**的状态
    1. `git checkout`用版本库中的版本替换工作区的版本，什么都可以一键**还原**
 

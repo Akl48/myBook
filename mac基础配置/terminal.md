@@ -8,7 +8,7 @@
 1. 查看当前设配上安装的shell
     * `cat /etc/shells`
 2. 更改mac默认的shell
-   1. `chsh -s /usr/local/bin/zsh`
+   1. `chsh -s /bin/zsh`
 3. 重新启动shell
 4. 切换回原本的shell
    1. `chsh -s /bin/bash`
@@ -19,11 +19,13 @@
    * `sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"`
 2. 安装之后配置zsh
    * `vim ~/.zshrc`
-   * ZSH_THEME="agnoster"更改主题为agnoster
+   * ZSH_THEME="agnoster"可更改主题为agnoster
 ### 自动提示和命令补全
 1. `git clone git://github.com/zsh-users/zsh-autosuggestions $ZSH_CUSTOM/plugins/zsh-autosuggestions` 在git上把将zsh-autosuggestions拷下来
 2. 通过vim编辑zsh配置
    1. `vim ~/.zshrc`
    2. 将其中的plugins=(git) -> plugins=(zsh-autosuggestions git)
+3. 更新
+   1. `source ~/.zshrc`
 ###卸载oh-my-zsh
 `uninstall_oh_my_zsh`
