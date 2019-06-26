@@ -90,10 +90,9 @@ GitHub告诉我们，可以从这个仓库克隆出新的仓库，也可以把�
 
 ### 撤销文件修改
 1. 修改最后一次提交`git commit --amend`
-1. `git checkout -- readme.txt`意思就是，把`readme.txt`文件在工作区的修改全部撤销。可以将这个文件回到最近一次**git commit**或者**git add**的状态
+2. `git checkout -- readme.txt`意思就是，把`readme.txt`文件在工作区的修改全部撤销。可以将这个文件回到最近一次**git commit**或者**git add**的状态
    1. `git checkout`用版本库中的版本替换工作区的版本，什么都可以一键**还原**
-
-2. 用命令`git reset HEAD <file>`可以把暂存区的修改撤销掉（unstage），重新放回工作区 后面的是版本号
+3. 用命令`git reset HEAD <file>`可以把暂存区的修改撤销掉（unstage），重新放回工作区 后面的是版本号
    1. 通过`git reset --hard HEAD^`将git的版本返回上一个版本，^代表了一次回退次数如果变多则为~**100** 可以回到过去
 
 ### 更新本地仓库
@@ -133,7 +132,7 @@ git上的分支类似于平行宇宙，对现在没有影响，但是在某个�
 解决冲突就是把Git合并失败的文件手动编辑为我们希望的内容，再提交。
 
 1. merge
-2. rebase
+2. rebase(变基)2
 
 #### 分支管理策略
 
