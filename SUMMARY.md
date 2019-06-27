@@ -34,4 +34,7 @@
     * [算法](计算机基础/algorithm.md)
 * [mac基础配置](mac基础配置/README.md)
     * [mac终端设置](mac基础配置/terminal.md)
+* [work](work/README.md)
+    * [问题](work/问题.md)
+    * [分析](work/分析.md)
 
