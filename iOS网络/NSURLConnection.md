@@ -98,7 +98,7 @@ NSLog(@"%@",[[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding]);
 通常在该方法中解析服务器返回的数据 
 */ 
 -(void)connectionDidFinishLoading:(nonnull NSURLConnection *)connection 
-  
+
 /*4.当请求错误的时候调用（比如请求超时） 
 第一个参数connection：NSURLConnection对象 
 第二个参数：网络请求的错误信息，如果请求失败，则error有值 
