@@ -592,6 +592,20 @@ return (NSString*);
 
 \* tableFooterView 
 
+#### 自定义tableView中section header/footerView的View的复用
+
+- (instancetype)initWithReuseIdentifier:(NSString *)reuseIdentifier{
+   
+    self = [super initWithReuseIdentifier:reuseIdentifier];
+   
+    if (self) {
+       
+        [self _init];//_init表示初始化方法
+    }
+   
+    return self;
+}
+
 #### 右边索引 
 
 \* sectionIndexColor 
