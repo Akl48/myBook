@@ -1,5 +1,3 @@
-
-
 [TOC]
 
 ## iOS中storybroad的基础使用 
@@ -370,7 +368,6 @@ UIView可以隐藏通过hidden隐藏也可以通过透明实现alpha
 ### 取值 
 
 ```objc 
-
 [valueForKey:(nonnull NSString *)]; 
 
 [valueForKeyPath:(nonnull NSString *)];//最好用KeyPath 
@@ -378,7 +375,6 @@ UIView可以隐藏通过hidden隐藏也可以通过透明实现alpha
 [valueForUndefinedKey:(nonnull NSString *)]; 
 
 [dictionaryWithValuesForKeys:(nonnull NSArray<NSString *> *)];//会返回一个字典 模型转字典 如果是数组的话，会抽取数组中每个数组的值，并返回一个数组 
-
 ```
 
 ## KVO键值监听 
@@ -391,13 +387,13 @@ UIView可以隐藏通过hidden隐藏也可以通过透明实现alpha
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context{ 
 
-keyPath 那个属性改了 
+// keyPath 那个属性改了 
 
-object 那个对象 
+// object 那个对象 
 
-change 改成什么样了 
+// change 改成什么样了 
 
-context 当初传的context是什么就是什么 
+// context 当初传的context是什么就是什么 
 
 }//监听方法当通KVO监听到之后会自动调用 
 
@@ -417,9 +413,9 @@ context 当初传的context是什么就是什么
 
 ### 不能滚动原因 
 
-scrollEnable属性设置为NO 
+1. scrollEnable属性设置为NO 
 
-userInteractionEnabled是UIView的属性，设置之后用户不能交互 
+2. userInteractionEnabled是UIView的属性，设置之后用户不能交互 
 
 ### 没有设置contentSize怎么实现滚动效果 
 
@@ -518,7 +514,6 @@ NSArray* arr = [NSLayoutConstraint constraintsWithVisualFormat:vfl_h options:kNi
 * 重要就是字典转模型 
 
 ```objc 
-
 //告诉tableView每个一共有多少块 
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{ 
@@ -626,7 +621,7 @@ Cell中的image Text等都是contentView的子控件，所以在实现删除的�
 
 ### 索引 
 
-```
+```objc
 -(nullable NSArray<NSString * >* )sectionIndexTitlesForTableView:(UITableView* )TableView;
 ```
 
@@ -686,3 +681,14 @@ Cell中的image Text等都是contentView的子控件，所以在实现删除的�
       1. 进入编辑模式`[self.table setEditing:!self.tableView.isEditing animated:YES];`
       2. 自定义批量删除
          1. 自定义cell控件在contentView添加一个ImageView
+
+### 通知
+1. 通知的声明 name（通知名称） object（通知发布者） NSDictionary *userInfo（一些额外的信息）
+    * `NSNotification *note = [NSNotification notificationWithName:@"军事信息" object:nil userInfo:nil];`
+2. 通知的发布
+    * `[[NSNotificationCenter defaultCenter]postNotification:note];`
+3. 通知的监听 Observer（监听者）object（监听的对象）
+    * `[[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(haveNote:) name:@"军事信息" object:nil];`
+4. 移除监听（通常在dealloc中，否则会出现野指针问题）
+    * `[[NSNotificationCenter defaultCenter]removeObserver:self];`(移除self监听的所有通知)
+
