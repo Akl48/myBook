@@ -151,7 +151,6 @@ s.substr(int i,int j);//提取字符串返回从i~j的子串
 ## 杨氏矩阵（横向递增，纵向递增）中如何找到指定的数字 
 
 ## 翻转一句话，例如I am 3 years old，翻转后，old years 3 am I
-
 ```c++
 class Solution {
 public:

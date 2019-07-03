@@ -6,11 +6,11 @@
 
 CocoaPods是开发OSX和iOS应用程序的一个**第三方库的依赖管理工具**。通过CocoaPods，可以定义自己的依赖关系(pods)，并且在整个开发环境中对第三方库的版本管理非常方便。由于在工程中引入第三方框架，要配置build phases 和linker flags过程，而CocoaPods则简化了这个过程。
 
-### 使用
+## 使用
 
 通过命令行进入在你要使用的项目中使用`pod init`自动回生成一个**Podfile**文件，通过vim进入并且更改，将你要使用的第三方库的名字按照格式输入。再退出vim，再`pod install`安装库。
 
-### 组件
+## 组件
 
 CocoaPods使用Ruby写的，并且由若干个Ruby包构成(gems)，在解析整合过程最重要的几个gems是 `CocoaPod` `Core` `Xcodeproj`
 
@@ -25,7 +25,7 @@ CocoaPods使用Ruby写的，并且由若干个Ruby包构成(gems)，在解析整
   * 负责所有文件的整合。
   * 创建并秀给.xcodeproj和.xcworkspace文件
 
-### pod install过程
+## pod install过程
 
 ```
 Analyzing dependencies
@@ -131,7 +131,7 @@ Sending stats
       * Podfile.lock CocoaPods 创建的最重要的文件之一。它记录了需要被安装的 pod 的每个已安装的版本
       * Manifest.lock 这是每次运行pod install命令时创建的Podfile.lock文件的副本
 
-### 原理
+## 原理
 
 1. 它是将所有的依赖库都放到另一个名为 Pods 项目中 
 
@@ -140,4 +140,8 @@ Sending stats
 3. 对于资源文件，CocoaPods 提供了一个名为 Pods-resources.sh 的 bash 脚本，该脚本在每次项目编译的时候都会执行，将第三方库的各种资源文件复制到目标目录中。 
 
 4. CocoaPods 通过一个名为 Pods.xcconfig 的文件来在编译时设置所有的依赖和参数。 
+
+## 通过Cocoapods达成组件化管理
+
+组件化管理也就是业务模块化，将一个复杂的项目根据业务，划分成不同的模块。而cocoapods，提供私有pod repo，使用时把自己的组件放在私有pod repo里，然后在Podfile里直接通过pod命令集成。一个组件对应一个私有pod，每个组件依赖自己所需要的三方库。多个组件联合开发的时候，可以在一个podspec里配置子模块，这样在每个组件自己的podspec里，只需要把子模块里的pod依赖关系拷贝过去就行了。
 

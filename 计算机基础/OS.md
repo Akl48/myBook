@@ -3,7 +3,6 @@
 [TOC]
 
 # 操作系统 
-
 操作系统是用户与计算机硬件之间的界面，它是控制和管理计算机系统内各种硬件和软件资源、有效地组织多道程序运行的程序集合。
 
 ## 进程和线程的区别 
@@ -327,25 +326,18 @@ wc  -l \< infile \>outfile
 将编译m1.c的错误重定向输出到abc
 
 # 科学上网
+## 购买VPS
 
-## 购买vps
+略
 
 ## 安装Google的BBR加速算法
-
 使用root身份登录你的vps，输入下面命令就自动安装BBR算法。
-
 wget –no-check-certificate https://github.com/teddysun/across/raw/master/bbr.sh
-
 chmod +x bbr.sh
-
 ./bbr.sh
-
 安装后，建议重启一次服务器生效。
 
 ## 安装ShadowSocks
-
 > wget –no-check-certificate  https://raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocks.sh
-
 > ./shadowsocks.sh 2>&1 | tee shadowsocks.log
-
 按照顺序安装即可
