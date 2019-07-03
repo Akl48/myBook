@@ -80,7 +80,6 @@ GitHub告诉我们，可以从这个仓库克隆出新的仓库，也可以把�
 
 * 里面的commit id是通过SHA1计算的16进制的数
 * `git log --graph `可以查看改动的图形状态
-  * 通过GUI的sourceTree可以更加简便的查看 在sourceTree上直接拉取
 
 ### 查看文件的修改
 
