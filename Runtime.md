@@ -87,6 +87,7 @@ struct objc_method {
 + (BOOL)resolveClassMethod:(SEL)sel;
 //实例方法未找到时调起，可于此添加实例方法实现
 + (BOOL)resolveInstanceMethod:(SEL)sel;
+
 //Runtime方法：
 /**
  运行时方法：向指定类中添加特定方法实现的操作
@@ -111,30 +112,21 @@ BOOL class_addMethod(Class _Nullable cls,
 ```
 ### 消息接受者重定向
 ```objc
-//重定向类方法的消息接收者，返回一个类
-- (id)forwardingTargetForSelector:(SEL)aSelector;
-//重定向实例方法的消息接受者，返回一个实例对象
-- (id)forwardingTargetForSelector:(SEL)aSelector;
+//重定向(类方法|实例方法)的消息接收者，返回一个(类对象|实例对象)
++|- (id)forwardingTargetForSelector:(SEL)aSelector;
 
 //例如：在viewDidLoad中有调用一个在当前viewController中没有的SEL，但是其中的一个类中恰好又实现了这个SEL，这个时候可以使用消息重定向
-//重定向一个类方法（takeExam:）
+//重定向一个类方法（+takeExam:)(-learnKnowledge:)
 + (id)forwardingTargetForSelector:(SEL)aSelector{
     if (aSelector == @selector(takeExam:)) {
-        return [Student class];
-    }
-    return [super forwardingTargetForSelector:aSelector];
-}
-//重定向实例方法
-- (id)forwardingTargetForSelector:(SEL)aSelector{
-    if (aSelector == @selector(learnKnowledge:)) {
-        return self.student;
+        return [Student class];// self.student
     }
     return [super forwardingTargetForSelector:aSelector];
 }
 ```
 如果这个法子ok的话是成功返回，不OK就去父类中找
 ### 消息重定向
-当上面连个方法不行，没有定义……会来到这最后一步->Runtime系统会通知该对象，给予此次消息发送最后一次寻找IMP的机会
+当上面两个方法不行，没有定义……会来到这最后一步->Runtime系统会通知该对象，给予此次消息最后一次寻找IMP的机会
 `- (void)forwardInvocation:(NSInvocation *)anInvocation；`
 原理：其实每个对象都从NSObject类中继承了forwardInvocation：方法，但是NSObject中的这个方法只是简单的调用了doesNotRecongnizeSelector:方法，提示我们错误。所以我们可以重写这个方法：对不能处理的消息做一些默认处理，也可以将消息转发给其他对象来处理，而不抛出错误。而**anInvocation**是**forwardInvocation**唯一参数，它封装了原始的消息和消息参数。正是因为它，我们还不得不重写另一个函数：`methodSignatureForSelector`。这是因为在forwardInvocation: 消息发送前，Runtime系统会向对象发送methodSignatureForSelector消息，并取到返回的方法签名用于生成NSInvocation对象。
 
@@ -159,4 +151,49 @@ BOOL class_addMethod(Class _Nullable cls,
     }
     return methodSignature;
 }
+```
+## Runtime应用
+### 拦截替换系统方法
+先建立UIFont的一个分类，在分类里自定义你的方法，再在`+(void)load;`中替换系统方法和你的方法(在类初始加载时自动被调用,load方法按照父类到子类,类自身到Category的顺序被调用)
+```objc
++ (void)load{
+    //获取系统方法地址
+    Method sytemMethod = class_getClassMethod([UIFont class], @selector(systemFontOfSize:));
+    //获取自定义方法地址
+    Method customMethod = class_getClassMethod([UIFont class], @selector(zs_systemFontOfSize:));
+    //交换两个方法的实现
+    method_exchangeImplementations(sytemMethod, customMethod);
+}
+```
+### 类添加新属性
+```objc
+/**
+ 1.给对象设置关联属性
+ @param object 需要设置关联属性的对象，即给哪个对象关联属性
+ @param key 关联属性对应的key，可通过key获取这个属性，
+ @param value 给关联属性设置的值
+ @param policy 关联属性的存储策略(对应Property属性中的assign,copy，retain等)
+ OBJC_ASSOCIATION_ASSIGN             @property(assign)。
+ OBJC_ASSOCIATION_RETAIN_NONATOMIC   @property(strong, nonatomic)。
+ OBJC_ASSOCIATION_COPY_NONATOMIC     @property(copy, nonatomic)。
+ OBJC_ASSOCIATION_RETAIN             @property(strong,atomic)。
+ OBJC_ASSOCIATION_COPY               @property(copy, atomic)。
+ */
+void objc_setAssociatedObject(id _Nonnull object,
+                              const void * _Nonnull key,
+                              id _Nullable value,
+                              objc_AssociationPolicy policy)
+/**
+ 2.通过key获取关联的属性
+ @param object 从哪个对象中获取关联属性
+ @param key 关联属性对应的key
+ @return 返回关联属性的值
+ */
+id _Nullable objc_getAssociatedObject(id _Nonnull object,
+                                      const void * _Nonnull key)
+/**
+ 3.移除对象所关联的属性
+ @param object 移除某个对象的所有关联属性
+ */
+void objc_removeAssociatedObjects(id _Nonnull object)
 ```
