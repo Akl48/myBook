@@ -1,37 +1,27 @@
 [TOC]
 
 ## Git的使用
-
 [简单易懂版](https://rogerdudler.github.io/git-guide/index.zh.html)（简单版）
-
 [廖雪峰老师官网](<https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000>)（中级版）
-
 [pro git](https://gitee.com/progit/) (高级复杂枯燥版但是很有用很细致)
-
 **Git跟踪并管理的是修改**
 
 ### Git和SVN的差别
-
 1. **速度** git的速度远比SVN快
 2. SVN是集中式管理，git是分布式
 3. SVN必须联网工作，git可以本地作业
 
 ### 本地新建仓库
-
 1. 通过`git init`将这个目录变成**Git**可以管理的仓库
    1. 新建好了就会提示试一个空的仓库`Initialized empty Git repository in`
 2. 新建之后有一个.**git** 的隐藏目录来跟踪管理版本库
 
 ### Git的配置
-
 全局配置git的用户名和邮箱
-
 `git config --global user.name "ZzzzT_R"`
-
 `git config --global user.email "z1057075812@outlook.com"`
 
 ### Git中的区域
-
 1. 工作区 除了.git的都是工作区
 2. 暂存区 通过add将更改的文件添加到缓存区
    1. 也可以通过status来查看差别
@@ -40,20 +30,15 @@
    2. 分支(master) 最初的分支
 
 ### 从Git上下载东西
-
 通过`git clone git的http链接` 将远程仓库克隆下来
 - `git clone`下来的会自动将远程仓库归于origin名下。
 - `git fatch [remote name]`此命令会到远程仓库中拉取所有你本地仓库中还没有的数据，之后你可以在本地访问该远程仓库中所有的分支，将其中某个合并到本地。
 
-
 ### 将本地的仓库同步到git上
-
 GitHub告诉我们，可以从这个仓库克隆出新的仓库，也可以把一个已有的本地仓库与之关联，然后，把本地仓库的内容推送到GitHub仓库。
-
 * 关联Git仓库`git remote add origin`
 
 ### 上传到Git
-
 1. 添加要更改的文件到暂存区 `git add 文件名`
    1. `git add .`添加所有
    2. 如何跳过暂存区？通过-a可以跳过`git commit -a`
@@ -62,29 +47,23 @@ GitHub告诉我们，可以从这个仓库克隆出新的仓库，也可以把�
 4. push到远程仓库上`git push -u origin master`
 
 #### 寻找git的commit id
-
 `git reflog`**会记录你的每一次命令**
 **回退的记录也可以看到**比log强，通过这个可以从过去回到未来
 
 ### 删除Git文件
-
 通过`git rm `可以删除文件也可以通过`-r`删除全部文件夹
 
 ### 查看Git的修改
-
 > commit d1635c35b894ed4f48dc04c29ae0bcf7f93d0f46
 > Author: 周天荣 <zhoutianrong@JOJO.local>
 > Date:   Mon Apr 22 15:34:22 2019 +0800
 
 可以通过`git log`查看最近的改动记录 可以加上参数选择`--pretty=oneline`也可以加上`--author=bob`查看作者
-
 * 里面的commit id是通过SHA1计算的16进制的数
 * `git log --graph `可以查看改动的图形状态
 
 ### 查看文件的修改
-
 `git status`命令用于显示工作目录和暂存区的状态。使用此命令能看到那些修改被暂存到了, 哪些没有, 哪些文件没有被Git tracked到。
-
 * 通过`git diff`可以查看更改的内容 ta**会使用文件补丁的格式显示具体添加和删除的行**
 
 ### 撤销文件修改
@@ -95,21 +74,16 @@ GitHub告诉我们，可以从这个仓库克隆出新的仓库，也可以把�
    1. 通过`git reset --hard HEAD^`将git的版本返回上一个版本，^代表了一次回退次数如果变多则为~**100** 可以回到过去
 
 ### 更新本地仓库
-
 `git pull`更新本地仓库到最新
 
 ### 分支管理
-
 git上的分支类似于平行宇宙，对现在没有影响，但是在某个时间点分支汇总了，两部分工作都完成了。创建了一个属于你自己的分支，别人看不到，还继续在原来的分支上正常工作，而你在自己的分支上干活，想提交就提交，直到开发完毕后，再一次性合并到原来的分支上，这样，既安全，又不影响别人工作
-
 * 除非将分支推送到远程仓库，不然分支都是不为别人所见的
 
 #### 创建以及合并分支 
-
 每次提交Git都将他们串成一串时间线，这条时间线就是一条**分支**，截止目前只有一条时间线，在Git中这个分支叫主分支，即**master**分支，而HEAD严格的说也不是指向提交。而是指向master，**master**才是**指向提交**，**HEAD是指向当前分支**。
 
 * 每次提交master都向前移动，**master分支**也越来越长。
-
 1. 创建新的分支，例如dev。
    1. Git**新建一个dev指针**，指向和master相同的commit，再将**HEAD指向dev**就表示分支在dev上
    2. 在更改HEAD之后对工作区的修改和提交就是针对dev分支之后只有**dev指针**移动，**master不动**
@@ -127,13 +101,11 @@ git上的分支类似于平行宇宙，对现在没有影响，但是在某个�
 #### 解决分支冲突
 当Git无法自动合并分支时，就必须首先解决冲突。解决冲突后，再提交，合并完成。
 解决冲突就是把Git合并失败的文件手动编辑为我们希望的内容，再提交。
-
 1. merge
 2. rebase(变基)
 
 #### 分支管理策略
 在`git merge`的时候通常会使用`Fast forward`模式，删除分支之后，会自动删除分支信息。所以有时候需要禁用merge模式，会在`merge`的时候生成一个全新的`commit`，可以看到分支的历史了
-
 * 可以通过`--no-ff`的方式`merge`
   * `git merge --no-ff -m "merge no-ff" dev`
   * 由于是一个全新的`commit`所以需要带一个`message`
@@ -141,7 +113,6 @@ git上的分支类似于平行宇宙，对现在没有影响，但是在某个�
 
 #### bug分支
 在软件开发中bug突如其来，但是在Git中的分支过于强大，可以通过一个新的临时分支来修复，修复之后合并分支，再删除。
-
 * 但是有时候当前的分支任务没有完成的时候，需要暂时将现场保存起来
   * `git stash`
   * 在用`git status`查看工作区，就是干净的
@@ -158,12 +129,10 @@ git上的分支类似于平行宇宙，对现在没有影响，但是在某个�
 
 #### 多人合作时候
 远程仓库默认的名字是origin
-
 1. 首先，可以试图用`git push origin <branch-name>`推送自己的分支；
 2. 如果推送失败，则因为远程分支比你的本地更新，需要先用`git pull`试图合并；
 3. 如果合并有冲突，则解决冲突，并在本地提交；
 4. 没有冲突或者解决掉冲突后，再用`git push origin <branch-name>`推送就能成功！
-
 如果`git pull`提示`no tracking information`，则说明本地分支和远程分支的链接关系没有创建，用命令`git branch --set-upstream-to <branch-name> origin/<branch-name>`。
 
 #### rebase
@@ -203,29 +172,21 @@ git上的分支类似于平行宇宙，对现在没有影响，但是在某个�
 - 命令`git push origin :refs/tags/<tagname>`可以删除一个远程标签。
 
 ## GitBook的使用
-
 ### GitBook的安装
-
 `npm install -g gitbook-cli`通过**npm**指令来安装GitBook
-
 * npm是Node.js自带的
 
 ### 新建Gitbook
-
 `gitbook init`
 
 1. 在指定的目录新建gitbook
-
 2. 新建之后会有两个文件
    1. README.md 
    2. SUMMARY.md gitbook的目录
 
 ### 浏览书
-
  `gitbook serve`通过gitbook来在网页上显示书籍--[默认的IP地址http://localhost:4000](http://localhost:4000) 
-
 执行命令之后会对Markdown格式文件进行转化为html格式 
 
 ###  构建书籍
-
 `gitbook build ([数据路径][输出路径])`构建新的gitbook
