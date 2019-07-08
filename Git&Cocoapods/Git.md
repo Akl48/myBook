@@ -171,6 +171,12 @@ git上的分支类似于平行宇宙，对现在没有影响，但是在某个�
 - 命令`git tag -d <tagname>`可以删除一个本地标签;
 - 命令`git push origin :refs/tags/<tagname>`可以删除一个远程标签。
 
+### git操作实践
+#### 在自己电脑上开发了新功能之后再整合到dev上
+```
+
+```
+
 ## GitBook的使用
 ### GitBook的安装
 `npm install -g gitbook-cli`通过**npm**指令来安装GitBook

@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>UI进阶 · GitBook</title>
+        <title>分析 · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -57,10 +57,8 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="../iOS多线程/" />
     
-    
-    <link rel="prev" href="../UI基础/" />
+    <link rel="prev" href="问题.html" />
     
 
     </head>
@@ -141,9 +139,9 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.5" data-path="./">
+        <li class="chapter " data-level="1.5" data-path="../UI进阶/">
             
-                <a href="./">
+                <a href="../UI进阶/">
             
                     
                     UI进阶
@@ -561,9 +559,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.15" data-path="../work/">
+        <li class="chapter " data-level="1.15" data-path="./">
             
-                <a href="../work/">
+                <a href="./">
             
                     
                     work
@@ -575,9 +573,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.15.1" data-path="../work/问题.html">
+        <li class="chapter " data-level="1.15.1" data-path="问题.html">
             
-                <a href="../work/问题.html">
+                <a href="问题.html">
             
                     
                     问题
@@ -588,9 +586,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.15.2" data-path="../work/分析.html">
+        <li class="chapter active" data-level="1.15.2" data-path="分析.html">
             
-                <a href="../work/分析.html">
+                <a href="分析.html">
             
                     
                     分析
@@ -636,7 +634,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >UI进阶</a>
+        <a href=".." >分析</a>
     </h1>
 </div>
 
@@ -651,7 +649,32 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="ui&#x8FDB;&#x9636;">UI&#x8FDB;&#x9636;</h1>
+                                <p>[toc]</p>
+<h1 id="&#x5206;&#x6790;">&#x5206;&#x6790;</h1>
+<h2 id="jyhitchconfigm">JYHitchConfig.m</h2>
+<ul>
+<li>(void)load {
+  [[JYIntentContext defaultContext] registerWillFinishLaunchingHandler:^(NSDictionary * _Nullable param, void (^ _Nullable completion)(id _Nullable)) {<pre><code>  [JYHitchConfig registerModuleConfig];
+</code></pre>  } forIndex:kHitchLaunchIndex];<h1 id="if-defineddebug--definedfat--defineduat--definedvuat">if defined(DEBUG) || defined(FAT) || defined(UAT) || defined(VUAT)</h1>
+  //debug     FAT&#x51FA;&#x5382;&#x6D4B;&#x8BD5;  UAT&#x7528;&#x6237;&#x53EF;&#x63A5;&#x53D7;&#x6D4B;&#x8BD5;
+  [[JYNetworkMonitor shareInstance] startMonitor];<h1 id="endif">endif</h1>
+}</li>
+<li>(void)registerModuleConfig{
+  [self registerRouterClass];         //&#x6CE8;&#x518C;&#x8DEF;&#x7531;&#x7C7B;
+  {<pre><code>  Home,PhotoGraph,PublishJourney(Passenger,driver),Home,SearchAddress,HitchIM
+</code></pre>  }
+  [self registerProtocolClass];       //&#x6CE8;&#x518C;&#x534F;&#x8BAE;&#x7C7B;
+  {<pre><code>  InviteFriendList,Tool-&gt;Handler,Tool-&gt;BeatsHelper,Tool-&gt;handler
+</code></pre>  }
+  [self registerHitchModuleNetworkEnvir$$onment]; //&#x6D4B;&#x8BD5;&#x987A;&#x98CE;&#x8F66;&#x7F51;&#x7EDC;&#x73AF;&#x5883;FAT||UAT||VUAT
+  [self registerSchemeHandle];        //&#x6CE8;&#x518C;Scheme keys
+  [self registerTcpObserverClass];    //TCP
+  [self registerJYFaceLivenessSDK];   //&#x9762;&#x90E8;&#x8BC6;&#x522B;SDK
+  [self registerRongCloudIM];         //&#x878D;&#x4E91;IM
+ // [JYBuriedPointsManager showLog:NO]; //&#x57CB;&#x70B9;&#x7BA1;&#x7406;
+  [self registerTripOrderAction]; 
+}</li>
+</ul>
 
                                 
                                 </section>
@@ -679,14 +702,10 @@
 
             
                 
-                <a href="../UI基础/" class="navigation navigation-prev " aria-label="Previous page: UI基础">
+                <a href="问题.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page: 问题">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
-                
-                <a href="../iOS多线程/" class="navigation navigation-next " aria-label="Next page: iOS多线程">
-                    <i class="fa fa-angle-right"></i>
-                </a>
                 
             
         
@@ -695,7 +714,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"UI进阶","level":"1.5","depth":1,"next":{"title":"iOS多线程","level":"1.6","depth":1,"path":"iOS多线程/README.md","ref":"iOS多线程/README.md","articles":[{"title":"pthread","level":"1.6.1","depth":2,"path":"iOS多线程/pthread.md","ref":"iOS多线程/pthread.md","articles":[]},{"title":"NSThread","level":"1.6.2","depth":2,"path":"iOS多线程/NSThread.md","ref":"iOS多线程/NSThread.md","articles":[]},{"title":"GCD","level":"1.6.3","depth":2,"path":"iOS多线程/GCD.md","ref":"iOS多线程/GCD.md","articles":[]},{"title":"NSOperation","level":"1.6.4","depth":2,"path":"iOS多线程/NSOperation.md","ref":"iOS多线程/NSOperation.md","articles":[]}]},"previous":{"title":"UI基础","level":"1.4","depth":1,"path":"UI基础/README.md","ref":"UI基础/README.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"UI进阶/README.md","mtime":"2019-07-03T05:36:11.516Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-07-08T03:14:03.008Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"分析","level":"1.15.2","depth":2,"previous":{"title":"问题","level":"1.15.1","depth":2,"path":"work/问题.md","ref":"work/问题.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"work/分析.md","mtime":"2019-07-03T05:36:11.625Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-07-08T03:14:03.008Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

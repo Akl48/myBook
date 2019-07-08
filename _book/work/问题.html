@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>UI进阶 · GitBook</title>
+        <title>问题 · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -57,10 +57,10 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="../iOS多线程/" />
+    <link rel="next" href="分析.html" />
     
     
-    <link rel="prev" href="../UI基础/" />
+    <link rel="prev" href="./" />
     
 
     </head>
@@ -141,9 +141,9 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.5" data-path="./">
+        <li class="chapter " data-level="1.5" data-path="../UI进阶/">
             
-                <a href="./">
+                <a href="../UI进阶/">
             
                     
                     UI进阶
@@ -561,9 +561,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.15" data-path="../work/">
+        <li class="chapter " data-level="1.15" data-path="./">
             
-                <a href="../work/">
+                <a href="./">
             
                     
                     work
@@ -575,9 +575,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.15.1" data-path="../work/问题.html">
+        <li class="chapter active" data-level="1.15.1" data-path="问题.html">
             
-                <a href="../work/问题.html">
+                <a href="问题.html">
             
                     
                     问题
@@ -588,9 +588,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.15.2" data-path="../work/分析.html">
+        <li class="chapter " data-level="1.15.2" data-path="分析.html">
             
-                <a href="../work/分析.html">
+                <a href="分析.html">
             
                     
                     分析
@@ -636,7 +636,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >UI进阶</a>
+        <a href=".." >问题</a>
     </h1>
 </div>
 
@@ -651,7 +651,105 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="ui&#x8FDB;&#x9636;">UI&#x8FDB;&#x9636;</h1>
+                                <h1 id="&#x95EE;&#x9898;">&#x95EE;&#x9898;</h1>
+<h2 id="nullable&#x7684;&#x4F7F;&#x7528;">_NULLable&#x7684;&#x4F7F;&#x7528;</h2>
+<ul>
+<li>_Nullable &#x8868;&#x793A;&#x5BF9;&#x8C61;&#x53EF;&#x4EE5;&#x662F;NULL&#x6216;&#x8005;nil <ul>
+<li>&#x65B9;&#x6CD5; <code>- (NSString * _Nullable)method;</code></li>
+<li>&#x5C5E;&#x6027; <code>@property(nonatomic ,copy)NSString * _Nullable str;</code></li>
+</ul>
+</li>
+<li>_nonull&#x8868;&#x793A;&#x5BF9;&#x8C61;&#x4E0D;&#x5E94;&#x8BE5;&#x4E3A;&#x7A7A;&#x3002;</li>
+</ul>
+<h2 id="nsassumenonnullbegin&#xFF0C;-nsassumenonnullend">NS_ASSUME_NONNULL_BEGIN&#xFF0C; NS_ASSUME_NONNULL_END</h2>
+<p>&#x5728;&#x65B0;&#x5EFA;&#x4E00;&#x4E2A;&#x7C7B;&#x7684;&#x65F6;&#x5019;&#x628A;interface&#x5939;&#x5728;&#x4E2D;&#x95F4; &#x662F;&#x4E3A;&#x4E86;&#x8BA9;&#x4E2D;&#x95F4;&#x7684;&#x5BF9;&#x8C61;&#x4E0D;&#x4E3A;&#x7A7A;&#x3002;</p>
+<h2 id="strongifyselfweakifyself">strongify(self)&amp;&amp;weakify(self)</h2>
+<h3 id="weak--strong"><strong>weak &amp;&amp; </strong>strong</h3>
+<p>&#x5728;&#x5F00;&#x53D1;&#x4E2D;&#xFF0C;&#x7ECF;&#x5E38;&#x5728;&#x63A7;&#x5236;&#x5668;&#x4E2D;&#x7528;&#x5230;block&#x8BED;&#x53E5;&#xFF0C;&#x5728;block&#x8BED;&#x53E5;&#x4E2D;&#x5982;&#x679C;&#x9700;&#x5F15;&#x7528;self&#xFF0C;&#x800C;self&#xFF08;&#x63A7;&#x5236;&#x5668;&#xFF09;&#x5BF9;&#x8C61;&#x4E2D;&#x53C8;&#x6301;&#x6709;block&#x5BF9;&#x8C61;&#xFF0C;&#x5C31;&#x4F1A;&#x9020;&#x6210;&#x5FAA;&#x73AF;&#x5F15;&#x7528;&#x5FAA;&#x73AF;&#x5F15;&#x7528;&#xFF0C;&#x5BFC;&#x81F4;&#x5185;&#x5B58;&#x6CC4;&#x9732;&#xFF0C;&#x6BD4;&#x5982;&#x4EE5;&#x4E0B;&#x4EE3;&#x7801;</p>
+<pre><code class="lang-objc">    <span class="hljs-keyword">self</span>.block = ^{
+        [<span class="hljs-keyword">self</span> test];
+    };
+</code></pre>
+<p>&#x5982;&#x679C;&#x662F;&#x901A;&#x8FC7;<strong>weak&#x4FEE;&#x9970;&#x7684;&#x4E00;&#x4E2A;weakSelf&#x53D8;&#x91CF;&#x6307;&#x5411;self&#x5BF9;&#x8C61;&#xFF0C;&#x5E76;&#x5728;block&#x4E2D;&#x4F7F;&#x7528;weakSelf`</strong>weak typeof(self) weakSelf = self;`
+<strong>&#x4F46;&#x662F;&#x8FD9;&#x6837;&#x5B50;&#x5199;&#x6709;&#x53EF;&#x80FD;&#x51FA;&#x95EE;&#x9898;&#xFF0C;&#x56E0;&#x4E3A;weakSelf&#x662F;&#x5F31;&#x5F15;&#x7528;&#xFF0C;&#x800C;self&#x4E00;&#x65E6;&#x91CA;&#x653E;&#x4E86;&#xFF0C;weakSelf&#x53EF;&#x80FD;&#x4E3A;nil</strong></p>
+<ul>
+<li>&#x89E3;&#x51B3;&#x95EE;&#x9898;&#xFF1A;&#x518D;&#x5728;&#x8FD9;&#x4E2A;block&#x4E2D;&#x628A;weakSelf&#x7ED9;<strong>strong&#x4E00;&#x4E0B;`</strong>strong typeof(weakSelf) strongSelf = weakSelf;`&#x5728;&#x4F7F;&#x7528;&#x8FD9;&#x4E2A;strongSelf</li>
+</ul>
+<h3 id="&#x5B8F;&#x5B9A;&#x4E49;">&#x5B8F;&#x5B9A;&#x4E49;</h3>
+<ol>
+<li>&#x5728;&#x5B8F;&#x91CC;&#x4E5F;&#x53EF;&#x4EE5;&#x7528;...&#x6765;&#x8868;&#x793A;&#x591A;&#x4E2A;&#x53C2;&#x6570;&#xFF0C;&#x800C;<strong>VA_ARGS</strong>&#x5C31;&#x5BF9;&#x5E94;&#x591A;&#x4E2A;&#x53C2;&#x6570;&#x7684;&#x90E8;&#x5206;&#xFF0C;&#x4F8B;&#x5982;&#xFF1A;<ul>
+<li><blockquote>
+<p><code>define log(...) NSLog(__VA_ARGS__)</code></p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li><h2 id="&#x662F;&#x5B8F;&#x8FDE;&#x63A5;&#x7B26;&#xFF0C;&#x4F1A;&#x5C06;-&#x5DE6;&#x53F3;&#x4E24;&#x8FB9;&#x8FDE;&#x63A5;&#x8D77;&#x6765;&#xFF0C;&#x4F8B;&#x5982;&#xFF1A;">&#x662F;&#x5B8F;&#x8FDE;&#x63A5;&#x7B26;&#xFF0C;&#x4F1A;&#x5C06; ##&#x5DE6;&#x53F3;&#x4E24;&#x8FB9;&#x8FDE;&#x63A5;&#x8D77;&#x6765;&#xFF0C;&#x4F8B;&#x5982;&#xFF1A;</h2>
+<ul>
+<li><code>#define XLink(n) x##n</code> -&gt;@&quot;xn&quot; </li>
+</ul>
+</li>
+</ol>
+<pre><code class="lang-objc"><span class="hljs-meta">#ifndef weakify</span>
+    <span class="hljs-meta">#if DEBUG</span>
+        <span class="hljs-meta">#if __has_feature(objc_arc)</span>
+        <span class="hljs-meta">#define weakify(object) autoreleasepool{} __weak __typeof__(object) weak##_##object = object;</span>
+        <span class="hljs-meta">#else</span>
+        <span class="hljs-meta">#define weakify(object) autoreleasepool{} __block __typeof__(object) block##_##object = object;</span>
+        <span class="hljs-meta">#endif</span>
+    <span class="hljs-meta">#else</span>
+        <span class="hljs-meta">#if __has_feature(objc_arc)</span>
+        <span class="hljs-meta">#define weakify(object) try{} @finally{} {} __weak __typeof__(object) weak##_##object = object;</span>
+        <span class="hljs-meta">#else</span>
+        <span class="hljs-meta">#define weakify(object) try{} @finally{} {} __block __typeof__(object) block##_##object = object;</span>
+        <span class="hljs-meta">#endif</span>
+    <span class="hljs-meta">#endif</span>
+<span class="hljs-meta">#endif</span>
+</code></pre>
+<p>@autoreleasepool{} <strong>&#x6CA1;&#x6709;&#x5B9E;&#x9645;&#x7684;&#x610F;&#x4E49;</strong>&#x53EA;&#x662F;&#x4E3A;&#x4E86;&#x8BA9;@weakify&#x663E;&#x5F97;&#x66F4;&#x6807;&#x51C6;</p>
+<h2 id="nsunavailable--nsdesignatedinitializer">NS_UNAVAILABLE &amp;&amp; NS_DESIGNATED_INITIALIZER</h2>
+<p>&#x8FD9;&#x4E24;&#x4E2A;&#x5173;&#x952E;&#x5B57;&#xFF0C;&#x662F;&#x5E2E;&#x52A9;&#x7EA6;&#x675F;&#x5B9A;&#x4E49;&#x65B9;&#x5F0F;&#xFF0C;&#x5F53;&#x6709;&#x591A;&#x4E2A;&#x521D;&#x59CB;&#x5316;&#x7684;&#x65B9;&#x6CD5;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x5E2E;&#x52A9;&#x5916;&#x6765;&#x8005;&#x4E86;&#x89E3;&#x90A3;&#x4E2A;&#x624D;&#x662F;&#x6B63;&#x786E;&#x7684;&#x521D;&#x59CB;&#x5316;&#x65B9;&#x6CD5;</p>
+<h3 id="nsdesignatedinitalizer">NS_DESIGNATED_INITALIZER</h3>
+<pre><code class="lang-objc">- (<span class="hljs-keyword">void</span>)init;
+- (<span class="hljs-keyword">void</span>)initWithTitle:(<span class="hljs-built_in">NSString</span> *)title;
+- (<span class="hljs-keyword">void</span>)initWithTitle:(<span class="hljs-built_in">NSString</span> *)title date:(<span class="hljs-built_in">NSDate</span> *)date;
+</code></pre>
+<p><code>init</code>&#x4F1A;&#x8C03;&#x7528;<code>initWithTitle</code>&#x4E4B;&#x540E;&#x4ED6;&#x4F1A;&#x8C03;&#x7528;<code>initWithTitle:date:</code>&#x8FD9;&#x6837;&#x6700;&#x540E;&#x8FD8;&#x662F;&#x8C03;&#x7528;&#x7684;&#x6700;&#x540E;&#x8FD9;&#x4E00;&#x4E2A;&#x65B9;&#x6CD5;
+&#x5BF9;&#x4E8E;&#x8FD9;&#x6837;&#x80FD;&#x521D;&#x59CB;&#x5316;&#x5168;&#x90E8;&#x5FC5;&#x987B;&#x53D8;&#x91CF;&#x7684;&#x65B9;&#x6CD5;&#xFF0C;&#x4E00;&#x822C;&#x53EF;&#x7528;&#x4F5C;designed initalizer&#xFF0C;&#x6240;&#x4EE5;&#x6700;&#x540E;&#x544A;&#x8BC9;&#x8C03;&#x7528;&#x8005;&#x4ED6;&#x662F;&#x8FD9;&#x6837;&#x4E00;&#x4E2A;&#x521D;&#x59CB;&#x5316;&#x65B9;&#x6CD5;
+<code>- (void)initWithTitle:(NSString *)title date:(NSDate *)date NS_DESIGNATED_INITIALIZER;</code></p>
+<ul>
+<li>&#x4E00;&#x4E2A;&#x5B50;&#x7C7B;&#x5982;&#x679C;&#x6709;&#x81EA;&#x5DF1;&#x7684;designed initalizer&#x90A3;&#x4E48;<strong>&#x5FC5;&#x987B;</strong>&#x5B9E;&#x73B0;&#x7236;&#x7C7B;&#x7684;designed initalizer</li>
+</ul>
+<h3 id="nsunavailable">NS_UNAVAILABLE</h3>
+<p>&#x5728;&#x5B9A;&#x4E49;&#x521D;&#x59CB;&#x5316;&#x65B9;&#x6CD5;&#x65F6;&#xFF0C;&#x9664;&#x4E86;&#x80FD;&#x591F;&#x7528; NS_DESIGNATED_INITIALIZER &#x6807;&#x8BB0;&#x4EE5;&#x5916;&#xFF0C;&#x8FD8;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;<strong>&#x66F4;&#x4E3A;&#x5F3A;&#x52BF;</strong>&#x7684; NS_UNAVAILABLE &#x3002;&#x548C; NS_DESIGNATED_INITIALIZER &#x7528;&#x4E8E;&#x660E;&#x786E;&#x521D;&#x59CB;&#x5316;&#x65B9;&#x6CD5;&#x65B9;&#x5F0F;&#x4E0D;&#x540C;&#xFF0C; NS_UNAVAILABLE &#x7684;&#x4F5C;&#x7528;&#x662F;&#xFF0C;<strong>&#x76F4;&#x63A5;&#x7981;&#x7528;&#x5F53;&#x524D;&#x7684;&#x521D;&#x59CB;&#x5316;&#x65B9;&#x6CD5;</strong>&#x3002;</p>
+<h2 id="&#x4EE3;&#x7801;&#x89C4;&#x8303;">&#x4EE3;&#x7801;&#x89C4;&#x8303;</h2>
+<h3 id="&#x7C7B;&#x7684;&#x5E03;&#x5C40;">&#x7C7B;&#x7684;&#x5E03;&#x5C40;</h3>
+<pre><code class="lang-objc"><span class="hljs-meta">#pragma mark - Life Cycle</span>
+<span class="hljs-meta">#pragma mark - Setup View / Data</span>
+<span class="hljs-meta">#pragma mark - Observer</span>
+<span class="hljs-meta">#pragma mark - Notification</span>
+<span class="hljs-meta">#pragma mark - Event Response</span>
+<span class="hljs-meta">#pragma mark - Override Methods</span>
+<span class="hljs-meta">#pragma mark - Delegate</span>
+<span class="hljs-meta">#pragma mark - Public Methods</span>
+<span class="hljs-meta">#pragma mark - Private Methods</span>
+<span class="hljs-meta">#pragma mark - Setter / Getter</span>
+<span class="hljs-meta">#pragma mark - Network</span>
+</code></pre>
+<h3 id="&#x521D;&#x59CB;&#x5316;ui&#x548C;data">&#x521D;&#x59CB;&#x5316;UI&#x548C;Data</h3>
+<pre><code class="lang-objc">- (<span class="hljs-keyword">void</span>)setupViews;
+- (<span class="hljs-keyword">void</span>)setupUI;
+- (<span class="hljs-keyword">void</span>)createUI;
+- (<span class="hljs-keyword">void</span>)configData;
+- (<span class="hljs-keyword">void</span>)setupData;
+- (<span class="hljs-keyword">void</span>)fetchData;
+</code></pre>
+<h3 id="&#x5237;&#x65B0;ui">&#x5237;&#x65B0;UI</h3>
+<pre><code class="lang-objc">- (<span class="hljs-keyword">void</span>)updateUI;
+- (<span class="hljs-keyword">void</span>)refreshUI;
+- (<span class="hljs-keyword">void</span>)reloadData;
+- (<span class="hljs-keyword">void</span>)refreshData;
+</code></pre>
 
                                 
                                 </section>
@@ -679,12 +777,12 @@
 
             
                 
-                <a href="../UI基础/" class="navigation navigation-prev " aria-label="Previous page: UI基础">
+                <a href="./" class="navigation navigation-prev " aria-label="Previous page: work">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="../iOS多线程/" class="navigation navigation-next " aria-label="Next page: iOS多线程">
+                <a href="分析.html" class="navigation navigation-next " aria-label="Next page: 分析">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -695,7 +793,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"UI进阶","level":"1.5","depth":1,"next":{"title":"iOS多线程","level":"1.6","depth":1,"path":"iOS多线程/README.md","ref":"iOS多线程/README.md","articles":[{"title":"pthread","level":"1.6.1","depth":2,"path":"iOS多线程/pthread.md","ref":"iOS多线程/pthread.md","articles":[]},{"title":"NSThread","level":"1.6.2","depth":2,"path":"iOS多线程/NSThread.md","ref":"iOS多线程/NSThread.md","articles":[]},{"title":"GCD","level":"1.6.3","depth":2,"path":"iOS多线程/GCD.md","ref":"iOS多线程/GCD.md","articles":[]},{"title":"NSOperation","level":"1.6.4","depth":2,"path":"iOS多线程/NSOperation.md","ref":"iOS多线程/NSOperation.md","articles":[]}]},"previous":{"title":"UI基础","level":"1.4","depth":1,"path":"UI基础/README.md","ref":"UI基础/README.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"UI进阶/README.md","mtime":"2019-07-03T05:36:11.516Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-07-08T03:14:03.008Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"问题","level":"1.15.1","depth":2,"next":{"title":"分析","level":"1.15.2","depth":2,"path":"work/分析.md","ref":"work/分析.md","articles":[]},"previous":{"title":"work","level":"1.15","depth":1,"path":"work/README.md","ref":"work/README.md","articles":[{"title":"问题","level":"1.15.1","depth":2,"path":"work/问题.md","ref":"work/问题.md","articles":[]},{"title":"分析","level":"1.15.2","depth":2,"path":"work/分析.md","ref":"work/分析.md","articles":[]}]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"work/问题.md","mtime":"2019-07-03T12:34:46.525Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-07-08T03:14:03.008Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
