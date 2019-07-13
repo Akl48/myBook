@@ -1,6 +1,6 @@
-# GCD
-
 [TOC]
+
+# GCD
 
 ### GCD（中央调度器） 
 
@@ -55,17 +55,13 @@ dispatch_async(dispatch_queue_t _Nonnull queue, ^(void)block); //异步
          1. Global Dispatch Queue一共有四种优先级 
          2. High Priority|Default Priority|Low Priority|Background Priority 
          3. 向Global Dispatch Queue追加处理的时候，应该选择对应优先级 
-
 3. 并发 + 异步的话会创建N条线程 线程的个数 ！= 任务数量 ⚠️ 
 
 ###### 串行队列
 
 1. 第一个任务取出来之后必须等待任务执行完，才能执行下一个 
-
 1. 主对列 特殊的串型对列（和主线程先关联的） 
-
    1. dispatch_get_main_queue() 
-
    2. 开启多条串行对列可以有不限量的线程生成
       1. 可以避免更新相同资源导致数据竞争 
 
