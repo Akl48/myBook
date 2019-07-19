@@ -78,12 +78,9 @@ dispatch_set_target_queue(<dispatch_object_t _Nonnull object>,<dispatch_queue_t 
 #### 主对列 
 
 1. 放在主对列的任务都会放到主线程中执行 
-
 2. 不会开启新的线程 
-
 3. 同步函数+主对列 = 死锁 
    1. dispatch_sync会立即阻塞当前的**主线程**，然后把 Block 中的任务放到 main_queue 中，可是 main_queue 中的任务会被取出来放到主线程中执行，但主线程这个时候已经被阻塞了，所以 Block 中的任务就不能完成，由于它不完成，dispatch_sync 就会一直阻塞主线程，这就是死锁了。
-
 4. 异步函数+主对列 = 不会开线程，所有任务都会在主线程中串行执行 
 
 #### ~~对列中的释放机制~~ 
@@ -263,7 +260,6 @@ NSEC_PER_SEC|MSEC 秒|毫秒
 
 ```objc 
 dispatch_suspend(queue); 
-
 dispatch_resume(queue); 
 ```
 
