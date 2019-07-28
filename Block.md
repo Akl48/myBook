@@ -10,7 +10,7 @@
 
 1. 拥有局部变量(自动变量)或者成员属性变量(即使被strong或者copy修饰的成员变量) 
 
-2. 没有被强引用 通过\_\_weak实现 
+2. 没有被强引用 通过__weak实现 
 
 ## _ NSConcreteGlobalBlock 
 
