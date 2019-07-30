@@ -1,4 +1,159 @@
 # UI进阶
 
+## iOS中的响应链
 
+iOS中我们会经常接受用户的操作并作出相应处理事件，主要使用的是UIResponder类。
+> UIView UIApplication UIViewController都是继承自UIResponder类
+所以只要继承自UIResponder都能响应事件
 
+### 响应链
+
+1. 生成事件
+   1. 当用户点击屏幕的时候会产生一个触摸事件
+   2. 把这个触摸事件放到UIApplication管理的事件队列中
+   3. 从队列中取出最前面的事件，交给UIWindow处理
+2. 查找第一响应者
+   1. Window收到事件后会在视图层次结构中找到最适合的一个视图来处理事件
+   2. 通常一个窗口中最适合处理当前事件的对象称为第一响应对象。
+3. 处理事件
+   1. 通常是第一响应对象**处理事件**，如果第一响应对象**无法处理事件**，就会**把事件传递给下一个响应对象**，直到Application。如果Application也无法处理，那就丢**弃掉**此事件。
+   2. 在上述系列操作中，所参与到的UIApplication、UIViewController和UIView就作为响应对象构成这次事件的响应链。view -> ViewController -> window -> Application -> 丢弃
+
+在我们需要使用键盘的时候，经常使用[self.textField registerFirstResponder]组册成为第一响应者，但是其实是Application.keyWindow.vc通过hitTest:withEvent找到事件最合适的响应者，再让[self becomeFirstResponder]唤起键盘
+
+### 响应链中常用方法
+<!-- 找到最适合的响应者 -->
+```objc
+// 因为所有的视图类都是继承BaseView
+- (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event {
+// 1.判断当前控件能否接收事件
+   if (self.userInteractionEnabled == NO || self.hidden == YES || self.alpha <= 0.01) return nil;
+// 2. 判断点在不在当前控件
+   if ([self pointInside:point withEvent:event] == NO) return nil;
+// 3.从后往前遍历自己的子控件 看子控件能否处理事件
+   NSInteger count = self.subviews.count;
+   for (NSInteger i = count - 1; i >= 0; i--) {
+       UIView *childView = self.subviews[I];
+       // 把当前控件上的坐标系转换成子控件上的坐标系
+    CGPoint childP = [self convertPoint:point toView:childView];
+      UIView *fitView = [childView hitTest:childP withEvent:event];
+       if (fitView) { // 寻找到最合适的view
+           return fitView;
+       }
+   }
+   // 循环结束,表示没有比自己更合适的view
+   return self;}
+```
+<!-- 扩大按钮的点击范围 -->
+```objc
+- (BOOL)pointInside:(CGPoint)point withEvent:(UIEvent*)event {
+    CGRect bounds = self.bounds;
+     bounds = CGRectInset(bounds, -10, -10);
+   // CGRectContainsPoint  判断点是否在矩形内
+    return CGRectContainsPoint(bounds, point);
+}
+```
+
+## UIView和CALayer
+
+[链接：https://www.jianshu.com/p/fd8cd2231541](https://www.jianshu.com/p/fd8cd2231541)
+
+UIView继承自UIResponder可以响应事件，但是CALayer直接继承自NSObject不能响应。
+UIView相当于CALayer的delegate，负责处理事件，而CALayer负责绘制。简单的就是MVC中的**View和Controller**的关系
+**每个 UIView 内部都有一个 CALayer 在背后提供内容的绘制和显示**，并且 UIView 的尺寸样式都由内部的 Layer 所提供。两者都有树状层级结构，**layer 内部有 SubLayers，View 内部有 SubViews**.但是 Layer 比 View 多了个AnchorPoint
+
+### 计算机中CPU和GPU的关系
+
+![CPU&GPU](../photo/CPU&GPU.png)
+
+计算机系统中 CPU、GPU、显示器是协同工作的。CPU 计算好显示内容提交到 GPU，GPU 渲染完成后将渲染结果放入帧缓冲区，随后视频控制器会按照 VSync 信号逐行读取帧缓冲区的数据，经过可能的数模转换传递给显示器显示。
+
+### 为什么会造成卡顿
+
+![VSync](../photo/VSync.png)
+
+在 VSync 信号到来后，系统图形服务会通过 CADisplayLink 等机制通知 App，**App 主线程开始在 CPU 中计算显示内容**，比如视图的创建、布局计算、图片解码、文本绘制等。**随后 CPU 会将计算好的内容提交到 GPU 去**，**由 GPU 进行变换、合成、渲染。随后 GPU 会把渲染结果提交到帧缓冲区去，等待下一次 VSync 信号到来时显示到屏幕上**。**由于垂直同步的机制，如果在一个 VSync 时间内，CPU 或者 GPU 没有完成内容提交，则那一帧就会被丢弃**，等待下一次机会再显示，而这时显示屏会保留之前的内容不变。这就是界面卡顿的原因。
+CPU 和 GPU 不论哪个阻碍了显示流程，都会造成掉帧现象。所以开发时，也需要分别对 CPU 和 GPU 压力进行评估和优化。
+
+#### GPU
+
+相对于 CPU 来说，GPU 能干的事情比较单一：接收提交的纹理（Texture）和顶点描述（三角形），应用变换（transform）、混合并渲染，然后输出到屏幕上。通常你所能看到的内容，主要也就是纹理（图片）和形状（三角模拟的矢量图形）两类。
+
+**纹理的渲染**
+所有的 Bitmap，包括图片、文本、栅格化的内容，最终都要由内存提交到显存，绑定为 GPU Texture。不论是提交到显存的过程，还是 GPU 调整和渲染 Texture 的过程，都要消耗不少 GPU 资源。当在较短时间显示大量图片时（比如 TableView 存在非常多的图片并且快速滑动时），CPU 占用率很低，GPU 占用非常高，界面仍然会掉帧。避免这种情况的方法只能是尽量减少在短时间内大量图片的显示，尽可能将多张图片合成为一张进行显示。
+当图片过大，超过 GPU 的最大纹理尺寸时，图片需要先由 CPU 进行预处理，这对 CPU 和 GPU 都会带来额外的资源消耗。
+
+**视图的混合** (Composing)
+当多个视图（或者说 CALayer）重叠在一起显示时，GPU 会首先把他们混合到一起。如果视图结构过于复杂，混合的过程也会消耗很多 GPU 资源。为了减轻这种情况的 GPU 消耗，应用应当尽量减少视图数量和层次，并在不透明的视图里标明 opaque 属性以避免无用的 Alpha 通道合成。当然，这也可以用上面的方法，把多个视图预先渲染为一张图片来显示。
+
+**图形的生成**
+CALayer 的 border、圆角、阴影、遮罩（mask），CASharpLayer 的矢量图形显示，通常会触发离屏渲染（**offscreen rendering 指的是在GPU在当前屏幕缓冲区以外开辟一个缓冲区进行渲染操作 首选要创建一个新的缓冲区，屏幕渲染会有一个上下文环境的一个概念，离屏渲染的整个过程需要切换上下文环境，先从当前显示幕切换到离屏，等结束后，又要将上下文环境切换回来。这也是为什么会消耗性能的原因**），而离屏渲染通常发生在 GPU 中。当一个列表视图中出现大量圆角的 CALayer，并且快速滑动时，可以观察到 GPU 资源已经占满，而 CPU 资源消耗很少。这时界面仍然能正常滑动，但平均帧数会降到很低。为了避免这种情况，可以尝试开启 CALayer.shouldRasterize 属性，但这会把原本离屏渲染的操作转嫁到 CPU 上去。对于只需要圆角的某些场合，也可以用一张已经绘制好的圆角图片覆盖到原本视图上面来模拟相同的视觉效果。最彻底的解决办法，就是把需要显示的图形在后台线程绘制为图片，避免使用圆角、阴影、遮罩等属性
+
+## - (void)loadView
+
+* 每个controller默认有一个loadView方法（系统会通知这个方法来创建controller的view）
+
+> 系统默认怎么加载控制器的view呢，先去storyboard里面找，没有找到再去与控制器名称相同的xib里面找,没有找到，在去名称相同去掉
+> Controller的xib里面找，还没有找到，程序员也没有重写loadView方法，那么系统默认会创建一个view，颜色是clearColor,
+> 如果实现了loadView方法的话，上面的都不会做
+
+* 在什么时候使用loadView
+  * 当控制器的View一进来就是一张图片的时候
+  * 控制器一进来就加载图片的时候
+
+## 实例方法和类方法的区别
+
+### 类方法（工厂方法）
+
+在OC中类定义方法时以 + 开头的方法，又称为静态方法
+
+1. 静态方法常驻内存，实例方法不是，所以静态方法效率高但占内存
+2. 静态方法在堆上分配内存
+3. 静态方法是静态绑定到子类中
+
+### 什么时候用类方法
+
+1. 一般使用频繁的方法用静态方法，用的少的方法用动态的。静态的速度快，占内存。动态的速度相对慢些，但调用完后，立即释放类，可以节省内存
+
+## 类方法中的load和initialize
+
+### load
+
+当类被引用进项目的时候就会执行load函数(在main函数开始执行之前）,与这个类是否被用到无关,每个类的load函数只会自动调用一次.由于load函数是系统自动加载的，因此不需要调用父类的load函数，否则父类的load函数会多次执行。
+
+1. 当父类和子类都实现load函数时,父类的load方法执行顺序要优先于子类
+2. 当子类未实现load方法时,不会调用父类load方法
+3. **类中的load方法执行顺序要优先于类别(Category)**
+4. **当有多个类别(Category)都实现了load方法,这几个load方法都会执行**,但执行顺序不确定(其执行顺序与类别在Compile Sources中出现的顺序一致)
+5. 当然当有多个不同的类的时候,每个类load 执行顺序与其在Compile Sources出现的顺序一致
+
+### load使用情况
+
+由于调用load方法时的环境很不安全(其他类可能还没加载完成,运行环境不安全)，我们应该尽量减少load方法的逻辑。另一个原因是load方法是线程安全的，它内部使用了锁，所以我们应该避免线程阻塞在load方法中
+
+1. Method swizzling
+2. runtime方法
+
+### initalize
+
+initialize在类或者其子类的第一个方法被调用前调用。即使类文件被引用进项目,但是没有使用,initialize不会被调用。由于是系统自动调用，也不需要再调用  [super initialize] ，否则父类的initialize会被多次执行。假如这个类放到代码中，而这段代码并没有被执行，这个函数是不会被执行的。
+
+1.父类的initialize方法会比子类先执行
+2.当子类未实现initialize方法时,会调用父类initialize方法,子类实现initialize方法时,会覆盖父类initialize方法.
+3.当有多个Category都实现了initialize方法,会覆盖类中的方法,只执行一个(会执行Compile Sources 列表中最后一个Category 的initialize方法)
+
+### initalize使用情况
+
+initialize方法主要用来对一些不方便在编译期初始化的对象进行赋值。比如NSMutableArray这种类型的实例化依赖于runtime的消息发送，所以显然无法在编译器初始化
+
+## 程序的生命周期
+
+1. 首先进入main函数
+2. 执行UIApplicationMain函数
+3. 初始化UIApplication对象并为他设置代理对象
+   1. 即在Appdelegate中的方法
+4. UIApplication对象监听系统事件
+5. 最后退出
+
+![APP生命周期](../photo/APP生命周期1.png)
+![APP生命周期](../photo/APP生命周期2.png)

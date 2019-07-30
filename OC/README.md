@@ -1,12 +1,10 @@
-[TOC]
-
 # OC基本语法
 
-### 协议
+## 协议
 
 协议的存在相当于C++中抽象类的存在。在协议中只声明方法，而在遵守他的协议的类中实现它的方法。
 
-#### 声明一个协议
+### 声明一个协议
 
 ```objc
 @protocol watch <NSObject>
@@ -17,7 +15,7 @@
 @end
 ```
 
-#### 遵守协议
+### 遵守协议
 
 ```objc
 @interface dog : NSObject <watch>
@@ -33,7 +31,7 @@
 @end
 ```
 
-#### 代理
+### 代理
 
 驾校的代理是学生 驾校是被代理方 学生是代理
 
@@ -47,7 +45,7 @@
 @end
 ```
 
-### Foundation
+#### Foundation
 
 1. `NSString(NSMutableString)`
    1. 字符串常量@""通常经常使用NSString
