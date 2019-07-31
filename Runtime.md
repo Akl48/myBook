@@ -18,6 +18,8 @@ struct objc_object {
 };
 ```
 
+![isa指针](photo/isa指针.png)
+
 ### 类
 
 ```objc
