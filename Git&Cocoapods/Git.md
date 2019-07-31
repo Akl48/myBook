@@ -1,6 +1,5 @@
-[TOC]
+# Git的使用
 
-## Git的使用
 [简单易懂版](https://rogerdudler.github.io/git-guide/index.zh.html)（简单版）
 [廖雪峰老师官网](<https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000>)（中级版）
 [pro git](https://gitee.com/progit/) (高级复杂枯燥版但是很有用很细致)
