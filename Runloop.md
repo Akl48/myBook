@@ -183,6 +183,3 @@ kCFRunLoopAllActivities = 0x0FFFFFFFU
 2. 第二的Observer监听了两个事件
    1. RunLoop即将休眠 会释放之前的AutoReleasePool并且创建一个新的
    2. RunLoop即将推出 此时释放自动释放池这个事件优先级最低（**保证在最后释放**）
-
-### AFNetWorking
-
