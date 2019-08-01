@@ -80,14 +80,16 @@ struct objc_method {
 
 ## Runtime中的消息传递
 
-在OC中都是这样的[]表示的方法`[objc msgSend];`,每次都是一次运行时方法发送的过程。
+Runtime主要分为两个阶段
 
-1. 编译器将这句话转化成`objc_msgSend(reseiver,selector)`
-2. 首先通过objc的isa指针找到他的class
-3. 在class的method list去找是否有msgSend
-4. 没有就去他的super class找
-5. 找到之后执行它的IMP
-6. 找到之后将key：method_name value：method_imp作为字典存储在objc_cache中
+1. 编译阶段
+   1. 将[]结构转化为函数形式`objc_msgSend(reseiver,selector)`
+2. 运行时阶段
+   1. 首先通过objc的isa指针找到他的class
+   2. 在class的method list去找是否有msgSend
+   3. 没有就去他的super class找
+   4. 找到之后执行它的IMP
+   5. 找到之后将key：method_name value：method_imp作为字典存储在objc_cache中
 注：IMP 函数指针 记录了方法的地址
 
 ## 消息转发
@@ -236,6 +238,16 @@ class_copyMethodList(Class  _Nullable __unsafe_unretained cls, unsigned int * _N
 class_copyPropertyList(Class  _Nullable __unsafe_unretained cls, unsigned int * _Nullable outCount);
 //  获取所有遵循协议
 class_copyProtocolList(Class  _Nullable __unsafe_unretained cls, unsigned int * _Nullable outCount);
+
+unsigned int count = 0;
+Ivar *ivars = class_copyIvarList([self Class],&count);
+for(unsigned int i = 0;i < count ;i++){
+    const char *ivar = ivar_getName(ivars[i]);
+   // SEL method = method_getName(methods[i]);
+    NSLog(@"%@",[NSString stringWithUTF8String:ivar]);
+   // NSLog(@"%@",NSStringFromSelector(method));
+}
+free(ivars);
 ```
 
 ### 字典和模型的转换

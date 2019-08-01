@@ -1,14 +1,11 @@
-[TOC]
+# AFNetworking
 
-###AFnetworking
-
-#### get&post
+## get&post
 
 ```objc
 NSDictionary *dict = @{@"name":@"ztr"};
-    
+
 AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-    
 [manager (GET|POST):(nonnull NSString *) parameters:dict progress:^(NSProgress * _Nonnull downloadProgress) {
 //  get的为请求路径 但是不包含参数  parameters 为字典 存放参数 progress是下载进度
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
@@ -18,7 +15,7 @@ AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     }];
 ```
 
-#### 下载
+## 下载
 
 ```objective-c
 //    创建请求对象
@@ -40,7 +37,7 @@ AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     [task resume];
 ```
 
-#### 上传
+## 上传
 
 ```objc
 //    通过POST上传
@@ -68,13 +65,13 @@ AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     }];
 ```
 
-#### 序列化
+## 序列化
 
-##### JSON
+### JSON
 
 默认就是JSON会自动序列化
 
-##### XML
+### XML
 
 设置manager的**responseSerializer**来达到解析成别的数据格式
 
@@ -90,7 +87,7 @@ parser.delegate = self;
 [parser parser];
 ```
 
-##### httpData
+### httpData
 
 既不是XML也不是JSON就是这个
 
@@ -99,8 +96,7 @@ parser.delegate = self;
 #### 网络状态监听
 
 ```objc
-		AFNetworkReachabilityManager *manager = [AFNetworkReachabilityManager sharedManager];
-    
+    AFNetworkReachabilityManager *manager = [AFNetworkReachabilityManager sharedManager];
     [manager setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
 //       网络状态改变的时候调用block块 并且当前的网络状态为参数
         /*
@@ -115,6 +111,3 @@ parser.delegate = self;
 //    开始监听
     [manager startMonitoring];
 ```
-
-
-
