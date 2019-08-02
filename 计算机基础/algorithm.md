@@ -92,6 +92,54 @@ set的特性是，所有元素都会根据元素的键值自动排序，set的�
 
 map是一种关联容器，对象的位置取决于和它关联的键的值（键可以是基本类型，也可以是类类型）。
 
+## C++中的优先级队列
+
+在里面是**自动排序**，包含在`<queue>` 中。
+
+```C++
+// 普通模式
+priority_queue <int> i;
+priority_queue <double> d;
+// 进阶模式
+priority_queue <node> q;
+//node是一个结构体
+//结构体里重载了‘<’小于符号
+priority_queue <int,vector<int>,greater<int> > q;
+//不需要#include<vector>头文件
+//注意后面两个“>”不要写在一起，“>>”是右移运算符
+priority_queue <int,vector<int>,less<int> >q;
+```
+
+1. 默认是从大到小排序的
+2. 但是可以**重载** < 运算符来判断结构体对象的大小
+
+```C++
+bool operator < (const ListNode &a) const{
+     return val < a.val;
+}
+```
+
+* 实现大小根堆
+
+``` C++
+// 加入p中的最后会按从大到小排序
+priority_queue <int,vector<int>,less<int> > p;
+// 加入q中的会从小到大排序
+priority_queue <int,vector<int>,greater<int> > q;
+```
+
+* 自定义排序方式
+
+```C++
+struct cmp{
+    bool operator () (const stone &a,const stone& b){
+        return a.x < b.x;
+    }
+};
+
+priority_queue<stone,vector<stone>,cmp> q;
+```
+
 ## C++中结构体的定义
 
 ```c
@@ -119,54 +167,3 @@ s.length();//返回s的长度
 
 s.substr(int i,int j);//提取字符串返回从i~j的子串
 ```
-
-## 算法
-
-### 七大排序算法（冒泡，选择，插入，归并排序，快速排序，堆排序，希尔排序）
-
-### 二分查找
-
-### 海量数据排序
-
-### topK问题，有1千万个数，怎么快速找出最大的100个
-
-### 合并两个有序数组，合并两个有序链表
-
-### 杨氏矩阵（横向递增，纵向递增）中如何找到指定的数字
-
-### 翻转一句话，例如I am 3 years old，翻转后，old years 3 am I
-
-```c++
-class Solution {
-public:
-// 交换 传引用
-     void swap(string &s,int i,int j){
-        char a = s[i];
-        s[i] = s[j];
-        s[j] = a;
-    }
-    string reverseWords(string s) {
-        int len = (int)s.length();
-        for (int i = 0,j = 0; j < len; i++) {
-            if(s[i]==' '){ //如果是空格的话交换前面的所有
-                int now = i+1;
-                i--;
-                while (j < i) {
-                    swap(s,i--,j++);
-                }
-                i = j = now;
-            }
-            if(i == len - 1){ //如果是最后一个单词的话
-                int now = len;
-                while (j < i) {
-                    swap(s, i--, j++);
-                }
-                i = j = now;
-            }
-        }
-        return s;
-    }
-};
-```
-
-## 有10亿条数据，现在只有200M内存，怎么找出这10亿条数据中出现次数最多的100条数据
