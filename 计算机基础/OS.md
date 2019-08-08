@@ -297,7 +297,7 @@ unalise name…
 >
 > **who >** abc 将who的结果输入到abc文件中
 
-**输入和输出重定向可以一起使用**
+》**输入和输出重定向可以一起使用**
 
 wc  -l \< infile \>outfile
 
@@ -332,7 +332,6 @@ wc  -l \< infile \>outfile
 使用root身份登录你的vps，输入下面命令就自动安装BBR算法。
 
 > wget –no-check-certificate https://github.com/teddysun/across/raw/master/bbr.sh
-
 chmod +x bbr.sh
 ./bbr.sh
 安装后，建议重启一次服务器生效。
@@ -340,6 +339,5 @@ chmod +x bbr.sh
 ### 安装ShadowSocks
 
 > wget –no-check-certificate  https://raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocks.sh
-
 > ./shadowsocks.sh 2>&1 | tee shadowsocks.log
 按照顺序安装即可

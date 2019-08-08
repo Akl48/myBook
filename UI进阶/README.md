@@ -33,7 +33,7 @@ iOS中我们会经常接受用户的操作并作出相应处理事件，主要�
 // 3.从后往前遍历自己的子控件 看子控件能否处理事件
    NSInteger count = self.subviews.count;
    for (NSInteger i = count - 1; i >= 0; i--) {
-       UIView *childView = self.subviews[I];
+       UIView *childView = self.subviews[i];
        // 把当前控件上的坐标系转换成子控件上的坐标系
     CGPoint childP = [self convertPoint:point toView:childView];
       UIView *fitView = [childView hitTest:childP withEvent:event];

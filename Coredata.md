@@ -1,17 +1,15 @@
-[toc] 
+# 数据持久化
 
-# 数据持久化 
+## plist
 
-## plist 
+## NSUserDefaults
 
-## NSUserDefaults 
+## 归档序列化储存
 
-## 归档序列化储存 
+## 沙盒储存
 
-## 沙盒储存 
+## Core Data
 
-## Core Data 
+## SQLite3
 
-## SQLite3 
-
-## FMDB 
+## FMDB

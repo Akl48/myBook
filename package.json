@@ -1,0 +1,28 @@
+{
+  "name": "myBook",
+  "version": "1.0.0",
+  "description": "**This book is about my study.I want to record at git.LOL**",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Akl48/myBook.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Akl48/myBook/issues"
+  },
+  "homepage": "https://github.com/Akl48/myBook#readme",
+  "devDependencies": {
+    "cz-conventional-changelog": "^3.0.2"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  }
+}
