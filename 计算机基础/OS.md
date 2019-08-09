@@ -335,6 +335,9 @@ wc  -l \< infile \>outfile
 chmod +x bbr.sh
 ./bbr.sh
 安装后，建议重启一次服务器生效。
+安装bbr的时候出现问题 `curl: (35) SSL connect error`
+是系统中源老了
+`yum update`
 
 ### 安装ShadowSocks
 
