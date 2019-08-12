@@ -235,8 +235,8 @@ git rebase -i dev
 
 ### 浏览书
 
- `gitbook serve`通过gitbook来在网页上显示书籍--[默认的IP地址http://localhost:4000](http://localhost:4000) 
-执行命令之后会对Markdown格式文件进行转化为html格式 
+ `gitbook serve`通过gitbook来在网页上显示书籍--[默认的IP地址http://localhost:4000](http://localhost:4000)
+执行命令之后会对Markdown格式文件进行转化为html格式
 
 ### 构建书籍
 
