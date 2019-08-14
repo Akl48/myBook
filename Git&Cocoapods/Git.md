@@ -163,6 +163,10 @@ git上的分支类似于平行宇宙，对现在没有影响，但是在某个�
 4. 没有冲突或者解决掉冲突后，再用`git push origin <branch-name>`推送就能成功！
 如果`git pull`提示`no tracking information`，则说明本地分支和远程分支的链接关系没有创建，用命令`git branch --set-upstream-to <branch-name> origin/<branch-name>`。
 
+##### 删除远程分支
+
+`git push origin -d <branch-name>`
+
 #### rebase
 
 `rebase`相较于`merge`而言有一个更加**整洁**的提交记录。
