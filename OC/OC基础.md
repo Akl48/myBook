@@ -40,8 +40,10 @@
 -(void)buy;
 @end
   
-@interface Boss : NSObject 
+@interface Boss : NSObject
+
 @property(nonatomic,weak)id <buything> delegate;//必须为weak 避免循环引用
+
 @end
 ```
 
@@ -55,6 +57,6 @@
    1. 不能放nil
 4. NSURL
    1. 专门用来保存资源路径
-      * http:// 开头的是网页路径的写法.
-      * file:// 开头的是本地磁盘的路径
-      * ftp:// 开头的是ftp文件资源的路径
+      * `http://` 开头的是网页路径的写法.
+      * `file://` 开头的是本地磁盘的路径
+      * `ftp://` 开头的是ftp文件资源的路径
