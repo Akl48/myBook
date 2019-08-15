@@ -1,30 +1,26 @@
-[TOC]
+# UI基础
 
-## iOS中storybroad的基础使用 
+## iOS中storybroad的基础使用
 
-### 方法的绑定 
+### 方法的绑定
 
-```
+```objc
 -(IBAction)set{}
 ```
 
-**通过IBAction** 
+通过IBAction
 
-### 属性的绑定 
+### 属性的绑定
 
-```
+```objc
 @property(nonamatic,strong)IBOutlet UILable * lab;
 ```
 
-**通过IBOutlet**
+通过IBOutlet
 
 ### 切换主控制storybroad
 
-![image-20190513210856706](/Users/zhoutianrong/Library/Application Support/typora-user-images/image-20190513210856706.png)
-
 [ ] Is Initial View Controller 是否是初始化控制器 再在target->General->Deployment Info->设置初始入口
-
-![image-20190513211022775](/Users/zhoutianrong/Library/Application Support/typora-user-images/image-20190513211022775.png)
 
 ### IB
 
@@ -46,42 +42,43 @@ Interface Builder现在打开Xcode即打开IB即前缀IB
 
 2. 所有控件最终都继承自UIView
 
-#### UIView常见属性 
+#### UIView常见属性
 
 ``` objc
-(UIView *) superview； 
+(UIView *) superview;
 
-获取父控件 
+获取父控件
 
 NSArray * subviews; //获取一个View所有子对象
 
--(void)removeFromSuperview 
+-(void)removeFromSuperview
 
-/* 从父控件移除控件 但不是销毁*/ 
+/* 从父控件移除控件 但不是销毁*/
 
--(void)addSubview 
+-(void)addSubview
 
-/* 添加控件*/ 
+/* 添加控件*/
 
 -(UIView*)viewWithTag:(NSInteger)tag;  
 // 本质上是一层一层View的遍历找 找到就返回 1.最好不适用  2.存在性能问题
 
-/* 根据一个tag标志找出对应的控件（一般是子控件）*/ 
+/* 根据一个tag标志找出对应的控件（一般是子控件）*/
 ```
 
-### 常用UI控件 
+### 常用UI控件
 
-* UIButton 按钮 
-* UILabel 文本标签 
-* UITextField 文本输入框 
-* UIImageView 图片显示 
-* UIScrollView 滚动的控件 
-* UICollectionView 九宫格 
-* UIWebView 网页显示控件 
-* UIAlertView 对话警告框 
-* UINavigationBar 导航栏 
+* UIButton 按钮
+* UILabel 文本标签
+* UITextField 文本输入框
+* UIImageView 图片显示
+* UIScrollView 滚动的控件
+* UICollectionView 九宫格
+* UIWebView(WKWebView) 网页显示控件
+* UIAlertView(UIAlertController) 对话警告框
+* UINavigationBar 导航栏
 
 #### UILabel
+
 * text显示文字
 
 * Lines == 0 代码中`numberOfLines` 能显示多少行 0表示就显示多少
