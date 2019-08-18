@@ -93,8 +93,8 @@ CALayer 的 border、圆角、阴影、遮罩（mask），CASharpLayer 的矢量
 
 * 每个controller默认有一个loadView方法（系统会通知这个方法来创建controller的view）
 
-> 系统默认怎么加载控制器的view呢，先去storyboard里面找，没有找到再去与控制器名称相同的xib里面找,没有找到，在去名称相同去掉
-> Controller的xib里面找，还没有找到，程序员也没有重写loadView方法，那么系统默认会创建一个view，颜色是clearColor,
+> 系统默认怎么加载控制器的view呢，先去storyboard里面找，没有找到再去与控制器名称相同的xib里面找,没有找到，在去名称相同Controller的xib里面找去找
+>还没有找到，程序员也没有重写loadView方法，那么系统默认会创建一个view，颜色是clearColor,
 > 如果实现了loadView方法的话，上面的都不会做
 
 * 在什么时候使用loadView
