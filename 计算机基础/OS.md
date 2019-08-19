@@ -331,9 +331,9 @@ wc  -l \< infile \>outfile
 
 使用root身份登录你的vps，输入下面命令就自动安装BBR算法。
 
-> wget –no-check-certificate https://github.com/teddysun/across/raw/master/bbr.sh
-chmod +x bbr.sh
-./bbr.sh
+> `wget –no-check-certificate https://github.com/teddysun/across/raw/master/bbr.sh`
+`chmod +x bbr.sh`
+`./bbr.sh`
 安装后，建议重启一次服务器生效。
 安装bbr的时候出现问题 `curl: (35) SSL connect error`
 是系统中源老了
@@ -341,6 +341,6 @@ chmod +x bbr.sh
 
 ### 安装ShadowSocks
 
-> wget –no-check-certificate  https://raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocks.sh
-> ./shadowsocks.sh 2>&1 | tee shadowsocks.log
+> `wget –no-check-certificate  https://raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocks.sh`
+> `./shadowsocks.sh 2>&1 | tee shadowsocks.log`
 按照顺序安装即可
