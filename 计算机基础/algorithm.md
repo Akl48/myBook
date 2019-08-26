@@ -20,7 +20,7 @@
 
 * cin.get(字符数组名,接收字符数目)用来接收一行字符串,可以接收空格
 
-* string str; getline(cin,str); 输入一串字符串
+* string str; `getline(cin,str)`; 输入一串字符串
 
 ## stack的使用
 
@@ -167,3 +167,33 @@ s.length();//返回s的长度
 
 s.substr(int i,int j);//提取字符串返回从i~j的子串
 ```
+
+## 生成随机数
+
+```c++
+#include <time.h>
+int main() {
+    srand(unsigned(time(NULL)));//srand()为初始化随机数发生器，用于设置rand()产生随机数时的种子
+    rand();
+}
+```
+
+```c++
+void RandomArray(vector<int>oldArray, vector<int> &newArray) {
+    // 随机打乱
+    for (int i=LENGTH; i>0; i--) {
+        srand(unsigned(time(NULL)));
+        // 选中的随机下标
+        int index = rand()%i;
+        // 根据选中的下标将原数组选中的元素push到新数组
+        newArray.push_back(oldArray[index]);
+        // 将原数组中选中的元素剔除
+        oldArray.erase(oldArray.begin()+index);
+    }
+}
+```
+
+优化空间复杂度
+第一个循环从所有元素中随机选择一个元素，和最后一个元素交换，如果是最后一个元素本身则不用交换； 
+第二个循环从前n-1个元素随机选择一个和倒数第二个元素交换，如果是倒数第二个本身则不交换； 
+以此类推直到只剩第一个元素结束。 
