@@ -726,12 +726,17 @@
 <h2 id="&#x70ED;&#x8EAB;&#xFF08;&#x4E1A;&#x52A1;&#x6D41;&#x7A0B;&#xFF09;">&#x70ED;&#x8EAB;&#xFF08;&#x4E1A;&#x52A1;&#x6D41;&#x7A0B;&#xFF09;</h2>
 <h3 id="nullable&#x7684;&#x4F7F;&#x7528;">_NULLable&#x7684;&#x4F7F;&#x7528;</h3>
 <ul>
-<li>_Nullable &#x8868;&#x793A;&#x5BF9;&#x8C61;&#x53EF;&#x4EE5;&#x662F;NULL&#x6216;&#x8005;nil<ul>
+<li>_Nullable &#x8868;&#x793A;<strong>&#x5BF9;&#x8C61;</strong>&#x53EF;&#x4EE5;&#x662F;NULL&#x6216;&#x8005;nil<ul>
 <li>&#x65B9;&#x6CD5; <code>- (NSString * _Nullable)method;</code></li>
-<li>&#x5C5E;&#x6027; <code>@property(nonatomic ,copy)NSString * _Nullable str;</code></li>
+<li>&#x5C5E;&#x6027; <code>@property(nonatomic ,copy)NSString * _Nullable str;</code><ul>
+<li><code>@property (nonatomic, copy, nullable) *NSString tips;</code></li>
+</ul>
+</li>
 </ul>
 </li>
 <li>_nonull&#x8868;&#x793A;&#x5BF9;&#x8C61;&#x4E0D;&#x5E94;&#x8BE5;&#x4E3A;&#x7A7A;&#x3002;</li>
+<li>null_resettable set&#x65B9;&#x6CD5;&#x53EF;&#x4EE5;&#x4E3A;&#x7A7A;&#xFF0C;get&#x65B9;&#x6CD5;&#x4E0D;&#x80FD;&#x4E3A;&#x7A7A;</li>
+<li>null_unspecified &#x4E0D;&#x80FD;&#x786E;&#x5B9A;&#x662F;&#x5426;&#x552F;&#x6050;</li>
 </ul>
 <h3 id="kindof">__kindof</h3>
 <p>&#x8868;&#x793A;&#x5F53;&#x524D;&#x7C7B;&#x6216;&#x8005;&#x4ED6;&#x7684;&#x5B50;&#x7C7B;
@@ -827,6 +832,8 @@ xib&#x95EE;&#x9898;&#x4E4B;&quot;..nib but the view outlet was not set.&quot;</p
 <h3 id="uinavigationcontroller&#x521D;&#x59CB;&#x5316;">UINavigationController&#x521D;&#x59CB;&#x5316;</h3>
 <p>&#x5FC5;&#x987B;&#x5728;&#x521D;&#x59CB;&#x5316;&#x7684;&#x65F6;&#x5019;&#x6307;&#x5B9A;&#x4E00;&#x4E2A;rootController&#xFF0C;&#x5982;&#x679C;&#x662F;&#x88AB;present&#x51FA;&#x6765;&#x7684;&#x540C;&#x6837;&#x4E5F;&#x53EF;&#x4EE5;&#x5728;navigation&#x7684;&#x5B50;&#x89C6;&#x56FE;&#x4E2D;&#x901A;&#x8FC7;
 <code>[self.navigationController dismissViewControllerAnimated:YES completion:nil]</code>&#x76F4;&#x63A5;&#x5728;&#x5B50;&#x89C6;&#x56FE;&#x4E2D;dismiss&#x51FA;&#x53BB;</p>
+<h3 id="&#x5728;navigation&#x4E2D;popto">&#x5728;navigation&#x4E2D;popTo</h3>
+<p>&#x5C06;&#x5F53;&#x524D;&#x7684;navigationController&#x6808;&#x4E2D;&#x7684;VCpop&#x51FA;&#x53BB;&#x77E5;&#x9053;To&#x7684;&#x90A3;&#x4E2A;VC</p>
 <h3 id="uibuttonuiimageview&#x7684;&#x5706;&#x89D2;&#x8BBE;&#x7F6E;">UIButton&amp;UIImageView&#x7684;&#x5706;&#x89D2;&#x8BBE;&#x7F6E;</h3>
 <pre><code class="lang-objc"><span class="hljs-keyword">self</span>.button.layer.cornerRadius = <span class="hljs-built_in">CGFloat</span>(<span class="hljs-number">10</span>);
 sellf.button.layer.masksToBounds = <span class="hljs-literal">YES</span>;
@@ -1171,6 +1178,24 @@ ZTTableViewlogicDelegate&gt;
 </code></pre>
 <h3 id="mvvm&#x4E2D;&#x7684;&#x4F20;&#x503C;">MVVM&#x4E2D;&#x7684;&#x4F20;&#x503C;</h3>
 <p>viewModel&#x4F7F;&#x7528;Logic&#x800C;Logic&#x548C;ViewController&#x7684;&#x6570;&#x636E;&#x4F20;&#x9012;&#x63A8;&#x8350;&#x4F7F;&#x7528;Block</p>
+<h3 id="&#x9762;&#x8BD5;&#x4E2D;&#x7684;&#x95EE;&#x9898;">&#x9762;&#x8BD5;&#x4E2D;&#x7684;&#x95EE;&#x9898;</h3>
+<h4 id="nonatomic&#x548C;atomic&#x4E4B;&#x95F4;&#x7B80;&#x5355;&#x7684;&#x533A;&#x522B;">nonatomic&#x548C;atomic&#x4E4B;&#x95F4;&#x7B80;&#x5355;&#x7684;&#x533A;&#x522B;</h4>
+<ol>
+<li>atomic&#x52A0;&#x9501;&#x6027;&#x80FD;&#x5DEE;&#x7684;&#x95EE;&#x9898;</li>
+<li>nonatomic&#x4E0D;&#x5B89;&#x5168;</li>
+</ol>
+<p>&#x5728;ARC&#x4E0B;&#x6211;&#x901A;&#x8FC7;&#x6267;&#x884C;1w&#x6B21;&#x5F02;&#x6B65;&#x7684;&#x7EBF;&#x7A0B;&#xFF0C;&#x5C06;&#x5F53;&#x524D;&#x7684;nonatomic&#x7684;&#x5C5E;&#x6027;&#x4FEE;&#x6539;&#xFF0C;&#x6700;&#x540E;&#x4F1A;&#x62A5;&#x51FA;&#x73B0;&#x91CE;&#x6307;&#x9488;&#x8FD9;&#x4E2A;&#x95EE;&#x9898;&#xFF0C;&#x600E;&#x4E48;&#x4E86;&#x5462;&#x5BF9;&#x8C61;&#x88AB;&#x91CA;&#x653E;&#x4E86;&#x3002;</p>
+<pre><code class="lang-objc">- (<span class="hljs-keyword">void</span>)setName:(<span class="hljs-built_in">NSString</span> *)name {
+    <span class="hljs-keyword">if</span> (_name != name) {
+        [_name release]; <span class="hljs-comment">//&#x5728;&#x56E0;&#x4E3A;&#x662F;&#x5728;&#x591A;&#x7EBF;&#x7A0B;&#x7684;&#x64CD;&#x4F5C;&#x6A21;&#x5F0F;&#x4E0B;&#xFF0C;&#x53EF;&#x80FD;&#x88AB;&#x4E00;&#x4E2A;&#x7EBF;&#x7A0B;release&#x4E4B;&#x540E;&#x53C8;&#x88AB;&#x53E6;&#x4E00;&#x4E2A;&#x7EBF;&#x7A0B;release&#x4E86;&#x4E00;&#x904D;&#xFF0C;&#x7136;&#x540E;&#x76F4;&#x63A5;&#x62A5;&#x9519;&#x3002;</span>
+        [name retain];
+        _name = name;
+    }
+}
+</code></pre>
+<p>&#x4F46;&#x662F;&#x540C;&#x6837;&#x7684;&#x4F7F;&#x7528;atomic&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x6700;&#x540E;&#x7684;&#x7ED3;&#x679C;&#x4E0D;&#x4E3A;1w&#xFF0C;atomic&#x53EA;&#x662F;&#x5BF9;&#x4E8E;noatomic&#x591A;&#x4E86;&#x4E00;&#x4E2A;&#x9501;&#xFF0C;&#x7CFB;&#x7EDF;&#x751F;&#x6210;&#x7684; getter/setter &#x4F1A;&#x4FDD;&#x8BC1; get&#x3001;set &#x64CD;&#x4F5C;&#x7684;&#x5B8C;&#x6574;&#x6027;&#xFF0C;&#x4E0D;&#x53D7;&#x5176;&#x4ED6;&#x7EBF;&#x7A0B;&#x5F71;&#x54CD;&#x3002;getter &#x8FD8;&#x662F;&#x80FD;&#x5F97;&#x5230;&#x4E00;&#x4E2A;&#x5B8C;&#x597D;&#x65E0;&#x635F;&#x7684;&#x5BF9;&#x8C61;&#xFF08;&#x53EF;&#x4EE5;&#x4FDD;&#x8BC1;&#x6570;&#x636E;&#x7684;&#x5B8C;&#x6574;&#x6027;&#xFF09;&#xFF0C;&#x5982;&#x679C;&#x6709;&#x591A;&#x4E2A;&#x7EBF;&#x7A0B;&#x540C;&#x65F6;&#x8C03;&#x7528;setter&#x7684;&#x8BDD;&#xFF0C;&#x4E0D;&#x4F1A;&#x51FA;&#x73B0;&#x67D0;&#x4E00;&#x4E2A;&#x7EBF;&#x7A0B;&#x6267;&#x884C;&#x5B8C;setter&#x5168;&#x90E8;&#x8BED;&#x53E5;&#x4E4B;&#x524D;&#xFF0C;&#x53E6;&#x4E00;&#x4E2A;&#x7EBF;&#x7A0B;&#x5F00;&#x59CB;&#x6267;&#x884C;setter&#x60C5;&#x51B5;&#xFF0C;&#x76F8;&#x5F53;&#x4E8E;&#x51FD;&#x6570;&#x5934;&#x5C3E;&#x52A0;&#x4E86;&#x9501;&#x4E00;&#x6837;&#xFF0C;&#x6BCF;&#x6B21;&#x53EA;&#x80FD;&#x6709;&#x4E00;&#x4E2A;&#x7EBF;&#x7A0B;&#x8C03;&#x7528;&#x5BF9;&#x8C61;&#x7684;setter&#x65B9;&#x6CD5;&#x3002;</p>
+<h4 id="copy&#x7684;&#x6DF1;&#x5165;">copy&#x7684;&#x6DF1;&#x5165;</h4>
+<p>&#x5728;&#x5C5E;&#x6027;&#x4E2D;&#x58F0;&#x660E;&#x7684;copy&#x5C31;&#x7C7B;&#x4F3C;&#x4E8E;<code>[name copy];</code>&#x662F;&#x6D45;&#x62F7;&#x8D1D;&#xFF0C;&#x53EA;&#x662F;&#x62F7;&#x8D1D;&#x4E86;&#x6307;&#x9488;&#xFF0C;&#x5806;&#x91CC;&#x6CA1;&#x6709;&#x6539;&#x53D8;&#x3002;&#x53EA;&#x6709;mutablecopy&#x624D;&#x662F;&#x6DF1;&#x62F7;&#x8D1D;&#xFF0C;&#x66F4;&#x6539;&#x4E86;&#x6307;&#x9488;&#x800C;&#x4E14;&#x91CD;&#x65B0;&#x590D;&#x5236;&#x4E86;&#x4E00;&#x4E2A;&#x5185;&#x5B58;&#x7A7A;&#x95F4;&#x3002;</p>
 
                                 
                                 </section>
@@ -1214,7 +1239,7 @@ ZTTableViewlogicDelegate&gt;
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"问题","level":"1.16.1","depth":2,"next":{"title":"第三方框架解读","level":"1.17","depth":1,"path":"SDK解读/README.md","ref":"SDK解读/README.md","articles":[{"title":"SDWebImage","level":"1.17.1","depth":2,"path":"SDK解读/SDWebImage.md","ref":"SDK解读/SDWebImage.md","articles":[]},{"title":"AFNetworking","level":"1.17.2","depth":2,"path":"SDK解读/AFNetworking.md","ref":"SDK解读/AFNetworking.md","articles":[]},{"title":"Masonry","level":"1.17.3","depth":2,"path":"SDK解读/Masonry.md","ref":"SDK解读/Masonry.md","articles":[]},{"title":"MJExtension","level":"1.17.4","depth":2,"path":"SDK解读/MJExtension.md","ref":"SDK解读/MJExtension.md","articles":[]}]},"previous":{"title":"work","level":"1.16","depth":1,"path":"work/README.md","ref":"work/README.md","articles":[{"title":"问题","level":"1.16.1","depth":2,"path":"work/问题.md","ref":"work/问题.md","articles":[]}]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"work/问题.md","mtime":"2019-08-15T15:10:38.707Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-08-18T06:34:33.077Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"问题","level":"1.16.1","depth":2,"next":{"title":"第三方框架解读","level":"1.17","depth":1,"path":"SDK解读/README.md","ref":"SDK解读/README.md","articles":[{"title":"SDWebImage","level":"1.17.1","depth":2,"path":"SDK解读/SDWebImage.md","ref":"SDK解读/SDWebImage.md","articles":[]},{"title":"AFNetworking","level":"1.17.2","depth":2,"path":"SDK解读/AFNetworking.md","ref":"SDK解读/AFNetworking.md","articles":[]},{"title":"Masonry","level":"1.17.3","depth":2,"path":"SDK解读/Masonry.md","ref":"SDK解读/Masonry.md","articles":[]},{"title":"MJExtension","level":"1.17.4","depth":2,"path":"SDK解读/MJExtension.md","ref":"SDK解读/MJExtension.md","articles":[]}]},"previous":{"title":"work","level":"1.16","depth":1,"path":"work/README.md","ref":"work/README.md","articles":[{"title":"问题","level":"1.16.1","depth":2,"path":"work/问题.md","ref":"work/问题.md","articles":[]}]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"work/问题.md","mtime":"2019-08-27T09:36:13.164Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-08-27T09:38:31.153Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
