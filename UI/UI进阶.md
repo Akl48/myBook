@@ -100,3 +100,21 @@ CALayer 的 border、圆角、阴影、遮罩（mask），CASharpLayer 的矢量
 * 在什么时候使用loadView
   * 当控制器的View一进来就是一张图片的时候
   * 控制器一进来就加载图片的时候
+
+## LaunchScreen.storyboard
+
+设置LaunchScreen之后在程序中打印NSHomeDirectory()然后在前往打印出来的文件夹，可以在里面的liberary/cache/snapshots中找到相应的LaunchScreen的图片，包括横向合竖屏的。
+如果不使用LaunchScreen可以在target中设置LaunchScreenFile为空，并且可以设置Launch Image Source之后在Assets里直接放置对应尺寸的图片。
+
+## info.plist
+
+可以open as sourceCode已源代码的形式打开，打开之后是XML文件，key-value对应。
+
+## pch
+
+.pch文件，通常用于定义一些公用宏 + 公共头文件。并且通常以工程名来命名。还要配置路径在target/build setting搜索prefix 然后在clang中的prefix header中修改当前路径为pch文件路径（注意不能带中文）$(SRCROOT)/项目名/Prefix.pch
+
+原理是将定义的拷贝到工程每一个文件中（代价很高）
+
+**注意 在OC C混编的时候要判断文件中是否有__OBJC__这个宏来判断时候是OC文件**
+
