@@ -100,3 +100,84 @@ CALayer 的 border、圆角、阴影、遮罩（mask），CASharpLayer 的矢量
 * 在什么时候使用loadView
   * 当控制器的View一进来就是一张图片的时候
   * 控制器一进来就加载图片的时候
+
+## LaunchScreen.storyboard
+
+设置LaunchScreen之后在程序中打印NSHomeDirectory()然后在前往打印出来的文件夹，可以在里面的liberary/cache/snapshots中找到相应的LaunchScreen的图片，包括横向合竖屏的。
+如果不使用LaunchScreen可以在target中设置LaunchScreenFile为空，并且可以设置Launch Image Source之后在Assets里直接放置对应尺寸的图片。
+
+## info.plist
+
+可以open as sourceCode已源代码的形式打开，打开之后是XML文件，key-value对应。
+
+## pch
+
+.pch文件，通常用于定义一些公用宏 + 公共头文件。并且通常以工程名来命名。还要配置路径在target/build setting搜索prefix 然后在clang中的prefix header中修改当前路径为pch文件路径（注意不能带中文）$(SRCROOT)/项目名/Prefix.pch
+
+原理是将定义的拷贝到工程每一个文件中（代价很高）
+
+注意 **在OC C混编的时候要判断文件中是否有__OBJC__这个宏来判断时候是OC文件**
+
+## UIApplication
+
+是在iOS程序中的单例可以通过`[UIApplication shareApplication]`获取对象
+
+1. 设置icon
+   1. 设置属性`applicationIconBadgeNumber`
+2. 设置联网状态
+   1. showing network spinning gear in status bar
+   2. 属性`networkActivityIndicatorVisible`
+3. 设置状态栏
+   1. iOS中每个VC都可以有一个自己的状态栏
+      1. 样式`- (UIStatusBarStyle)preferredStatusBarStyle {return UIStatusBarStyleLightContent;}`
+      2. 是否隐藏`- (BOOL)prefersStatusBarHidden {return YES;}`
+   2. UIApplication中则是通过属性设置还要修改info.plist`View controller-based status bar appearance`
+      1. 如果是为YES则VC生效
+      2. NO的话VC失效 Application生效
+4. 打开URL
+   1. `- (void)openURL:(NSURL*)url options:(NSDictionary<UIApplicationOpenExternalURLOptionsKey, id> *)options completionHandler:(void (^ __nullable)(BOOL success))completion NS_AVAILABLE_IOS(10_0) NS_EXTENSION_UNAVAILABLE_IOS("");`详细见系统
+
+### UIApplication的delegate
+
+* 移动端的APP会很容易收到外界的干扰（锁屏，后台），会导致APP进入后台甚至终止
+收到这些状况的时候会UIApplication会通知它的代理对象（生命周期过程、内存警告、系统事件）,系统已经将AppDelegate设置为UIApplication代理
+
+```objc
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    // 程序启动完毕的时候调用
+    return YES;
+}
+
+- (void)applicationWillResignActive:(UIApplication *)application {
+    // 程序失去焦点的时候调用
+}
+
+- (void)applicationDidEnterBackground:(UIApplication *)application {
+    // 程序进入到后台的时候调用
+}
+
+- (void)applicationWillEnterForeground:(UIApplication *)application {
+   //  程序进入前台的时候调用
+}
+
+- (void)applicationDidBecomeActive:(UIApplication *)application {
+    // 程序获取焦点的时候调用
+}
+
+- (void)applicationWillTerminate:(UIApplication *)application {
+    // 程序终止的时候
+}
+
+- (void)applicationDidReceiveMemoryWarning:(UIApplication *)application {
+    // 程序收到内存警告
+}
+```
+
+## 抛出异常
+
+```objc
+    NSException *ex = [NSException exceptionWithName:@"exceptionName" reason:@"exception reason" userInfo:nil];
+    [ex raise];
+```
+
+![异常](/../photo/exception.png)
