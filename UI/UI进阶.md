@@ -262,3 +262,8 @@ UIGestureRecognizer和响应链的关系
 ```
 
 ![异常](/../photo/exception.png)
+
+## UIWindow
+
+UIWindow是一个特殊的View，每个App都有一个UIWindow，是创建的第一个视图控件，接着创建控制器的View并且**添加**到UIWindow上，没有UIWindow的话没有任何的控件显示（If your app does not use storyboards, you must create this window yourself.）
+
