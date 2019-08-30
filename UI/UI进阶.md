@@ -1,59 +1,5 @@
 # UI进阶
 
-## iOS中的响应链
-
-iOS中我们会经常接受用户的操作并作出相应处理事件，主要使用的是UIResponder类。
-> UIView UIApplication UIViewController都是继承自UIResponder类
-所以只要继承自UIResponder都能响应事件
-
-### 响应链
-
-1. 生成事件
-   1. 当用户点击屏幕的时候会产生一个触摸事件
-   2. 把这个触摸事件放到UIApplication管理的事件队列中
-   3. 从队列中取出最前面的事件，交给UIWindow处理
-2. 查找第一响应者
-   1. Window收到事件后会在视图层次结构中找到最适合的一个视图来处理事件
-   2. 通常一个窗口中最适合处理当前事件的对象称为第一响应对象。
-3. 处理事件
-   1. 通常是第一响应对象**处理事件**，如果第一响应对象**无法处理事件**，就会**把事件传递给下一个响应对象**，直到Application。如果Application也无法处理，那就丢**弃掉**此事件。
-   2. 在上述系列操作中，所参与到的UIApplication、UIViewController和UIView就作为响应对象构成这次事件的响应链。view -> ViewController -> window -> Application -> 丢弃
-
-在我们需要使用键盘的时候，经常使用[self.textField registerFirstResponder]组册成为第一响应者，但是其实是Application.keyWindow.vc通过hitTest:withEvent找到事件最合适的响应者，再让[self becomeFirstResponder]唤起键盘
-
-### 响应链中常用方法
-<!-- 找到最适合的响应者 -->
-```objc
-// 因为所有的视图类都是继承BaseView
-- (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event {
-// 1.判断当前控件能否接收事件
-   if (self.userInteractionEnabled == NO || self.hidden == YES || self.alpha <= 0.01) return nil;
-// 2. 判断点在不在当前控件
-   if ([self pointInside:point withEvent:event] == NO) return nil;
-// 3.从后往前遍历自己的子控件 看子控件能否处理事件
-   NSInteger count = self.subviews.count;
-   for (NSInteger i = count - 1; i >= 0; i--) {
-       UIView *childView = self.subviews[i];
-       // 把当前控件上的坐标系转换成子控件上的坐标系
-    CGPoint childP = [self convertPoint:point toView:childView];
-      UIView *fitView = [childView hitTest:childP withEvent:event];
-       if (fitView) { // 寻找到最合适的view
-           return fitView;
-       }
-   }
-   // 循环结束,表示没有比自己更合适的view
-   return self;}
-```
-<!-- 扩大按钮的点击范围 -->
-```objc
-- (BOOL)pointInside:(CGPoint)point withEvent:(UIEvent*)event {
-    CGRect bounds = self.bounds;
-     bounds = CGRectInset(bounds, -10, -10);
-   // CGRectContainsPoint  判断点是否在矩形内
-    return CGRectContainsPoint(bounds, point);
-}
-```
-
 ## UIView和CALayer
 
 [链接：https://www.jianshu.com/p/fd8cd2231541](https://www.jianshu.com/p/fd8cd2231541)
@@ -120,7 +66,11 @@ CALayer 的 border、圆角、阴影、遮罩（mask），CASharpLayer 的矢量
 
 ## UIApplication
 
-是在iOS程序中的单例可以通过`[UIApplication shareApplication]`获取对象
+每个APP都有一个UIApplicaiotn的实例或者他的subclass（如果你必须要在系统执行之前处理传入的事件，才需要自定义subclass），When an app is launched, the system calls the UIApplicationMain function; among its other tasks, **this function creates a Singleton UIApplication object**. Thereafter you access the object by calling the **sharedApplication** class method.通过UIApplication创建一个单例的UIApplication对象，并且能通过sharedAppliciont获取这个单例。
+
+A major role of your app’s application object is to handle the initial routing of incoming user events. It dispatches action messages forwarded to it by control objects (instances of the UIControl class) to appropriate target objects. The application object maintains a list of open windows (UIWindow objects) and through those can retrieve any of the app’s UIView objects.
+
+UIApplication对象主要的作用是处理传入的用户事件的initial routing，他通过UIControl的实例将动作消息分发给适合的目标对象。UIApplicaiotn单例维护着一个UIWindow对象列表，通过这个可以检索任意app内的UIView的对象
 
 1. 设置icon
    1. 设置属性`applicationIconBadgeNumber`
@@ -147,31 +97,162 @@ CALayer 的 border、圆角、阴影、遮罩（mask），CASharpLayer 的矢量
     // 程序启动完毕的时候调用
     return YES;
 }
-
 - (void)applicationWillResignActive:(UIApplication *)application {
     // 程序失去焦点的时候调用
 }
-
 - (void)applicationDidEnterBackground:(UIApplication *)application {
     // 程序进入到后台的时候调用
 }
-
 - (void)applicationWillEnterForeground:(UIApplication *)application {
    //  程序进入前台的时候调用
 }
-
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     // 程序获取焦点的时候调用
 }
-
 - (void)applicationWillTerminate:(UIApplication *)application {
     // 程序终止的时候
 }
-
 - (void)applicationDidReceiveMemoryWarning:(UIApplication *)application {
     // 程序收到内存警告
 }
 ```
+
+### UIApplication还可以做什么
+
+* Temporarily suspend incoming touch events (`beginIgnoringInteractionEvents`)暂时挂起到来的触碰事件
+* Register for remote notifications (`registerForRemoteNotifications`)注册远程通知
+* Trigger the undo-redo UI (`applicationSupportsShakeToEdit`)触发undo-redo的UI
+* Determine whether there is an installed app registered to handle a URL scheme (`canOpenURL:`)返回一个BOOl是否可以处理一个URL scheme
+* Extend the execution of the app so that it can finish a task in the background(`beginBackgroundTaskWithExpirationHandler:, beginBackgroundTaskWithName:expirationHandler:`)扩展应用程序的执行，以便它可以在后台完成任务
+* Schedule and cancel local notifications (`scheduleLocalNotification:, cancelLocalNotification:`)安排取消本地通知
+* Coordinate the reception of remote-control events (`beginReceivingRemoteControlEvents, endReceivingRemoteControlEvents`)协调远程控制事件的接受
+* Perform app-level state restoration tasks (methods in the Managing the State Restoration Behavior task group)执行应用级状态恢复任务
+
+## UIResponder
+
+UIResponder**用于响应和处理事件的抽象接口**
+很多对象都是继承自UIResponder包括UIApplication UIView UIViewController 甚至是UIWindow，当一个事件发生当时候，UIKit会将他分发给响应者去解决。除了解决这些事件（点击事件，按压事件，远程控制事件等），UIResponder还要管理未处理的事件将它转发给app的其他部分，如果给定的响应者没有处理事件，它会将该事件转发到响应者链中的下一个事件
+
+### UITouch
+
+* 保存着跟手指相关的信息，比如触摸的位置、时间、阶段
+* 当手指移动时，系统会更新同一个UITouch对象，使之能够一直保存该手指在的触摸位置
+* 当手指离开屏幕时，系统会销毁相应的UITouch对象
+提 示:iPhone开发中，要避免使用双击事件！
+
+```objc
+- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
+    // 想让控件随着手指移动而移动,监听手指移动
+    // 获取UITouch对象
+    UITouch *touch = [touches anyObject];
+    // 获取当前点的位置
+    CGPoint curP = [touch locationInView:self];
+    // 获取上一个点的位置
+    CGPoint preP = [touch previousLocationInView:self];
+    // 获取它们x轴的偏移量,每次都是相对上一次
+    CGFloat offsetX = curP.x - preP.x;
+    // 获取y轴的偏移量
+    CGFloat offsetY = curP.y - preP.y;
+    // 修改控件的形变或者frame,center,就可以控制控件的位置
+    // 形变也是相对上一次形变(平移)
+    // CGAffineTransformMakeTranslation:会把之前形变给清空,重新开始设置形变参数
+    // make:相对于最原始的位置形变
+    // CGAffineTransform t:相对这个t的形变的基础上再去形变
+    // 如果相对哪个形变再次形变,就传入它的形变
+    self.transform = CGAffineTransformTranslate(self.transform, offsetX, offsetY);
+}
+```
+
+### 事件的产生和传递
+
+1. 生成事件
+   1. 当用户点击屏幕的时候会产生一个触摸事件
+   2. 把这个触摸事件放到UIApplication管理的事件队列中
+   3. 从队列中取出最前面的事件，交给UIWindow处理
+2. 查找第一响应者
+   1. Window收到事件后会在视图层次结构中找到最适合的一个视图来处理事件
+   2. 通常一个窗口中最适合处理当前事件的对象称为第一响应对象。
+3. 处理事件
+   1. 通常是第一响应对象**处理事件**，如果第一响应对象**无法处理事件**，就会**把事件传递给下一个响应对象**，直到Application。如果Application也无法处理，那就丢**弃掉**此事件。
+   2. 在上述系列操作中，所参与到的UIApplication、UIViewController和UIView就作为响应对象构成这次事件的响应链。view -> ViewController -> window -> Application -> 丢弃
+
+在我们需要使用键盘的时候，经常使用[self.textField registerFirstResponder]组册成为第一响应者，但是其实是Application.keyWindow.vc通过hitTest:withEvent找到事件最合适的响应者，再让[self becomeFirstResponder]唤起键盘
+
+### 响应链中的方法
+<!-- 找到最适合的响应者 -->
+```objc
+// 因为所有的视图类都是继承BaseView
+- (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event {
+// 1.判断当前控件能否接收事件
+   if (!self.userInteractionEnabled || self.hidden || self.alpha <= 0.01) return nil;
+// 2. 判断点在不在当前控件
+   if (![self pointInside:point withEvent:event]) return nil;
+// 3.从后往前遍历自己的子控件 看子控件能否处理事件
+  for (UIView *childView in self.subviews) {
+        CGPoint childPoint = [self convertPoint:point toView:childView];
+        UIView *fitView = [childView hitTest:childPoint withEvent:event];
+        if (fitView) return fitView;
+    }
+    return self;
+   // 循环结束,表示没有比自己更合适的view
+}
+```
+<!-- 扩大按钮的点击范围 -->
+<!-- 当子View超出父View的情况 -->
+```objc
+- (BOOL)pointInside:(CGPoint)point withEvent:(UIEvent*)event {
+    CGRect bounds = self.bounds;
+     bounds = CGRectInset(bounds, -10, -10);
+   // CGRectContainsPoint  判断点是否在矩形内
+    return CGRectContainsPoint(bounds, point);
+}
+```
+
+### UIResponder中事件的响应
+
+找到最合适的视图控件后，就会调用控件的方法来作具体的事件处理touchesBegan…touchesMoved…touchedEnded…
+这些方法的默认做法是将事件顺着响应者链条向上传递（也就是touch方法默认不处理事件，只传递事件），将事件交给上一个响应者进行处理
+`[super touchesBegan:touches withEvent:event];`也是系统默认的方法，传递给上一层
+
+#### touch事件
+
+最常见的就是touch事件（⚠️在UIViewController中重写方法，是UIViewController作为responder而不是vc.view）
+
+```objc
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    // touchEnd touchCancel touchMoved 传入UItouch
+}
+```
+
+#### motion事件
+
+```objc
+- (void)motionBegan:(UIEventSubtype)motion withEvent:(UIEvent *)event {
+    // 加速事件
+}
+```
+
+#### remote-control事件
+
+```objc
+- (void)remoteControlReceivedWithEvent:(UIEvent *)event {
+    // 远程控制事件
+}
+```
+
+#### press事件
+
+```objc
+- (void)pressesEnded:(NSSet<UIPress *> *)presses withEvent:(UIPressesEvent *)event {
+    // 按压事件
+}
+```
+
+### UIGestureRecognizer
+
+UIGestureRecognizer和响应链的关系
+**手势响应是大哥**，**点击事件响应链是小弟**。单击手势优先于UIView的事件响应。大部分冲突，都是因为优先级没有搞清楚。
+单击事件优先传递给手势响应大哥，如果手势响应识别成功，就会直接取消事件的响应链传递。识别成功时候，手势响应大哥拥有垄断权力。如果失败之后会继续走传递链，**手势的识别需要事件**
 
 ## 抛出异常
 
