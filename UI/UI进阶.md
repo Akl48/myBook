@@ -37,7 +37,7 @@ CALayer 的 border、圆角、阴影、遮罩（mask），CASharpLayer 的矢量
 
 ## - (void)loadView
 
-* 每个controller默认有一个loadView方法（系统会通知这个方法来创建controller的view）
+* 每个controller默认有一个loadView方法（系统会通知这个方法来创建controller的view，在第一次使用View的时候懒加载）
 
 > 系统默认怎么加载控制器的view呢，先去storyboard里面找，没有找到再去与控制器名称相同的xib里面找,没有找到，在去名称相同Controller的xib里面找去找
 >还没有找到，程序员也没有重写loadView方法，那么系统默认会创建一个view，颜色是clearColor,
@@ -46,10 +46,11 @@ CALayer 的 border、圆角、阴影、遮罩（mask），CASharpLayer 的矢量
 * 在什么时候使用loadView
   * 当控制器的View一进来就是一张图片的时候
   * 控制器一进来就加载图片的时候
+* loadView什么时候调用在第一次get VC的view的时候懒加载 再调用`- (void)ViewDidLoad{}`
 
 ## LaunchScreen.storyboard
 
-设置LaunchScreen之后在程序中打印NSHomeDirectory()然后在前往打印出来的文件夹，可以在里面的liberary/cache/snapshots中找到相应的LaunchScreen的图片，包括横向合竖屏的。
+设置LaunchScreen之后在程序中打印NSHomeDirectory()然后在前往打印出来的文件夹，可以在里面的library/cache/snapshots中找到相应的LaunchScreen的图片，包括横向合竖屏的。
 如果不使用LaunchScreen可以在target中设置LaunchScreenFile为空，并且可以设置Launch Image Source之后在Assets里直接放置对应尺寸的图片。
 
 ## info.plist
@@ -71,6 +72,14 @@ CALayer 的 border、圆角、阴影、遮罩（mask），CASharpLayer 的矢量
 A major role of your app’s application object is to handle the initial routing of incoming user events. It dispatches action messages forwarded to it by control objects (instances of the UIControl class) to appropriate target objects. The application object maintains a list of open windows (UIWindow objects) and through those can retrieve any of the app’s UIView objects.
 
 UIApplication对象主要的作用是处理传入的用户事件的initial routing，他通过UIControl的实例将动作消息分发给适合的目标对象。UIApplicaiotn单例维护着一个UIWindow对象列表，通过这个可以检索任意app内的UIView的对象
+
+### UIApplicationMain函数
+
+`UIApplicationMain(argc, argv, nil, NSStringFromClass([AppDelegate class]))`
+第三个参数：The name of the UIApplication class or subclass. If you specify nil, UIApplication is assumed.
+第四个参数：The name of the class from which the application delegate is instantiated. **If principalClassName designates a subclass of UIApplication, you may designate the subclass as the delegate**如果有UIApplication子类即上面第三个参数有指定的话，可以也设定他为代理
+
+> It also sets up the main event loop, including the application’s run loop, and begins processing events. 设置主要的事件循环包括runloop，并处理事件
 
 1. 设置icon
    1. 设置属性`applicationIconBadgeNumber`
@@ -265,5 +274,40 @@ UIGestureRecognizer和响应链的关系
 
 ## UIWindow
 
-UIWindow是一个特殊的View，每个App都有一个UIWindow，是创建的第一个视图控件，接着创建控制器的View并且**添加**到UIWindow上，没有UIWindow的话没有任何的控件显示（If your app does not use storyboards, you must create this window yourself.）
+UIWindow是一个特殊的View，每个App都有一个Window，也是app创建的第一个视图控件，接着创建控制器的View并且**添加**到UIWindow上，没有UIWindow的话没有任何的控件显示（If your app does not use storyboards, you must create this window yourself.）
 
+### 不通过storybroad加载
+
+不使用main.storybroad直接加载vc的话可以直接在AppDeleagate中UIApplication的回调didFinishLaunch中声明UIWindow并自己设置启动方式
+
+```objc
+self.window = [[UIWindow alloc] init];
+ViewController *rootVC = [[ViewController alloc] init];
+self.window.rootViewController = rootVC;// 必要一个root
+self.window.windowLevel = UIWindowLevelNormal; //UIWindow可以设置level UIWindowLevelAlert > UIWindowLevelStatusBar状态栏 > UIWindowLevelNormal
+[self.window makeKeyAndVisible];
+/*
+convenience. most apps call this to show the main window and also make it key. otherwise use view hidden property 将window的hidden属性设置为NO 设置当前window为UIApplication的keyWindow
+*/
+```
+
+### 手动加载storybroad中的vc
+
+```objc
+self.window = [[UIWindow alloc] init];
+UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];/*storyboardBundleOrNil*/
+UIViewController *root = storyboard.instantiateInitialViewController;
+self.window.rootViewController = root;
+[self.window makeKeyAndVisible];
+```
+
+## UINavigationController
+
+![导航栏的view默认层级](../photo/UINavigationController.png)
+
+1. UILayoutContainerView
+   1. UINavigationTransitionView // 栈顶显示view
+   2. UINavigationBar // 导航栏
+
+要修改每个VC的bar要使用`navigationItem`来更改，一旦修改来leftbutton那么navigation自带的侧滑会失效，需要手势
+⚠️最好设定一个颜色，如果是clearcolor会卡一下
