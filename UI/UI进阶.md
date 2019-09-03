@@ -356,6 +356,20 @@ UIGestureRecognizer和响应链的关系
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch;
 ```
 
+### UIGestureRecognizer的状态机
+
+UIGestureRecognizer状态默认是possible
+
+**非连续的手势**要么识别成功(UIGestureRecognizerStateRecognized)，要么识别失败(UIGestureRecognizerStateFailed)。
+
+**连续的手势**识别到第一个手势时，变成UIGestureRecognizerStateBegan，然后变成UIGestureRecognizerStateChanged，并且不断地在这个状态下循环，当用户最后一个手指离开view时，变成UIGestureRecognizerStateEnded，
+
+当然如果手势不再符合它的模式的时候，状态也可能变成UIGestureRecognizerStateCancelled。
+
+### UIGestureRecognizer和UIControl
+
+UIControl，以及他的subclass UIButton UISwitch……会直接获取事件即默认控制操作可防止重叠的手势识别器行为。
+
 ## 抛出异常
 
 ```objc
