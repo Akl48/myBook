@@ -13,13 +13,15 @@
 
 .pch文件，通常用于定义一些公用宏 + 公共头文件。并且通常以工程名来命名。还要配置路径在target/build setting搜索prefix 然后在clang中的prefix header中修改当前路径为pch文件路径（注意不能带中文）$(SRCROOT)/项目名/Prefix.pch
 
-原理是将定义的拷贝到工程每一个文件中（代价很高）
+![pch](../photo/Clang-prefix.png)
+
+而它的**原理**是将文件内定义的拷贝到工程每一个文件中（代价很高）
 
 注意 **在OC C混编的时候要判断文件中是否有__OBJC__这个宏来判断时候是OC文件**
 
 ## UIApplication
 
-每个APP都有一个UIApplicaiotn的实例或者他的subclass（如果你必须要在系统执行之前处理传入的事件，才需要自定义subclass），When an app is launched, the system calls the UIApplicationMain function; among its other tasks, **this function creates a Singleton UIApplication object**. Thereafter you access the object by calling the **sharedApplication** class method.通过UIApplication创建一个单例的UIApplication对象，并且能通过sharedAppliciont获取这个单例。
+每个APP都有一个UIApplicaiotn的实例或者他的subclass（如果你必须要在系统执行之前处理传入的事件，才需要自定义subclass），When an app is launched, the system calls the UIApplicationMain function; among its other tasks, **this function creates a Singleton UIApplication object**. Thereafter you access the object by calling the **sharedApplication** class method.通过UIApplication创建一个单例的UIApplication对象，并且能通过sharedApplication获取这个单例。
 
 A major role of your app’s application object is to handle the initial routing of incoming user events. It dispatches action messages forwarded to it by control objects (instances of the UIControl class) to appropriate target objects. The application object maintains a list of open windows (UIWindow objects) and through those can retrieve any of the app’s UIView objects.
 
@@ -29,9 +31,9 @@ UIApplication对象主要的作用是处理传入的用户事件的initial routi
 
 `UIApplicationMain(argc, argv, nil, NSStringFromClass([AppDelegate class]))`
 第三个参数：The name of the UIApplication class or subclass. If you specify nil, UIApplication is assumed.
-第四个参数：The name of the class from which the application delegate is instantiated. **If principalClassName designates a subclass of UIApplication, you may designate the subclass as the delegate**如果有UIApplication子类即上面第三个参数有指定的话，可以也设定他为代理
+第四个参数：The name of the class from which the application delegate is instantiated. **If principalClassName designates a subclass of UIApplication, you may designate the subclass as the delegate**如果有UIApplication子类即上面第三个参数有指定的话，可以也设定他为代理（要记得添加UIWindow属性）
 
-> It also sets up the main event loop, including the application’s run loop, and begins processing events. 设置主要的事件循环包括runloop，并处理事件
+> It also sets up the main event loop, including the application’s run loop, and begins processing events. 设置主要的事件循环也包括runloop，并处理事件。
 
 1. 设置icon
    1. 设置属性`applicationIconBadgeNumber`
@@ -51,7 +53,7 @@ UIApplication对象主要的作用是处理传入的用户事件的initial routi
 ### UIApplication的delegate
 
 * 移动端的APP会很容易收到外界的干扰（锁屏，后台），会导致APP进入后台甚至终止
-收到这些状况的时候会UIApplication会通知它的代理对象（生命周期过程、内存警告、系统事件）,系统已经将AppDelegate设置为UIApplication代理
+收到这些状况的时候会UIApplication会通知它的代理对象（生命周期过程、内存警告、系统事件）,系统已经在main函数中默认将`NSStringFromClass([ZTApplication class])`设置为UIApplication代理
 
 ```objc
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
@@ -94,7 +96,7 @@ UIApplication对象主要的作用是处理传入的用户事件的initial routi
 
 ## UIWindow
 
-UIWindow是一个特殊的View，每个App都有一个Window，也是app创建的第一个视图控件，接着创建控制器的View并且**添加**到UIWindow上，没有UIWindow的话没有任何的控件显示（If your app does not use storyboards, you must create this window yourself.）
+UIWindow是一个特殊的View，每个App都有一个Window，它也是app创建的第一个视图控件，接着创建控制器的View并且**添加**到UIWindow上，没有UIWindow的话就没有任何的控件显示（If your app does not use storyboards, you must create this window yourself.）用了storyboards的话系统会自动帮你创建keyWindow
 
 ### 不通过storybroad加载
 
@@ -122,6 +124,8 @@ self.window.rootViewController = root;
 ```
 
 ⚠️：通过storyborad加载之后会调用initWithCoder将他解码，然后再调用`awakeFromNib`
+
+## UIViewController
 
 ## UINavigationController
 
@@ -198,7 +202,7 @@ UIResponder**用于响应和处理事件的抽象接口**
 // 因为所有的视图类都是继承BaseView
 - (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event {
 // 1.判断当前控件能否接收事件 （UIImageView的userInteration默认为NO）
-   if (!self.userInteractionEnabled || self.hidden || self.alpha <= 0.01) return nil;
+   if (!self.userInteractionEnabled || self.isHidden || self.alpha <= 0.01) return nil;
 // 2. 判断点在不在当前控件
    if (![self pointInside:point withEvent:event]) return nil;
 // 3.从后往前遍历自己的子控件 看子控件能否处理事件
@@ -212,20 +216,23 @@ UIResponder**用于响应和处理事件的抽象接口**
    // 循环结束,表示没有比自己更合适的view
 }
 ```
-<!-- 扩大按钮的点击范围 -->
-<!-- 当子View超出父View的情况 -->
+<!-- 扩大按钮的点击范围 CGRectInset-->
+<!-- 当子View超出父View的情况 在superView中的pointInside遍历subView的frame-->
+<!-- 如果一个Button被一个View盖住了，在触摸View时，希望该Button能够响应事件 -->
 ```objc
 - (BOOL)pointInside:(CGPoint)point withEvent:(UIEvent*)event {
     CGRect bounds = self.bounds;
-     bounds = CGRectInset(bounds, -10, -10);
-   // CGRectContainsPoint  判断点是否在矩形内
+    bounds = CGRectInset(bounds, -10, -10);
+   // CGRectContainsPoint  判断点是否在矩形内⚠️⚠️⚠️
     return CGRectContainsPoint(bounds, point);
 }
 ```
 
 ### UIEvent
 
-#### touch事件（触摸事件）
+#### 响应方法
+
+##### touch事件（触摸事件）
 
 最常见的就是touch事件（⚠️在UIViewController中重写方法，是UIViewController作为responder而不是vc.view）
 
@@ -235,7 +242,7 @@ UIResponder**用于响应和处理事件的抽象接口**
 }
 ```
 
-#### motion事件
+##### motion事件
 
 ```objc
 - (void)motionBegan:(UIEventSubtype)motion withEvent:(UIEvent *)event {
@@ -243,7 +250,7 @@ UIResponder**用于响应和处理事件的抽象接口**
 }
 ```
 
-#### remote-control事件
+##### remote-control事件
 
 ```objc
 - (void)remoteControlReceivedWithEvent:(UIEvent *)event {
@@ -251,7 +258,7 @@ UIResponder**用于响应和处理事件的抽象接口**
 }
 ```
 
-#### press事件
+##### press事件
 
 ```objc
 - (void)pressesEnded:(NSSet<UIPress *> *)presses withEvent:(UIPressesEvent *)event {
@@ -263,7 +270,105 @@ UIResponder**用于响应和处理事件的抽象接口**
 
 UIGestureRecognizer和响应链的关系
 **手势响应是大哥**，**点击事件响应链是小弟**。单击手势优先于UIView的事件响应。大部分冲突，都是因为优先级没有搞清楚。
-单击事件优先传递给手势响应大哥，如果手势响应识别成功，就会直接取消事件的响应链传递。识别成功时候，手势响应大哥拥有垄断权力。如果失败之后会继续走传递链，**手势的识别需要事件**
+单击事件优先传递给手势响应大哥，在一个手势触发之前，是会一并发消息给事件传递链的，所以才会有最开始的touchMoved方法被调用，当识别出手势以后，就会终止touch事件的传递
+
+### UIGestureRecognizer的几个subClass
+
+子类才是UIGetsrureRecognizer的关键
+
+1. `UITapGestureRecognizer` 点击手势
+2. `UISwipeGestureRecognizer` 滑动手势
+   1. 一个滑动手势对应一个`direction` 默认向右
+3. `UIScreenEdgePanGestureRecognizer` 边缘平移手势
+4. `UILongPressGestureRecognizer` 长按手势 // 长按手指移动的会持续调
+5. 连续手势 （都是基于原始的变换通过transform来变换，需要set来清零）
+   1. `UIPanGestureRecognizer` 平移手势
+      1. 获取移动的`translationInView`
+   2. `UIPinchGestureRecognizer` 捏合手势
+      1. 捏合的scale的大小 原始大小为1
+      2. 捏合的速度velocity
+   3. `UIRotationGestureRecognizer` 旋转手势
+      1. rotation旋转的角度（弧度）相对于原始的变换
+      2. 旋转的速度velocity
+
+### 关键方法
+
+```objc
+//初始化方法 且 添加 target的方法
+- (instancetype)initWithTarget:(nullable id)target action:(nullable SEL)action
+//单独添加target的方法
+- (void)addTarget:(id)target action:(SEL)action;
+//移除target的方法
+- (void)removeTarget:(nullable id)target action:(nullable SEL)action;
+```
+
+> 一个手势对象可以添加多个`selector`，并且一次都会被触发
+
+### 属性
+
+```objc
+// 手势的状态
+@property(nonatomic,readonly) UIGestureRecognizerState state;  
+// 手势代理
+@property(nullable,nonatomic,weak) id <UIGestureRecognizerDelegate> delegate;
+// 手势是否有效  默认YES
+@property(nonatomic, getter=isEnabled) BOOL enabled;
+// 获取手势所在的view
+@property(nullable, nonatomic,readonly) UIView *view;
+// 取消view上面的touch事件响应  default  YES  
+@property(nonatomic) BOOL cancelsTouchesInView;
+// 延迟touch事件开始 default  NO 如果为YES在失败之前都不会给响应链发消息
+@property(nonatomic) BOOL delaysTouchesBegan;
+// 延迟touch事件结束 default  YES 是否等待一段事件向touchEnd发送消息
+@property(nonatomic) BOOL delaysTouchesEnded;
+// 允许touch的类型数组
+@property(nonatomic, copy) NSArray<NSNumber *> *allowedTouchTypes
+// 允许按压press的类型数组
+@property(nonatomic, copy) NSArray<NSNumber *> *allowedPressTypes
+// 是否只允许一种touchType 类型 默认为YES IPAD同时只允许一种触控（笔|手）
+@property (nonatomic) BOOL requiresExclusiveTouchType
+// 手势依赖（手势互斥）方法
+- (void)requireGestureRecognizerToFail:(UIGestureRecognizer *)otherGestureRecognizer;
+// 获取在传入view的点击位置的信息方法
+- (CGPoint)locationInView:(nullable UIView*)view;
+// 获取触摸点数
+@property(nonatomic, readonly) NSUInteger numberOfTouches;
+//（touchIndex 是第几个触摸点）用来获取多触摸点在view上位置信息的方法
+- (CGPoint)locationOfTouch:(NSUInteger)touchIndex inView:(nullable UIView*)view;
+// 给手势加一个名字，以方便调式（iOS11 or later可以用）
+@property (nullable, nonatomic, copy) NSString *name API_AVAILABLE(ios(11.0)
+```
+
+#### UIGestureRecognizerDelegate
+
+```objc
+// 开始进行手势识别时调用的方法，返回NO，则手势识别失败
+- (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer;
+// 是否支持同时多个手势触发
+//**返回YES，则可以多个手势一起触发方法，返回NO则为互斥**
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer;
+// 下面这个两个方法也是用来控制手势的互斥执行的
+//这个方法返回YES，第二个手势的优先级高于第一个手势
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRequireFailureOfGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer NS_AVAILABLE_IOS(7_0);
+// 这个方法返回YES，第一个手势的优先级高于第二个手势
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldBeRequiredToFailByGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer NS_AVAILABLE_IOS(7_0);
+// 在touchBegin之前被调用 return NO 手势解析器不接受不接受
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch;
+```
+
+### UIGestureRecognizer的状态机
+
+UIGestureRecognizer状态默认是possible
+
+**非连续的手势**要么识别成功(UIGestureRecognizerStateRecognized)，要么识别失败(UIGestureRecognizerStateFailed)。
+
+**连续的手势**识别到第一个手势时，变成UIGestureRecognizerStateBegan，然后变成UIGestureRecognizerStateChanged，并且不断地在这个状态下循环，当用户最后一个手指离开view时，变成UIGestureRecognizerStateEnded，
+
+当然如果手势不再符合它的模式的时候，状态也可能变成UIGestureRecognizerStateCancelled。
+
+### UIGestureRecognizer和UIControl
+
+UIControl，以及他的subclass UIButton UISwitch……会直接获取事件即默认控制操作可防止重叠的手势识别器行为。
 
 ## 抛出异常
 
@@ -271,8 +376,6 @@ UIGestureRecognizer和响应链的关系
     NSException *ex = [NSException exceptionWithName:@"exceptionName" reason:@"exception reason" userInfo:nil];
     [ex raise];
 ```
-
-![异常](/../photo/exception.png)
 
 ## UIView和CALayer
 
@@ -315,7 +418,7 @@ CALayer 的 border、圆角、阴影、遮罩（mask），CASharpLayer 的矢量
 
 > 系统**默认**怎么加载控制器的view呢，先在storyboard里面找，没有找到再去找与控制器同名的xib,没有找到，在去名称相同Controller的xib里面找去找
 > 还没有找到，也没有重写loadView方法，那么系统默认会创建一个view，颜色是clearColor,
-> 如果实现了loadView方法的话，上面的都不会做
+> 如果实现了loadView方法的话，上面的都不会做使用`[super loadView]`也不行
 
 * 在什么时候自定义loadView
   * 当控制器的View一进来就是一张图片的时候
@@ -323,7 +426,9 @@ CALayer 的 border、圆角、阴影、遮罩（mask），CASharpLayer 的矢量
 
 > 下一个方法是ViewDidLoad Called after the view controller’s view has been loaded into memory.
 
-## UIView的transform属性
+## UIView
+
+### UIView的transform属性
 
 Transformations occur relative(相对) to the view's anchor point（锚点）. By default, the anchor point is equal to the center point of the frame rectangle. To change the anchor point, modify the anchorPoint property of the view's underlying CALayer object.（要改变view的锚点要修改CALayer的anchorPoint属性）
 
