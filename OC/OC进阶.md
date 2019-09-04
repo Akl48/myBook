@@ -99,8 +99,15 @@ KVC的底层实现
 
 ### KVO的原理
 
-KVO 是通过 isa-swizzling 实现的。
-基本的流程就是编译器自动为被观察对象创造一个派生类，并将被观察对象的isa 指向这个派生类。如果用户注册了对某此目标对象的某一个属性的观察，那么此派生类会重写这个方法，并在其中添加进行通知的代码。Objective-C 在发送消息的时候，会通过 isa 指针找到当前对象所属的类对象。而类对象中保存着当前对象的实例方法，因此在向此对象发送消息时候，实际上是发送到了派生类对象的方法。由于编译器对派生类的方法进行了 override，并添加了通知代码，因此会向注册的对象发送通知。注意派生类只重写注册了观察者的属性方法。
+1. KVO 是通过 isa-swizzling 实现的。
+
+2. 当某个类的属性对象第一次被观察时，系统就会在运行期动态地创建该类的一个派生类，在这个派生类中重写基类中任何被观察属性的setter方法。派生类在被重写的setter方法内实现真正的通知机制
+
+3. 如果原类为Person，那么生成的派生类名为NSKVONotifying_Person
+
+4. 每个类对象中都有一个isa指针指向当前类，当一个类对象的第一次被观察，那么系统会偷偷将isa指针指向动态生成的派生类，从而在给被监控属性赋值时执行的是派生类的setter方法
+
+5. 键值观察通知依赖于NSObject的两个方法: willChangeValueForKey: 和didChangevlueForKey:；在一个被观察属性发生改变之前，willChangeValueForKey:一定会被调用，这就 会记录旧的值。而当改变发生后，didChangeValueForKey:会被调用，继而 observeValueForKey:ofObject:change:context: 也会被调用。
 
 ![KVO](../photo/KVO.png)
 

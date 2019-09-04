@@ -174,7 +174,7 @@ s.substr(int i,int j);//提取字符串返回从i~j的子串
 #include <time.h>
 int main() {
     srand(unsigned(time(NULL)));//srand()为初始化随机数发生器，用于设置rand()产生随机数时的种子
-    rand();
+    rand() % i; // 生成到i到随机数
 }
 ```
 
@@ -184,7 +184,7 @@ void RandomArray(vector<int>oldArray, vector<int> &newArray) {
     for (int i=LENGTH; i>0; i--) {
         srand(unsigned(time(NULL)));
         // 选中的随机下标
-        int index = rand()%i;
+        int index = rand() % i;
         // 根据选中的下标将原数组选中的元素push到新数组
         newArray.push_back(oldArray[index]);
         // 将原数组中选中的元素剔除
