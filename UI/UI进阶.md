@@ -53,7 +53,7 @@ UIApplication对象主要的作用是处理传入的用户事件的initial routi
 ### UIApplication的delegate
 
 * 移动端的APP会很容易收到外界的干扰（锁屏，后台），会导致APP进入后台甚至终止
-收到这些状况的时候会UIApplication会通知它的代理对象（生命周期过程、内存警告、系统事件）,系统已经在main函数中默认将`NSStringFromClass([ZTApplication class])`设置为UIApplication代理
+收到这些状况的时候UIApplication会通知它的代理对象（生命周期过程、内存警告、系统事件）,系统已经在main函数中默认将`NSStringFromClass([ZTApplication class])`设置为UIApplication代理
 
 ```objc
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
@@ -178,9 +178,9 @@ UIResponder**用于响应和处理事件的抽象接口**
 ### 事件的产生和传递
 
 1. 生成事件
-   1. 当用户点击屏幕的时候会产生一个触摸事件
-   2. 把这个触摸事件放到UIApplication管理的event queue中
-   3. 从队列中取出最前面的事件，交给UIWindow处理
+   1. 当用户点击屏幕的时候会产生一个触摸事件然后硬件会将这个事件通过进程间的通讯传递给APP。
+   2. 这个触摸事件又会被封装成UIEvent然后放进UIApplication管理的event queue中。
+   3. 等到从队列中取出事件，交给最上层的UIWindow处理（hit-Testing）。
 2. 查找第一响应者
    1. Window收到事件后会在视图层次结构中找到最适合的一个视图来处理事件
    2. 通常一个窗口中最适合处理当前事件的对象称为第一响应对象。
@@ -368,7 +368,18 @@ UIGestureRecognizer状态默认是possible
 
 ### UIGestureRecognizer和UIControl
 
-UIControl，以及他的subclass UIButton UISwitch……会直接获取事件即默认控制操作可防止重叠的手势识别器行为。
+UIControl，他的subclass`UIButton``UISwitch`等系统提供的默认有action的响应优先级比手势识别器高,而**对于自定义的UIControl，响应的优先级比手势低**。由于UIControl也是继承自UIView即UIResponder也是有touch方法的
+
+```objc
+- (BOOL)beginTrackingWithTouch:(UITouch *)touch withEvent:(nullable UIEvent *)event;
+- (BOOL)continueTrackingWithTouch:(UITouch *)touch withEvent:(nullable UIEvent *)event;
+- (void)endTrackingWithTouch:(nullable UITouch *)touch withEvent:(nullable UIEvent *)event;
+- (void)cancelTrackingWithEvent:(nullable UIEvent *)event;
+```
+
+> UIControl确实是有自己独特的方法，但是UIControl只能接受一个UITouch单点触控。UIControl也有touch事件，但是和默认的不同的是他在`touch`方法中调用了自己的`tracking`方法
+
+* 当`UIControl track`事件的过程中，识别出事件交互符合响应条件，会触发target-action进行响应。当事件发生时，UIControl通知target执行对应的action。事实上这里有个action传递的过程。当UIControl监听到需要处理的交互事件时，会调用 `sendAction:to:forEvent:`将`target`、`action`以及`event`对象发送给全局应用，`Application`对象再通过 `sendAction:to:from:forEvent:`向`target`发送`action`。
 
 ## 抛出异常
 
