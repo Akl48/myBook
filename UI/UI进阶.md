@@ -465,3 +465,107 @@ view.transform = CGAffineTransformMakeTranslation(10, 20);// 平移一次
 ![仿射变换矩形](../photo/仿射变换矩形.png)
 
 第三列始终是 0 0 1
+
+### Quartz2D
+
+Allow users to browse, edit, and save images, using slideshows and Core Image filters.
+二维绘图引擎（绘制图形、绘制文字、绘制/生成图片、读取生成PDF、**裁剪图片**、**自定义控件**）
+
+#### 图形上下文（Graphics Context）CGContextRef
+
+1. 图形上下文的作用
+   1. 保存绘图信息，绘图形状
+   2. 决定绘制的输出目标
+绘制好的图形--保存-->图形上下文--显示-->输出目标
+
+##### 上下文种类
+
+Bitmap Graphics Context
+PDF Graphics Context
+Window Graphics Context
+Layer Graphics Context (UIView Layer上下文)
+
+#### 自定义UIView
+
+实现`- (void)drawRect:(NSRect)rect;`自动获取和当前View相关联的上下文
+
+```objc
+// Only override drawRect: if you perform custom drawing.
+// An empty implementation adversely affects performance during animation.
+- (void)drawRect:(CGRect)rect {
+    // Drawing code
+    NSLog(@"%s",__func__);
+    // 获取当前和view相关联的上下文
+    CGContextRef contextRef = UIGraphicsGetCurrentContext();
+    // 贝塞尔曲线
+    UIBezierPath *path = [UIBezierPath bezierPath];
+    // 移动到起点
+    [path moveToPoint:CGPointZero];
+    // 添加一个线到某个点
+    [path addLineToPoint:CGPointMake(240, 240)];
+    // 把path添加到上下文 将path->CGPath
+    CGContextAddPath(contextRef, path.CGPath);
+    // 最后渲染上下文layer上 1. stroke 2. fill
+    CGContextStrokePath(contextRef);
+}
+```
+
+在`viewWillAppear`和`ViewDidAppear`中间调用
+传入的是当前view的`bounds`
+
+* 获取当前view的上下文`CGContextRef contextRef = UIGraphicsGetCurrentContext();`
+* 系统调用`drawRect`方法的时候才会创建上下文(自己调用的是没有的)
+  * 可以调用`setNeedsDisplay`，它是异步执行的，会自动调用`drawRect`方法，这样可以拿到 `CurrentContext()`
+    * 在屏幕刷新的时候去调用这个方法
+
+#### UIBezierPath 贝塞尔曲线
+
+`[path stroke] [path fill]` 可以简单实现获取上下文的操作
+
+##### 画几何图形
+
+`UIBezierPath *path = [UIBezierPath bezierPathWithRect:CGRectMake(x, y, width, height)];`
+再通过fill或者stroke绘制简答图形
+
+##### 绘制弧线
+
+`+ (instancetype)bezierPathWithArcCenter:(CGPoint)center radius:(CGFloat)radius startAngle:(CGFloat)startAngle endAngle:(CGFloat)endAngle clockwise:(BOOL)clockwise;`
+
+0度是⭕️的右侧向上为负向下为负 M_PI为宏定义
+
+##### 绘制文字
+
+`[@"周天荣" drawAtPoint:CGPointMake(rect.size.width * 0.5, rect.size.height * 0.5) withAttributes:nil];`
+
+* 文字的对象
+* 文字的位置
+* 文字设置的Attributes Dictionary
+  * `NSFontAttributeName` 文字的字体UIFont对象
+  * `NSForegroundColorAttributeName` 文字的颜色
+  * `NSStrokeColorAttributeName` 文字描边颜色
+  * `NSStrokeWidthAttributeName` 文字描边宽度
+  * `NSShadowAttributeName` 设置NSShadow的对象
+    * shadowOffset shadowBlurRadius(模糊阴影半径) shadowColor
+
+##### View中的定时器
+
+```objc
+    // 每次屏幕刷新的时候更新 fps60 流畅
+    CADisplayLink *link = [CADisplayLink displayLinkWithTarget:self selector:@selector(startDisplay)];
+    [link addToRunLoop:[NSRunLoop mainRunLoop] forMode:NSRunLoopCommonModes];// 添加到runloop到common模式中
+```
+
+##### 上下文状态栈
+
+有一个存放的路径 和存放状态
+
+##### 形变CTM
+
+### UIView中的几个重要方法
+
+```objc
+- (void)setNeedsLayout{}
+- (void)setNeedsDisplay{}
+- (void)layoutIfNeeded{}
+- (void)layoutSubviews{}
+```
