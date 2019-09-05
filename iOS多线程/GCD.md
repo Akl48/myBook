@@ -84,11 +84,11 @@ dispatch_set_target_queue(<dispatch_object_t _Nonnull object>,<dispatch_queue_t 
 
 #### ~~对列中的释放机制~~
 
-1. ⚠️在声明自定义对列之后要释放
-   1. dispatch_release(queue);
+1. ~~⚠️在声明自定义对列之后要释放~~
+   1. ~~dispatch_release(queue);~~
 
-2. 同理dispatch_retain(queue);同样有效
-   1. 对于主对列以及全局对列释放无效
+2. ~~同理dispatch_retain(queue);同样有效~~
+   1.~~对于主对列以及全局对列释放无效~~
 
 #### GCD中的一次性代码
 
