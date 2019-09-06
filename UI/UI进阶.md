@@ -485,9 +485,7 @@ PDF Graphics Context
 Window Graphics Context
 Layer Graphics Context (UIView Layer上下文)
 
-#### 自定义UIView
-
-实现`- (void)drawRect:(NSRect)rect;`自动获取和当前View相关联的上下文
+#### 自定义UIView`- (void)drawRect:(NSRect)rect`
 
 ```objc
 // Only override drawRect: if you perform custom drawing.
@@ -517,6 +515,16 @@ Layer Graphics Context (UIView Layer上下文)
 * 系统调用`drawRect`方法的时候才会创建上下文(自己调用的是没有的)
   * 可以调用`setNeedsDisplay`，它是异步执行的，会自动调用`drawRect`方法，这样可以拿到 `CurrentContext()`
     * 在屏幕刷新的时候去调用这个方法
+
+#### - (void)setNeedsDisplay{}
+
+**Marks(标记) the receiver’s entire(整个) bounds rectangle as needing to be redrawn.**
+
+You can use this method or the `setNeedsDisplayInRect:` to notify(通知) the system that your view’s contents(内容) need to be redrawn. This method makes a note of the request and returns immediately. The view is not actually redrawn until the next drawing cycle(视图不会马上更新直到下一个绘制周期), at which point all invalidated views are updated.
+
+You should use this method to request that a view be redrawn **only when the content or appearance of the view change**. If you simply change the geometry of the view, the view is typically not redrawn. Instead, its existing content is adjusted based on the value in the view’s `contentMode property`(UIViewContentModeScaleToFill|UIViewContentModeScaleAspectFit……). Redisplaying the existing content improves performance by avoiding the need to redraw content that has not changed.
+
+**notes**: If your view is backed by a CAEAGLLayer(A layer that supports drawing OpenGL content in iOS applications.) object, this method has **no effect**. It is intended for use only with views that use native drawing technologies (such as UIKit and Core Graphics) to render(呈现) their content.
 
 #### UIBezierPath 贝塞尔曲线
 
@@ -563,9 +571,54 @@ Layer Graphics Context (UIView Layer上下文)
 
 ### UIView中的几个重要方法
 
-```objc
-- (void)setNeedsLayout{}
-- (void)setNeedsDisplay{}
-- (void)layoutIfNeeded{}
-- (void)layoutSubviews{}
-```
+#### Update Cycle
+
+**Update cycle** 是当应用完成了你的所有事件处理代码后控制流回到主 RunLoop 时的那个时间点。正是在这个时间点上系统开始更新布局、显示和设置约束。如果你在处理事件的代码中请求修改了一个 view，那么系统就会把这个 view 标记为需要重画（redraw）。在接下来的 Update cycle 中，系统就会执行这些 view 上的更改
+
+![update_Cycle](../photo/Update_Cycle.png)
+
+#### `- (void)setNeedsLayout{}`
+
+**Invalidates（无效化） the current layout of the receiver and triggers(触发) a layout update during the next update cycle.**
+
+Call this method on your application’s main thread when you want to **adjust the layout of a view’s subviews**. This method makes a note of the request and returns immediately. Because this method does not force an immediate update, but instead waits for the next update cycle, you can use it to invalidate the layout of multiple views before any of those views are updated. This behavior allows you to consolidate(合并) all of your layout updates to one update cycle, which is usually better for performance(性能).
+
+触发 `layoutSubviews` 调用的最省资源的方法就是在你的视图上调用 `setNeedsLaylout` 方法。调用这个方法代表向系统表示视图的布局需要重新计算。`setNeedsLayout` 方法会立刻执行并返回，但在返回前不会真正更新视图。视图会在下一个 `update cycle` 中更新，就在系统调用视图们的 `layoutSubviews` 以及他们的所有子视图的 layoutSubviews 方法的时候。
+
+#### `- (void)layoutIfNeeded{}`
+
+**Lays out the subviews immediately, if layout updates are pending(如果布局更新处于待处理状态).**
+
+Use this method to force(强制) the view to update its layout immediately. When using Auto Layout, the layout engine updates the position of views as needed to satisfy changes in constraints. Using the view that receives the message as the root view, this method lays out the view subtree starting at the root. If no layout updates are pending, this method exits without modifying the layout or calling any layout-related callbacks.
+
+#### `- (void)layoutSubviews{}`
+
+**Lays out subviews.**
+
+The default implementation of this method does nothing on iOS 5.1 and earlier. Otherwise, the default implementation uses any constraints you have set to determine the size and position of any subviews.
+
+Subclasses can override this method as needed to perform more precise layout of their subviews. You should override this method only if the autoresizing and constraint-based behaviors of the subviews do not offer the behavior you want. You can use your implementation to set the frame rectangles of your subviews directly.
+
+You should not call this method directly. If you want to force a layout update, call the setNeedsLayout method instead to do so prior to the next drawing update. If you want to update the layout of your views immediately, call the layoutIfNeeded method.
+
+* 修改 view 的大小
+* 新增 subview
+* 用户在 UIScrollView 上滚动（layoutSubviews 会在 UIScrollView 和它的父 view 上被调用）
+* 用户旋转设备
+* 更新视图的 constraints
+
+`layoutSubViews`**这个方法很开销很大，因为它会在每个子视图上起作用并且调用它们相应的 `layoutSubviews`方法**，所以最好不要显示的调用这个方法。相反，有许多可以在 run loop 的不同时间点触发 layoutSubviews 调用的机制，这些触发机制比直接调用 layoutSubviews 的资源消耗要小得多。
+
+##### `- (void)viewDidLayoutSubviews`
+
+在`layoutSubViews`完成之后之后，view所属vc会调用这个方法，`viewDidLayoutSubviews` 是 view 布局更新后会被唯一可靠调用的方法，所以你应该把所有依赖于布局或者大小的代码放在 `viewDidLayoutSubviews` 中，而不是放在 `viewDidLoad` 或者 `viewDidAppear` 中
+
+#### `- (void)updateConstraints`
+
+#### `- (void)setNeedsUpdateConstraints`
+
+#### `- (void)updateConstraintsIfNeeded`
+
+#### `invalidateIntrinsicContentSize`
+
+#### layout && constraint && draw
