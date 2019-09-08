@@ -601,6 +601,8 @@ Subclasses can override this method as needed to perform more precise layout of 
 
 You should not call this method directly. If you want to force a layout update, call the setNeedsLayout method instead to do so prior to the next drawing update. If you want to update the layout of your views immediately, call the layoutIfNeeded method.
 
+##### when will call it
+
 * 修改 view 的大小
 * 新增 subview
 * 用户在 UIScrollView 上滚动（layoutSubviews 会在 UIScrollView 和它的父 view 上被调用）
@@ -622,3 +624,29 @@ You should not call this method directly. If you want to force a layout update, 
 #### `invalidateIntrinsicContentSize`
 
 #### layout && constraint && draw
+
+#### 如何自定义一张图片 图形上下文 ImageContext
+
+```objc
+// 图像加水印
+UIImage *image = [UIImage imageNamed:@"image"];
+NSString *string = @"text";
+// 手动开启一个和图片一样大的图形上下文 Creates a bitmap-based graphics context and makes it the current context.
+UIGraphicsBeginImageContext(image.size);
+// 将内容绘制上去
+[image drawAtPoint:CGPointZero];
+[string drawAtPoint: CGPointMake(50, 50) withAttributes:@{
+                                                        NSFontAttributeName:[UIFont systemFontOfSize:20]
+                                                          }];
+// 从上下文中成一张图片
+UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+// 手动销毁上下文
+UIGraphicsEndImageContext();
+// 最后设置Image
+```
+
+1. 裁剪图片 [path addClip]; // 通过贝塞尔曲线方法addClip来添加裁剪区域，后面的图形才会裁剪
+2. 屏幕截屏
+   1. 将view的layer层的内容渲染到上下文上`[self.view.layer renderIncontext:ImageContext];`
+   2. 保存图片转二进制 `UIImageJPEGRepresentation` 可以设置压缩图片质量
+   3. 屏幕有个缩放比例`[UIScreen mainScreen].scale` 是当前像素和点坐标的比例（OC中会自动处理*scale）
