@@ -514,7 +514,7 @@ Layer Graphics Context (UIView Layer上下文)
 * 获取当前view的上下文`CGContextRef contextRef = UIGraphicsGetCurrentContext();`
 * 系统调用`drawRect`方法的时候才会创建上下文(自己调用的是没有的)
   * 可以调用`setNeedsDisplay`，它是异步执行的，会自动调用`drawRect`方法，这样可以拿到 `CurrentContext()`
-    * 在屏幕刷新的时候去调用这个方法
+    * 可以在屏幕刷新的时候去调用这个方法
 
 #### - (void)setNeedsDisplay{}
 
@@ -565,8 +565,6 @@ You should use this method to request that a view be redrawn **only when the con
 
 ##### 上下文状态栈
 
-有一个存放的路径 和存放状态
-
 ##### 形变CTM
 
 ### UIView中的几个重要方法
@@ -577,21 +575,7 @@ You should use this method to request that a view be redrawn **only when the con
 
 ![update_Cycle](../photo/Update_Cycle.png)
 
-#### `- (void)setNeedsLayout{}`
-
-**Invalidates（无效化） the current layout of the receiver and triggers(触发) a layout update during the next update cycle.**
-
-Call this method on your application’s main thread when you want to **adjust the layout of a view’s subviews**. This method makes a note of the request and returns immediately. Because this method does not force an immediate update, but instead waits for the next update cycle, you can use it to invalidate the layout of multiple views before any of those views are updated. This behavior allows you to consolidate(合并) all of your layout updates to one update cycle, which is usually better for performance(性能).
-
-触发 `layoutSubviews` 调用的最省资源的方法就是在你的视图上调用 `setNeedsLaylout` 方法。调用这个方法代表向系统表示视图的布局需要重新计算。`setNeedsLayout` 方法会立刻执行并返回，但在返回前不会真正更新视图。视图会在下一个 `update cycle` 中更新，就在系统调用视图们的 `layoutSubviews` 以及他们的所有子视图的 layoutSubviews 方法的时候。
-
-#### `- (void)layoutIfNeeded{}`
-
-**Lays out the subviews immediately, if layout updates are pending(如果布局更新处于待处理状态).**
-
-Use this method to force(强制) the view to update its layout immediately. When using Auto Layout, the layout engine updates the position of views as needed to satisfy changes in constraints. Using the view that receives the message as the root view, this method lays out the view subtree starting at the root. If no layout updates are pending, this method exits without modifying the layout or calling any layout-related callbacks.
-
-#### `- (void)layoutSubviews{}`
+#### `- (void)layoutSubviews`
 
 **Lays out subviews.**
 
@@ -615,15 +599,33 @@ You should not call this method directly. If you want to force a layout update, 
 
 在`layoutSubViews`完成之后之后，view所属vc会调用这个方法，`viewDidLayoutSubviews` 是 view 布局更新后会被唯一可靠调用的方法，所以你应该把所有依赖于布局或者大小的代码放在 `viewDidLayoutSubviews` 中，而不是放在 `viewDidLoad` 或者 `viewDidAppear` 中
 
+#### `- (void)setNeedsLayout`
+
+**Invalidates（无效化） the current layout of the receiver and triggers(触发) a layout update during the next update cycle.**
+
+Call this method on your application’s main thread when you want to **adjust the layout of a view’s subviews**. This method makes a note of the request and returns immediately. Because this method does not force an immediate update, but instead waits for the next update cycle, you can use it to invalidate the layout of multiple views before any of those views are updated. This behavior allows you to consolidate(合并) all of your layout updates to one update cycle, which is usually better for performance(性能).
+
+触发 `layoutSubviews` 调用的最省资源的方法就是在你的视图上调用 `setNeedsLaylout` 方法。调用这个方法代表向系统表示视图的布局需要重新计算。`setNeedsLayout` 方法会立刻执行并返回，但在返回前不会真正更新视图。视图会在下一个 `update cycle` 中更新，就在系统调用视图们的 `layoutSubviews` 以及他们的所有子视图的 layoutSubviews 方法的时候。
+
+#### `- (void)layoutIfNeeded`
+
+**Lays out the subviews immediately, if layout updates are pending(如果布局更新处于待处理状态).**
+
+Use this method to force(强制) the view to update its layout immediately. When using Auto Layout, the layout engine updates the position of views as needed to satisfy changes in constraints. Using the view that receives the message as the root view, this method lays out the view subtree starting at the root. If no layout updates are pending, this method exits without modifying the layout or calling any layout-related callbacks.
+
 #### `- (void)updateConstraints`
+
+**约束的设置过程**自动布局包含三步来布局和重绘视图。第一步是更新约束，系统会计算并给视图设置所有要求的约束。第二步是布局阶段，布局引擎计算视图和子视图的 frame 并且将它们布局。最后一步完成这一循环的是显示阶段，重绘视图的内容
+
+这个方法用来在自动布局中动态改变视图约束。和布局中的 `layoutSubviews()` 方法或者显示中的 `draw` 方法类似，`updateConstraints()` 只应该被重载，绝不要在代码中显式地调用
 
 #### `- (void)setNeedsUpdateConstraints`
 
-#### `- (void)updateConstraintsIfNeeded`
+会设置在下一次更新周期中更新，类似于`setNeedDisplay()``setNeedLayout()`
 
-#### `invalidateIntrinsicContentSize`
+#### `- (void)updateConstraintsIfNeeded` && `- (void)invalidateIntrinsicContentSize`
 
-#### layout && constraint && draw
+设置立即更新约束,类似与`layoutIfNeed()`会立即检查标记（可以被 `setNeedsUpdateConstraints` 或者 `invalidateInstrinsicContentSize`方法自动设置）
 
 #### 如何自定义一张图片 图形上下文 ImageContext
 
