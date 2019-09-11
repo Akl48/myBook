@@ -597,7 +597,7 @@ You should not call this method directly. If you want to force a layout update, 
 
 ##### `- (void)viewDidLayoutSubviews`
 
-在`layoutSubViews`完成之后之后，view所属vc会调用这个方法，`viewDidLayoutSubviews` 是 view 布局更新后会被唯一可靠调用的方法，所以你应该把所有依赖于布局或者大小的代码放在 `viewDidLayoutSubviews` 中，而不是放在 `viewDidLoad` 或者 `viewDidAppear` 中
+在`layoutSubViews`完成之后之后，view所属**vc**会调用这个方法，`viewDidLayoutSubviews` 是 view 布局更新后会被唯一可靠调用的方法，所以你应该把所有依赖于布局或者大小的代码放在 `viewDidLayoutSubviews` 中，而不是放在 `viewDidLoad` 或者 `viewDidAppear` 中
 
 #### `- (void)setNeedsLayout`
 
@@ -652,3 +652,15 @@ UIGraphicsEndImageContext();
    1. 将view的layer层的内容渲染到上下文上`[self.view.layer renderIncontext:ImageContext];`
    2. 保存图片转二进制 `UIImageJPEGRepresentation` 可以设置压缩图片质量
    3. 屏幕有个缩放比例`[UIScreen mainScreen].scale` 是当前像素和点坐标的比例（OC中会自动处理*scale）
+
+### CALayer:NSObject
+
+An object that manages image-based content and allows you to perform(执行) animations on that content.
+
+Layers are often used to provide the backing store for views but can also be used without a view to display content. A layer’s **main job** is to manage the visual(视觉) content that you provide but the layer itself has visual attributes that can be set, such as a background color, border, and shadow. In addition to managing visual content, the layer also maintains(持有) information about the geometry of its content (such as its position, size, and transform) that is used to present that content onscreen. Modifying the properties of the layer is how you initiate(初始化) animations on the layer’s content or geometry. A layer object encapsulates the duration and pacing of a layer and its animations by adopting the CAMediaTiming protocol, which defines the layer’s timing information.
+
+If the layer object was created by a view, **the view typically assigns itself as the layer’s delegate automatically**,and you should not change that relationship. For layers you create yourself, you can assign a delegate object and use that object to provide the contents of the layer dynamically and perform other tasks. A layer may also have a layout manager object (assigned to the layoutManager property) to manage the layout of subviews separately.
+
+#### CALayer的关键方法&属性
+
+`contents`An object that provides the contents of the layer. Animatable.由于CALayer在macOS中和iOS中都有使用到，所以这个内容为了方便使用类型是id类型。但是最好指定为CGImage在使用对象转换的时候要使用`__bridge id _Nullable`
