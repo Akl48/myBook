@@ -559,20 +559,33 @@ You should use this method to request that a view be redrawn **only when the con
   * `NSForegroundColorAttributeName` 文字的颜色
   * `NSStrokeColorAttributeName` 文字描边颜色
   * `NSStrokeWidthAttributeName` 文字描边宽度
-  * `NSShadowAttributeName` 设置NSShadow的对象
+  * `NSShadowAttributeName` 设置`NSShadow`的对象
     * shadowOffset shadowBlurRadius(模糊阴影半径) shadowColor
 
-##### View中的定时器
+##### View中的定时器(Core Animation中)
 
 ```objc
-    // 每次屏幕刷新的时候更新 fps60 流畅
-    CADisplayLink *link = [CADisplayLink displayLinkWithTarget:self selector:@selector(startDisplay)];
-    [link addToRunLoop:[NSRunLoop mainRunLoop] forMode:NSRunLoopCommonModes];// 添加到runloop到common模式中
+// 每次屏幕刷新的时候更新 fps60 流畅
+CADisplayLink *link = [CADisplayLink displayLinkWithTarget:self selector:@selector(startDisplay)];
+[link addToRunLoop:[NSRunLoop mainRunLoop] forMode:NSRunLoopCommonModes];// 添加到runloop到common模式中
 ```
 
 ##### 上下文状态栈
 
-##### 形变CTM
+`CGContextSaveGState();`Pushes a copy of the current graphics state onto the graphics state stack(图形状态栈) for the context.
+Each graphics context maintains(维护) a stack of graphics states. Note that not all aspects of the current drawing environment are elements of the graphics state. For example, the current path(路径) is not considered part of the graphics state and is therefore not saved when you call this function. The graphics state parameters that are saved are:
+
+`CGContextRestoreGState()`Core Graphics removes the graphics state at the top of the stack so that the most recently saved state becomes the current graphics state.
+
+##### CTM(current transformation matrix)
+
+```objc
+CGContextTranslateCTM(<#CGContextRef  _Nullable c#>, <#CGFloat tx#>, <#CGFloat ty#>)
+CGContextScaleCTM(<#CGContextRef  _Nullable c#>, <#CGFloat sx#>, <#CGFloat sy#>)
+CGContextRotateCTM(<#CGContextRef  _Nullable c#>, <#CGFloat angle#>)
+```
+
+类似与UIView中的transform属性
 
 ### UIView中的几个重要方法
 
