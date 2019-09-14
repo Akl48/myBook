@@ -541,6 +541,13 @@ You should use this method to request that a view be redrawn **only when the con
 
 0度是⭕️的右侧向上为负向下为负 M_PI为宏定义
 
+##### 设置手动绘制的线条的属性
+
+1. lineWidth
+2. lineJoinStyle 拐角样式
+3. lineCapStyle 起点样式
+4. color必须在drawRect中绘制`[[UIColor redColor] set]`
+
 ##### 绘制文字
 
 `[@"周天荣" drawAtPoint:CGPointMake(rect.size.width * 0.5, rect.size.height * 0.5) withAttributes:nil];`
@@ -652,6 +659,44 @@ UIGraphicsEndImageContext();
    1. 将view的layer层的内容渲染到上下文上`[self.view.layer renderIncontext:ImageContext];`
    2. 保存图片转二进制 `UIImageJPEGRepresentation` 可以设置压缩图片质量
    3. 屏幕有个缩放比例`[UIScreen mainScreen].scale` 是当前像素和点坐标的比例（OC中会自动处理*scale）
+3. 擦除上下文`CGContextClearRect(ctx,rect);`
+
+#### 系统相册的调用
+
+##### 保存图片到系统相册
+
+1. `This app has crashed because it attempted to access privacy-sensitive data without a usage description.`获取系统相册权限 `<key>NSPhotoLibraryAddUsageDescription</key> <string>获取相册权限</string>`
+
+```objc
+UIImageWriteToSavedPhotosAlbum(newImage, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
+// 它的selector被指定为只能声明成这个样子
+- (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo {
+    // 完成回调
+}
+```
+
+##### 从系统相册中选取图片
+
+```objc
+    UIImagePickerController *pickVC = [[UIImagePickerController alloc] init];
+    // 要告诉相册类型
+    pickVC.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    /*
+     UIImagePickerControllerSourceTypePhotoLibrary,
+     UIImagePickerControllerSourceTypeCamera,
+     UIImagePickerControllerSourceTypeSavedPhotosAlbum 图片专辑
+     */
+    pickVC.delegate = self;
+    ///<UINavigationControllerDelegate,UIImagePickerControllerDelegate>
+    [self presentViewController:pickVC animated:YES completion:nil];
+```
+
+```objc
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<UIImagePickerControllerInfoKey,id> *)info {
+    // 回调选择的信息都在info中
+    [self dismissViewControllerAnimated:YES completion:nil];// 需要dismiss
+}
+```
 
 ### CALayer:NSObject
 
@@ -661,6 +706,22 @@ Layers are often used to provide the backing store for views but can also be use
 
 If the layer object was created by a view, **the view typically assigns itself as the layer’s delegate automatically**,and you should not change that relationship. For layers you create yourself, you can assign a delegate object and use that object to provide the contents of the layer dynamically and perform other tasks. A layer may also have a layout manager object (assigned to the layoutManager property) to manage the layout of subviews separately.
 
+#### 基本属性
+
+* `border`边框
+* `shadow`阴影
+* `cornerRadius`圆角
+* `masksToBounds`裁剪
+
 #### CALayer的关键方法&属性
 
 `contents`An object that provides the contents of the layer. Animatable.由于CALayer在macOS中和iOS中都有使用到，所以这个内容为了方便使用类型是id类型。但是最好指定为CGImage在使用对象转换的时候要使用`__bridge id _Nullable`
+
+`CGRectContainsPoint(rect,point)`是CALayer的hit Testing中的方法 判断一个点是否在当前的rect上
+
+`CATransform3D`The standard transform matrix used throughout Core Animation.是一个可以在3维空间内做变换的4x4的矩阵
+![CATransform3D](../photo/CATransform3D.png)
+
+### Core Animation(CAAnimation)
+
+The abstract superclass for animations in Core Animation.
