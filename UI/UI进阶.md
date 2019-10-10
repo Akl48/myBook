@@ -2,16 +2,16 @@
 
 ## LaunchScreen.storyboard
 
-设置LaunchScreen之后在程序中打印NSHomeDirectory()然后在前往打印出来的文件夹，可以在里面的library/cache/snapshots中找到相应的LaunchScreen的图片，包括横向合竖屏的。
-如果不使用LaunchScreen可以在target中设置LaunchScreenFile为空，并且可以设置Launch Image Source之后在Assets里直接放置对应尺寸的图片。
+设置`LaunchScreen`之后在程序中打印`NSHomeDirectory()`再前往打印出来的文件夹，可以在文件夹下面的`library/cache/snapshots`中找到相应的`LaunchScreen`的图片，包括横向合竖屏的。
+如果不使用`LaunchScreen`可以在`target`中设置`LaunchScreenFile`为空，并且可以设置`Launch Image Source`之后在`Assets`里直接放置对应尺寸的图片。
 
 ## info.plist
 
-可以open as sourceCode已源代码的形式打开，打开之后是XML文件，key-value对应。
+可以`open as sourceCode`已源代码的形式打开，打开之后是XML文件，key-value对应。可以直接设置
 
 ## .pch
 
-.pch文件，通常用于定义一些公用宏 + 公共头文件。并且通常以工程名来命名。还要配置路径在target/build setting搜索prefix 然后在clang中的prefix header中修改当前路径为pch文件路径（注意不能带中文）$(SRCROOT)/项目名/Prefix.pch
+`.pch`文件，通常用于定义一些公用宏 + 公共头文件。并且通常以工程名来命名。还要配置路径在`target/build setting`搜索`prefix`然后在`clang`中的`prefix header`中修改当前路径为`pch`文件路径（注意不能带中文）`$(SRCROOT)/项目名/Prefix.pch`
 
 ![pch](../photo/Clang-prefix.png)
 
@@ -21,11 +21,11 @@
 
 ## UIApplication
 
-每个APP都有一个UIApplicaiotn的实例或者他的subclass（如果你必须要在系统执行之前处理传入的事件，才需要自定义subclass），When an app is launched, the system calls the UIApplicationMain function; among its other tasks, **this function creates a Singleton UIApplication object**. Thereafter you access the object by calling the **sharedApplication** class method.通过UIApplication创建一个单例的UIApplication对象，并且能通过sharedApplication获取这个单例。
+每个APP都有一个`UIApplication`的实例或者他的`subclass`（如果你必须要在系统执行之前处理传入的事件，才需要自定义subclass），When an app is launched, the system calls the UIApplicationMain function; among its other tasks, **this function creates a Singleton UIApplication object**. Thereafter you access the object by calling the **sharedApplication** class method.通过`UIApplication`创建一个单例的`UIApplication`对象，并且能通过`sharedApplication`获取这个单例。
 
 A major role of your app’s application object is to handle the initial routing of incoming user events. It dispatches action messages forwarded to it by control objects (instances of the UIControl class) to appropriate target objects. The application object maintains a list of open windows (UIWindow objects) and through those can retrieve any of the app’s UIView objects.
 
-UIApplication对象主要的作用是处理传入的用户事件的initial routing，他通过UIControl的实例将动作消息分发给适合的目标对象。UIApplicaiotn单例维护着一个UIWindow对象列表，通过这个可以检索任意app内的UIView的对象
+`UIApplication`对象主要的作用是处理传入的用户事件的`initial routing`，他通过`UIControl`的实例将动作消息分发给适合的目标对象。`UIApplicaiotn`单例维护着一个`UIWindow`对象列表，通过这个可以检索任意app内的UIView的对象
 
 ### UIApplicationMain函数
 
@@ -559,20 +559,33 @@ You should use this method to request that a view be redrawn **only when the con
   * `NSForegroundColorAttributeName` 文字的颜色
   * `NSStrokeColorAttributeName` 文字描边颜色
   * `NSStrokeWidthAttributeName` 文字描边宽度
-  * `NSShadowAttributeName` 设置NSShadow的对象
+  * `NSShadowAttributeName` 设置`NSShadow`的对象
     * shadowOffset shadowBlurRadius(模糊阴影半径) shadowColor
 
-##### View中的定时器
+##### View中的定时器(Core Animation中)
 
 ```objc
-    // 每次屏幕刷新的时候更新 fps60 流畅
-    CADisplayLink *link = [CADisplayLink displayLinkWithTarget:self selector:@selector(startDisplay)];
-    [link addToRunLoop:[NSRunLoop mainRunLoop] forMode:NSRunLoopCommonModes];// 添加到runloop到common模式中
+// 每次屏幕刷新的时候更新 fps60 流畅
+CADisplayLink *link = [CADisplayLink displayLinkWithTarget:self selector:@selector(startDisplay)];
+[link addToRunLoop:[NSRunLoop mainRunLoop] forMode:NSRunLoopCommonModes];// 添加到runloop到common模式中
 ```
 
 ##### 上下文状态栈
 
-##### 形变CTM
+`CGContextSaveGState();`Pushes a copy of the current graphics state onto the graphics state stack(图形状态栈) for the context.
+Each graphics context maintains(维护) a stack of graphics states. Note that not all aspects of the current drawing environment are elements of the graphics state. For example, the current path(路径) is not considered part of the graphics state and is therefore not saved when you call this function. The graphics state parameters that are saved are:
+
+`CGContextRestoreGState()`Core Graphics removes the graphics state at the top of the stack so that the most recently saved state becomes the current graphics state.
+
+##### CTM(current transformation matrix)
+
+```objc
+CGContextTranslateCTM(<#CGContextRef  _Nullable c#>, <#CGFloat tx#>, <#CGFloat ty#>)
+CGContextScaleCTM(<#CGContextRef  _Nullable c#>, <#CGFloat sx#>, <#CGFloat sy#>)
+CGContextRotateCTM(<#CGContextRef  _Nullable c#>, <#CGFloat angle#>)
+```
+
+类似与UIView中的transform属性
 
 ### UIView中的几个重要方法
 
